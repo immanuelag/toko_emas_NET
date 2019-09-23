@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace TokoEmasAppNET
 {
-    public partial class FormMasterCategory : Form
+    public partial class FormServices : Form
     {
-        public FormMasterCategory()
+        public FormServices()
         {
             InitializeComponent();
         }

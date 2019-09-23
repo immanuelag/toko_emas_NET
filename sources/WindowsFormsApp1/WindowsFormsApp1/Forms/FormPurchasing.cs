@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace TokoEmasAppNET
 {
-    public partial class FormLogin : Form
+    public partial class FormPurchasing : Form
     {
-        public FormLogin()
+        public FormPurchasing()
         {
             InitializeComponent();
         }

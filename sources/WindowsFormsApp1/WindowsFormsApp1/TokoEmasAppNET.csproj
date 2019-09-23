@@ -52,69 +52,108 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Inventory.cs" />
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormInvDetail.cs">
+    <Compile Include="Forms\FormInvDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormInvDetail.Designer.cs">
+    <Compile Include="Forms\FormInvDetail.Designer.cs">
       <DependentUpon>FormInvDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormLogin.cs">
+    <Compile Include="Forms\FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormLogin.Designer.cs">
+    <Compile Include="Forms\FormLogin.Designer.cs">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormMasterCategory.cs">
+    <Compile Include="Forms\FormMasterCategory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMasterCategory.Designer.cs">
+    <Compile Include="Forms\FormMasterCategory.Designer.cs">
       <DependentUpon>FormMasterCategory.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormMasterInventori.cs">
+    <Compile Include="Forms\FormMasterInventori.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMasterInventori.Designer.cs">
+    <Compile Include="Forms\FormMasterInventori.Designer.cs">
       <DependentUpon>FormMasterInventori.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormMasterUser.cs">
+    <Compile Include="Forms\FormMasterUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMasterUser.Designer.cs">
+    <Compile Include="Forms\FormMasterUser.Designer.cs">
       <DependentUpon>FormMasterUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormSettings.cs">
+    <Compile Include="Forms\FormPurchasing.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormSettings.Designer.cs">
+    <Compile Include="Forms\FormPurchasing.Designer.cs">
+      <DependentUpon>FormPurchasing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormSales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSales.Designer.cs">
+      <DependentUpon>FormSales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormSalesDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSalesDetail.Designer.cs">
+      <DependentUpon>FormSalesDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormServices.Designer.cs">
+      <DependentUpon>FormServices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSettings.Designer.cs">
       <DependentUpon>FormSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Sales.cs" />
+    <Compile Include="UserClass.cs" />
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormInvDetail.resx">
+    <EmbeddedResource Include="Forms\FormInvDetail.resx">
       <DependentUpon>FormInvDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormLogin.resx">
+    <EmbeddedResource Include="Forms\FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormMasterCategory.resx">
+    <EmbeddedResource Include="Forms\FormMasterCategory.resx">
       <DependentUpon>FormMasterCategory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormMasterInventori.resx">
+    <EmbeddedResource Include="Forms\FormMasterInventori.resx">
       <DependentUpon>FormMasterInventori.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormMasterUser.resx">
+    <EmbeddedResource Include="Forms\FormMasterUser.resx">
       <DependentUpon>FormMasterUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormSettings.resx">
+    <EmbeddedResource Include="Forms\FormPurchasing.resx">
+      <DependentUpon>FormPurchasing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSales.resx">
+      <DependentUpon>FormSales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSalesDetail.resx">
+      <DependentUpon>FormSalesDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormServices.resx">
+      <DependentUpon>FormServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSettings.resx">
       <DependentUpon>FormSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
