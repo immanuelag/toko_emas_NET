@@ -12,6 +12,8 @@ namespace TokoEmasAppNET
 {
     public partial class MainForm : Form
     {
+        public MySQLDBManager manDB;
+
         public MainForm()
         {
             InitializeComponent();

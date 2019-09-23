@@ -1,5 +1,6 @@
 ﻿using System;
-namespace TryMySQL
+
+namespace TokoEmasAppNET
 {
     public class Sales
     {

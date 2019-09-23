@@ -2,7 +2,7 @@
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
-namespace TryMySQL
+namespace TokoEmasAppNET
 {
     public class MySQLDBManager
     {
