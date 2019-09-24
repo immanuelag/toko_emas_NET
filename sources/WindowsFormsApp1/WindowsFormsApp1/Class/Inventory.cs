@@ -2,6 +2,18 @@
 
 namespace TokoEmasAppNET
 {
+    public class Carat
+    {
+        public int id;
+        public string value;
+
+        public Carat(int _id, string _val)
+        {
+            id = _id;
+            value = _val;
+        }
+    }
+
     public class Category
     {
         public string category_id;
@@ -32,8 +44,9 @@ namespace TokoEmasAppNET
     {
         public int price_id;
         public DateTime price_time;
-        public int carats;
-        public int price;
+        public int carats_id;
+        public int sell_price;
+        public int buyback_price;
     }
 
     public class Inventory
