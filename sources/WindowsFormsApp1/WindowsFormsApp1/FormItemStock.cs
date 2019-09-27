@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace TokoEmasAppNET
 {
-    public partial class FormSales : Form
+    public partial class FormItemStock : Form
     {
-        public FormSales()
+        public FormItemStock()
         {
             InitializeComponent();
-        }
-
-        private void BtnNew_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

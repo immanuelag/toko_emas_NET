@@ -54,6 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\Inventory.cs" />
+    <Compile Include="FormItemStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormItemStock.Designer.cs">
+      <DependentUpon>FormItemStock.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMasterCarat.cs">
       <SubType>Form</SubType>
     </Compile>

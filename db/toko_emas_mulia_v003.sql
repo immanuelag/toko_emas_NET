@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2019 at 12:22 PM
+-- Generation Time: Sep 27, 2019 at 05:10 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -19,10 +19,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `toko_emas_main_db`
+-- Database: `toko_emas_mulia`
 --
-CREATE DATABASE IF NOT EXISTS `toko_emas_mulia` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `toko_emas_mulia`;
 
 -- --------------------------------------------------------
 
@@ -60,7 +58,9 @@ CREATE TABLE `master_category` (
 
 INSERT INTO `master_category` (`id`, `nama`) VALUES
 ('A', 'Anting'),
-('C', 'Cincin');
+('C', 'Cincin'),
+('G', 'Gelang'),
+('K', 'Kalung');
 
 -- --------------------------------------------------------
 
@@ -82,8 +82,14 @@ CREATE TABLE `master_items` (
 --
 
 INSERT INTO `master_items` (`id`, `category`, `subcategory`, `nama`, `karat`, `berat`) VALUES
-('AP001', 'A', 'P', 'AP Kecil', 1, 0.875),
-('CP001', 'C', 'P', 'CP Kecil', 1, 1.702);
+('KF001', 'K', 'F', 'UBS', 1, 2.12),
+('KR001', 'K', 'R', 'UBS', 1, 2.06),
+('KR002', 'K', 'R', 'UBS', 1, 2.02),
+('KR003', 'K', 'R', 'UBS', 1, 3.11),
+('KR004', 'K', 'R', 'UBS', 1, 7.12),
+('KR005', 'K', 'R', 'UBS', 1, 5.05),
+('KR006', 'K', 'R', 'UBS', 1, 3.08),
+('KR007', 'K', 'R', 'UBS', 1, 9.98);
 
 -- --------------------------------------------------------
 
@@ -123,9 +129,10 @@ CREATE TABLE `master_subcategory` (
 --
 
 INSERT INTO `master_subcategory` (`id`, `category`, `nama`) VALUES
-('K', 'C', 'Cincin Kawin'),
-('P', 'A', 'Anting Polos'),
-('P', 'C', 'Cincin Polos');
+('F', 'K', 'Fancy'),
+('M', 'K', 'Milano'),
+('R', 'K', 'Rambo'),
+('S', 'K', 'Santa');
 
 -- --------------------------------------------------------
 

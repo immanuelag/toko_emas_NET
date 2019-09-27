@@ -38,8 +38,8 @@
             this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.cbCatItems = new System.Windows.Forms.ComboBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnEditItems = new System.Windows.Forms.Button();
+            this.btnAddItems = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.cbSubItems = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInventory)).BeginInit();
@@ -130,23 +130,25 @@
             this.cbCatItems.TabIndex = 7;
             this.cbCatItems.SelectedIndexChanged += new System.EventHandler(this.CbCatItems_SelectedIndexChanged);
             // 
-            // button3
+            // btnEditItems
             // 
-            this.button3.Location = new System.Drawing.Point(687, 438);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 9;
-            this.button3.Text = "Edit";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnEditItems.Location = new System.Drawing.Point(687, 438);
+            this.btnEditItems.Name = "btnEditItems";
+            this.btnEditItems.Size = new System.Drawing.Size(75, 23);
+            this.btnEditItems.TabIndex = 9;
+            this.btnEditItems.Text = "Edit";
+            this.btnEditItems.UseVisualStyleBackColor = true;
+            this.btnEditItems.Click += new System.EventHandler(this.BtnEditItems_Click);
             // 
-            // button4
+            // btnAddItems
             // 
-            this.button4.Location = new System.Drawing.Point(597, 438);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 10;
-            this.button4.Text = "Add";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnAddItems.Location = new System.Drawing.Point(597, 438);
+            this.btnAddItems.Name = "btnAddItems";
+            this.btnAddItems.Size = new System.Drawing.Size(75, 23);
+            this.btnAddItems.TabIndex = 10;
+            this.btnAddItems.Text = "Add";
+            this.btnAddItems.UseVisualStyleBackColor = true;
+            this.btnAddItems.Click += new System.EventHandler(this.BtnAddItems_Click);
             // 
             // label3
             // 
@@ -174,8 +176,8 @@
             this.ClientSize = new System.Drawing.Size(800, 481);
             this.Controls.Add(this.cbSubItems);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btnAddItems);
+            this.Controls.Add(this.btnEditItems);
             this.Controls.Add(this.cbCatItems);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dgvInventory);
@@ -196,8 +198,8 @@
         private System.Windows.Forms.DataGridView dgvInventory;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbCatItems;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnEditItems;
+        private System.Windows.Forms.Button btnAddItems;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbSubItems;
         private System.Windows.Forms.DataGridViewTextBoxColumn colItemID;

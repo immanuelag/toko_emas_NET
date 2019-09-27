@@ -36,9 +36,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.txbInvDetilID = new System.Windows.Forms.TextBox();
+            this.cbCatItemDetil = new System.Windows.Forms.ComboBox();
+            this.cbSubCatItemDetil = new System.Windows.Forms.ComboBox();
             this.txbInvName = new System.Windows.Forms.TextBox();
             this.cbInvCarat = new System.Windows.Forms.ComboBox();
             this.txbInvWeight = new System.Windows.Forms.TextBox();
@@ -56,6 +56,7 @@
             this.btnInvCancel.TabIndex = 9;
             this.btnInvCancel.Text = "Cancel";
             this.btnInvCancel.UseVisualStyleBackColor = true;
+            this.btnInvCancel.Click += new System.EventHandler(this.BtnInvCancel_Click);
             // 
             // btnInvSave
             // 
@@ -65,6 +66,7 @@
             this.btnInvSave.TabIndex = 8;
             this.btnInvSave.Text = "Save";
             this.btnInvSave.UseVisualStyleBackColor = true;
+            this.btnInvSave.Click += new System.EventHandler(this.BtnInvSave_Click);
             // 
             // label1
             // 
@@ -126,28 +128,29 @@
             this.label6.TabIndex = 15;
             this.label6.Text = "Weight";
             // 
-            // textBox1
+            // txbInvDetilID
             // 
-            this.textBox1.Location = new System.Drawing.Point(139, 27);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(76, 20);
-            this.textBox1.TabIndex = 16;
+            this.txbInvDetilID.Location = new System.Drawing.Point(139, 27);
+            this.txbInvDetilID.Name = "txbInvDetilID";
+            this.txbInvDetilID.Size = new System.Drawing.Size(76, 20);
+            this.txbInvDetilID.TabIndex = 16;
             // 
-            // comboBox1
+            // cbCatItemDetil
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(139, 66);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 17;
+            this.cbCatItemDetil.FormattingEnabled = true;
+            this.cbCatItemDetil.Location = new System.Drawing.Point(139, 66);
+            this.cbCatItemDetil.Name = "cbCatItemDetil";
+            this.cbCatItemDetil.Size = new System.Drawing.Size(121, 21);
+            this.cbCatItemDetil.TabIndex = 17;
+            this.cbCatItemDetil.SelectedIndexChanged += new System.EventHandler(this.CbCatItemDetil_SelectedIndexChanged);
             // 
-            // comboBox2
+            // cbSubCatItemDetil
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(139, 105);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 18;
+            this.cbSubCatItemDetil.FormattingEnabled = true;
+            this.cbSubCatItemDetil.Location = new System.Drawing.Point(139, 105);
+            this.cbSubCatItemDetil.Name = "cbSubCatItemDetil";
+            this.cbSubCatItemDetil.Size = new System.Drawing.Size(121, 21);
+            this.cbSubCatItemDetil.TabIndex = 18;
             // 
             // txbInvName
             // 
@@ -210,9 +213,9 @@
             this.Controls.Add(this.txbInvWeight);
             this.Controls.Add(this.cbInvCarat);
             this.Controls.Add(this.txbInvName);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.cbSubCatItemDetil);
+            this.Controls.Add(this.cbCatItemDetil);
+            this.Controls.Add(this.txbInvDetilID);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -223,6 +226,7 @@
             this.Controls.Add(this.btnInvSave);
             this.Name = "FormInvDetail";
             this.Text = "Inventory Details";
+            this.Load += new System.EventHandler(this.FormInvDetail_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picInv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -239,9 +243,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.TextBox txbInvDetilID;
+        private System.Windows.Forms.ComboBox cbCatItemDetil;
+        private System.Windows.Forms.ComboBox cbSubCatItemDetil;
         private System.Windows.Forms.TextBox txbInvName;
         private System.Windows.Forms.ComboBox cbInvCarat;
         private System.Windows.Forms.TextBox txbInvWeight;

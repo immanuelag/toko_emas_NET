@@ -93,7 +93,7 @@ namespace TokoEmasAppNET
         public List<Carat> GetAllCarat()
         {
             List<Carat> result = new List<Carat>();
-            string mySelectQuery = "SELECT id, nama FROM master_carat;";
+            string mySelectQuery = "SELECT id, carat FROM master_carat;";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
             if (isDBConnected)
@@ -647,7 +647,7 @@ namespace TokoEmasAppNET
                 " master_items.subcategory, master_subcategory.nama, master_items.nama, karat, master_carat.carat, berat" + 
                 " FROM master_items, master_category, master_subcategory, master_carat " +
                 " WHERE master_subcategory.category=master_category.id AND " +
-                " master_items.category = master_category.id AND karat=master_carat.id;";
+                " master_items.category = master_category.id AND karat=master_carat.id GROUP BY master_items.id;";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
             if (isDBConnected)
@@ -694,7 +694,7 @@ namespace TokoEmasAppNET
                 " FROM master_items, master_category, master_subcategory, master_carat " +
                 " WHERE master_subcategory.category=master_category.id AND " +
                 " master_items.category = master_category.id AND karat=master_carat.id AND master_items.category='" +
-                cat_id + "';";
+                cat_id + "' GROUP BY master_items.id;";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
             if (isDBConnected)
@@ -741,7 +741,7 @@ namespace TokoEmasAppNET
                 " FROM master_items, master_category, master_subcategory, master_carat " +
                 " WHERE master_subcategory.category=master_category.id AND " +
                 " master_items.category = master_category.id AND karat=master_carat.id AND master_items.category='" +
-                cat_id + "' AND master_items.subcategory='" + sub_id + "';";
+                cat_id + "' AND master_items.subcategory='" + sub_id + "' GROUP BY master_items.id;";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
             if (isDBConnected)
@@ -837,7 +837,7 @@ namespace TokoEmasAppNET
             string myInsertQuery = "INSERT INTO master_items (id, category, subcategory, nama, karat, berat) VALUES ('" +
                 item.inventory_id + "','" + item.inventory_sub.parent.category_id + 
                 "','" + item.inventory_sub.subcategory_id + "','" + item.inventory_name + 
-                "'," + item.inventory_carats + "," + item.inventory_weight.ToString("{0:n3")  + " );";
+                "'," + item.inventory_carats + "," + item.inventory_weight.ToString("0.000")  + " );";
             MySqlCommand myCommand = new MySqlCommand(myInsertQuery, dbConn);
 
             try
@@ -860,7 +860,7 @@ namespace TokoEmasAppNET
             string myUpdateQuery = "UPDATE master_items SET category='" + item.inventory_sub.parent.category_id +
                 "', subcategory='" + item.inventory_sub.subcategory_id + "', nama='"+
                 item.inventory_name + "', karat=" + item.inventory_carats.ToString() + ", berat=" +
-                item.inventory_weight.ToString("{0:n3}") + " WHERE id='" +
+                item.inventory_weight.ToString("0.000") + " WHERE id='" +
                 item.inventory_id + "';";
             MySqlCommand myCommand = new MySqlCommand(myUpdateQuery, dbConn);
 

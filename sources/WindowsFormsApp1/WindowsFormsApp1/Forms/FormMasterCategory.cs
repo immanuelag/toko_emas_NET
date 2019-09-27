@@ -210,6 +210,7 @@ namespace TokoEmasAppNET
             if (cbCatName.SelectedIndex != 0)
             {
                 gbSubCat.Enabled = true;
+                txbSubID.Enabled = true;
                 txbSubID.Focus();
                 data_mode_sub = 1;
             }
@@ -228,7 +229,8 @@ namespace TokoEmasAppNET
                 DataGridViewRow row = dgvSubcat.SelectedRows[0];
 
                 txbSubID.Text = (string)row.Cells[0].Value;
-                txbSubName.Text = (string)row.Cells[1].Value;
+                txbSubID.Enabled = false;
+                txbSubName.Text = (string)row.Cells[2].Value;
                 data_mode_sub = 2; //Edit mode
             }
             else
@@ -269,6 +271,7 @@ namespace TokoEmasAppNET
                     }
 
                     LoadViewSubcategories();
+                    ClearGBSub();
                 }
             }
             else
@@ -325,7 +328,7 @@ namespace TokoEmasAppNET
         {
             if (dgvSubcat.SelectedRows.Count > 0 && cbCatName.SelectedIndex > 0)
             {
-                gbSubCat.Enabled = true;
+                
                 DataGridViewRow row = dgvSubcat.SelectedRows[0];
                 Category parent;
                 comboDictionary.TryGetValue(cbCatName.SelectedIndex, out parent);

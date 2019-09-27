@@ -21,6 +21,7 @@ namespace TokoEmasAppNET
         public List<Subcategory> subcategories;
 
         public int data_mode;
+        public FormInvDetail frmInvDetail;
 
         public FormMasterInventori()
         {
@@ -43,11 +44,18 @@ namespace TokoEmasAppNET
             LoadComboCategories();
         }
 
+        public void Refresh()
+        {
+            LoadViewInventory();
+            LoadComboCategories();
+        }
+
         private void LoadViewInventory()
         {
             if (dgvInventory.Rows.Count > 0)
             {
                 dgvInventory.Rows.Clear();
+                itemsDict.Clear();
             }
 
             itemList = manager.GetAllInventories();
@@ -65,7 +73,9 @@ namespace TokoEmasAppNET
                 row.Cells[4].Value = carat.value;
                 row.Cells[5].Value = itemList[i].inventory_weight.ToString("0.000");
 
+
                 //listCat.Add(categories[i].category_id, categories[i].category_name);
+                itemsDict.Add(itemList[i].inventory_id, itemList[i]);
                 dgvInventory.Rows.Add(row);
             }
 
@@ -209,6 +219,45 @@ namespace TokoEmasAppNET
                 Subcategory sel_sub = null;
                 comboDictionarySub.TryGetValue(cbSubItems.SelectedIndex, out sel_sub);
                 LoadViewInventoryBySub(sel_sub.parent.category_id, sel_sub.subcategory_id);
+            }
+        }
+
+        private void BtnAddItems_Click(object sender, EventArgs e)
+        {
+            if (frmInvDetail == null || frmInvDetail.IsDisposed)
+            {
+                frmInvDetail = new FormInvDetail(this);
+                //frmInvDetail.MdiParent = this;
+            }
+            data_mode = 1;
+            frmInvDetail.SetDataMode(data_mode);
+            frmInvDetail.SetDBManager(manager);
+            frmInvDetail.ShowDialog(this);
+        }
+
+        private void BtnEditItems_Click(object sender, EventArgs e)
+        {
+            if (dgvInventory.SelectedRows.Count > 0)
+            {
+                if (frmInvDetail == null || frmInvDetail.IsDisposed)
+                {
+                    frmInvDetail = new FormInvDetail(this);
+                    //frmInvDetail.MdiParent = this;
+                }
+                data_mode = 2;
+                frmInvDetail.SetDataMode(data_mode);
+                frmInvDetail.SetDBManager(manager);
+                DataGridViewRow row = dgvInventory.SelectedRows[0];
+                string inv_id = (string)row.Cells[0].Value;
+                Inventory sel_inv = null;
+                itemsDict.TryGetValue(inv_id, out sel_inv);
+                frmInvDetail.SetInventory(sel_inv);
+
+                frmInvDetail.ShowDialog(this);
+            }
+            else
+            {
+                MessageBox.Show("Please select items first!");
             }
         }
     }
