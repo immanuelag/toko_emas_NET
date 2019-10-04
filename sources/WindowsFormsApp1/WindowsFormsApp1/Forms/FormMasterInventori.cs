@@ -50,6 +50,29 @@ namespace TokoEmasAppNET
             LoadComboCategories();
         }
 
+        private void FillDGViewInventory()
+        {
+            for (int i = 0; i < itemList.Count; i++)
+            {
+                DataGridViewRow row = new DataGridViewRow();
+                row.CreateCells(dgvInventory);
+
+                row.Cells[0].Value = itemList[i].inventory_id;
+                row.Cells[1].Value = itemList[i].inventory_sub.parent.category_name;
+                row.Cells[2].Value = itemList[i].inventory_sub.subcategory_name;
+                row.Cells[3].Value = itemList[i].inventory_name;
+                Carat carat = manager.GetCaratByID(itemList[i].inventory_carats);
+                row.Cells[4].Value = carat.value;
+                row.Cells[5].Value = itemList[i].inventory_weight.ToString("0.000");
+                row.Cells[6].Value = itemList[i].inventory_supplier;
+                row.Cells[7].Value = itemList[i].GetStatus();
+
+                //listCat.Add(categories[i].category_id, categories[i].category_name);
+                itemsDict.Add(itemList[i].inventory_id, itemList[i]);
+                dgvInventory.Rows.Add(row);
+            }
+        }
+
         private void LoadViewInventory()
         {
             if (dgvInventory.Rows.Count > 0)
@@ -60,24 +83,7 @@ namespace TokoEmasAppNET
 
             itemList = manager.GetAllInventories();
 
-            for (int i = 0; i < itemList.Count; i++)
-            {
-                DataGridViewRow row = new DataGridViewRow();
-                row.CreateCells(dgvInventory);
-
-                row.Cells[0].Value = itemList[i].inventory_id;
-                row.Cells[1].Value = itemList[i].inventory_sub.parent.category_name;
-                row.Cells[2].Value = itemList[i].inventory_sub.subcategory_name;
-                row.Cells[3].Value = itemList[i].inventory_name;
-                Carat carat = manager.GetCaratByID(itemList[i].inventory_carats);
-                row.Cells[4].Value = carat.value;
-                row.Cells[5].Value = itemList[i].inventory_weight.ToString("0.000");
-
-
-                //listCat.Add(categories[i].category_id, categories[i].category_name);
-                itemsDict.Add(itemList[i].inventory_id, itemList[i]);
-                dgvInventory.Rows.Add(row);
-            }
+            FillDGViewInventory();
 
         }
 
@@ -86,26 +92,12 @@ namespace TokoEmasAppNET
             if (dgvInventory.Rows.Count > 0)
             {
                 dgvInventory.Rows.Clear();
+                itemsDict.Clear();
             }
 
             itemList = manager.GetAllInventoriesByCat(cat_id);
 
-            for (int i = 0; i < itemList.Count; i++)
-            {
-                DataGridViewRow row = new DataGridViewRow();
-                row.CreateCells(dgvInventory);
-
-                row.Cells[0].Value = itemList[i].inventory_id;
-                row.Cells[1].Value = itemList[i].inventory_sub.parent.category_name;
-                row.Cells[2].Value = itemList[i].inventory_sub.subcategory_name;
-                row.Cells[3].Value = itemList[i].inventory_name;
-                Carat carat = manager.GetCaratByID(itemList[i].inventory_carats);
-                row.Cells[4].Value = carat.value;
-                row.Cells[5].Value = itemList[i].inventory_weight.ToString("0.000");
-
-                //listCat.Add(categories[i].category_id, categories[i].category_name);
-                dgvInventory.Rows.Add(row);
-            }
+            FillDGViewInventory();
 
         }
 
@@ -114,26 +106,12 @@ namespace TokoEmasAppNET
             if (dgvInventory.Rows.Count > 0)
             {
                 dgvInventory.Rows.Clear();
+                itemsDict.Clear();
             }
 
             itemList = manager.GetAllInventoriesBySub(cat_id, sub_id);
 
-            for (int i = 0; i < itemList.Count; i++)
-            {
-                DataGridViewRow row = new DataGridViewRow();
-                row.CreateCells(dgvInventory);
-
-                row.Cells[0].Value = itemList[i].inventory_id;
-                row.Cells[1].Value = itemList[i].inventory_sub.parent.category_name;
-                row.Cells[2].Value = itemList[i].inventory_sub.subcategory_name;
-                row.Cells[3].Value = itemList[i].inventory_name;
-                Carat carat = manager.GetCaratByID(itemList[i].inventory_carats);
-                row.Cells[4].Value = carat.value;
-                row.Cells[5].Value = itemList[i].inventory_weight.ToString("0.000");
-
-                //listCat.Add(categories[i].category_id, categories[i].category_name);
-                dgvInventory.Rows.Add(row);
-            }
+            FillDGViewInventory();
 
         }
 

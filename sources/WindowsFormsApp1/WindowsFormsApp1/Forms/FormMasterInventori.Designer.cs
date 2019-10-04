@@ -30,18 +30,22 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.dgvInventory = new System.Windows.Forms.DataGridView();
-            this.colItemID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCatName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSubName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNama = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCarat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.cbCatItems = new System.Windows.Forms.ComboBox();
             this.btnEditItems = new System.Windows.Forms.Button();
             this.btnAddItems = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.cbSubItems = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cbStatus = new System.Windows.Forms.ComboBox();
+            this.colItemID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCatName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSubName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNama = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCarat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInventory)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,15 +70,93 @@
             this.colSubName,
             this.colNama,
             this.colCarat,
-            this.colWeight});
+            this.colWeight,
+            this.colSupplier,
+            this.colStock});
             this.dgvInventory.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvInventory.Location = new System.Drawing.Point(34, 66);
             this.dgvInventory.MultiSelect = false;
             this.dgvInventory.Name = "dgvInventory";
             this.dgvInventory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvInventory.ShowEditingIcon = false;
-            this.dgvInventory.Size = new System.Drawing.Size(728, 357);
+            this.dgvInventory.Size = new System.Drawing.Size(812, 357);
             this.dgvInventory.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(294, 32);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(49, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Category";
+            // 
+            // cbCatItems
+            // 
+            this.cbCatItems.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCatItems.FormattingEnabled = true;
+            this.cbCatItems.Location = new System.Drawing.Point(349, 28);
+            this.cbCatItems.Name = "cbCatItems";
+            this.cbCatItems.Size = new System.Drawing.Size(97, 21);
+            this.cbCatItems.TabIndex = 7;
+            this.cbCatItems.SelectedIndexChanged += new System.EventHandler(this.CbCatItems_SelectedIndexChanged);
+            // 
+            // btnEditItems
+            // 
+            this.btnEditItems.Location = new System.Drawing.Point(767, 438);
+            this.btnEditItems.Name = "btnEditItems";
+            this.btnEditItems.Size = new System.Drawing.Size(75, 23);
+            this.btnEditItems.TabIndex = 9;
+            this.btnEditItems.Text = "Edit";
+            this.btnEditItems.UseVisualStyleBackColor = true;
+            this.btnEditItems.Click += new System.EventHandler(this.BtnEditItems_Click);
+            // 
+            // btnAddItems
+            // 
+            this.btnAddItems.Location = new System.Drawing.Point(677, 438);
+            this.btnAddItems.Name = "btnAddItems";
+            this.btnAddItems.Size = new System.Drawing.Size(75, 23);
+            this.btnAddItems.TabIndex = 10;
+            this.btnAddItems.Text = "Add";
+            this.btnAddItems.UseVisualStyleBackColor = true;
+            this.btnAddItems.Click += new System.EventHandler(this.BtnAddItems_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(463, 32);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(71, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Sub Category";
+            // 
+            // cbSubItems
+            // 
+            this.cbSubItems.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSubItems.FormattingEnabled = true;
+            this.cbSubItems.Location = new System.Drawing.Point(540, 28);
+            this.cbSubItems.Name = "cbSubItems";
+            this.cbSubItems.Size = new System.Drawing.Size(138, 21);
+            this.cbSubItems.TabIndex = 13;
+            this.cbSubItems.SelectedIndexChanged += new System.EventHandler(this.CbSubItems_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(696, 32);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(37, 13);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "Status";
+            // 
+            // cbStatus
+            // 
+            this.cbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbStatus.FormattingEnabled = true;
+            this.cbStatus.Location = new System.Drawing.Point(747, 28);
+            this.cbStatus.Name = "cbStatus";
+            this.cbStatus.Size = new System.Drawing.Size(97, 21);
+            this.cbStatus.TabIndex = 15;
             // 
             // colItemID
             // 
@@ -85,13 +167,15 @@
             // colCatName
             // 
             this.colCatName.HeaderText = "Category";
+            this.colCatName.MinimumWidth = 30;
             this.colCatName.Name = "colCatName";
+            this.colCatName.Width = 60;
             // 
             // colSubName
             // 
             this.colSubName.HeaderText = "Subcategory";
+            this.colSubName.MinimumWidth = 50;
             this.colSubName.Name = "colSubName";
-            this.colSubName.Width = 160;
             // 
             // colNama
             // 
@@ -111,69 +195,26 @@
             this.colWeight.Name = "colWeight";
             this.colWeight.Width = 80;
             // 
-            // label2
+            // colSupplier
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(375, 31);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Category";
+            this.colSupplier.HeaderText = "Supplier";
+            this.colSupplier.MinimumWidth = 50;
+            this.colSupplier.Name = "colSupplier";
             // 
-            // cbCatItems
+            // colStock
             // 
-            this.cbCatItems.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCatItems.FormattingEnabled = true;
-            this.cbCatItems.Location = new System.Drawing.Point(430, 28);
-            this.cbCatItems.Name = "cbCatItems";
-            this.cbCatItems.Size = new System.Drawing.Size(97, 21);
-            this.cbCatItems.TabIndex = 7;
-            this.cbCatItems.SelectedIndexChanged += new System.EventHandler(this.CbCatItems_SelectedIndexChanged);
-            // 
-            // btnEditItems
-            // 
-            this.btnEditItems.Location = new System.Drawing.Point(687, 438);
-            this.btnEditItems.Name = "btnEditItems";
-            this.btnEditItems.Size = new System.Drawing.Size(75, 23);
-            this.btnEditItems.TabIndex = 9;
-            this.btnEditItems.Text = "Edit";
-            this.btnEditItems.UseVisualStyleBackColor = true;
-            this.btnEditItems.Click += new System.EventHandler(this.BtnEditItems_Click);
-            // 
-            // btnAddItems
-            // 
-            this.btnAddItems.Location = new System.Drawing.Point(597, 438);
-            this.btnAddItems.Name = "btnAddItems";
-            this.btnAddItems.Size = new System.Drawing.Size(75, 23);
-            this.btnAddItems.TabIndex = 10;
-            this.btnAddItems.Text = "Add";
-            this.btnAddItems.UseVisualStyleBackColor = true;
-            this.btnAddItems.Click += new System.EventHandler(this.BtnAddItems_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(544, 32);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 13);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Sub Category";
-            // 
-            // cbSubItems
-            // 
-            this.cbSubItems.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSubItems.FormattingEnabled = true;
-            this.cbSubItems.Location = new System.Drawing.Point(621, 29);
-            this.cbSubItems.Name = "cbSubItems";
-            this.cbSubItems.Size = new System.Drawing.Size(138, 21);
-            this.cbSubItems.TabIndex = 13;
-            this.cbSubItems.SelectedIndexChanged += new System.EventHandler(this.CbSubItems_SelectedIndexChanged);
+            this.colStock.HeaderText = "Status";
+            this.colStock.MinimumWidth = 40;
+            this.colStock.Name = "colStock";
+            this.colStock.Width = 80;
             // 
             // FormMasterInventori
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 481);
+            this.ClientSize = new System.Drawing.Size(874, 481);
+            this.Controls.Add(this.cbStatus);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.cbSubItems);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnAddItems);
@@ -202,11 +243,15 @@
         private System.Windows.Forms.Button btnAddItems;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbSubItems;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cbStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colItemID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCatName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSubName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNama;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCarat;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colStock;
     }
 }

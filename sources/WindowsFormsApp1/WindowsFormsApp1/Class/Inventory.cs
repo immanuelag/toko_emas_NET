@@ -57,9 +57,21 @@ namespace TokoEmasAppNET
         public int inventory_carats;
         public float inventory_weight;
         public int inventory_status;
+        public string inventory_supplier;
 
         public Inventory()
         {
+        }
+
+        public string GetStatus()
+        {
+            switch(inventory_status)
+            {
+                case 0: return "SOLD";
+                case 1: return "INSIDE";
+                case 2: return "OUTSIDE";
+                default: return "UNKNOWN";
+            }
         }
     }
 
