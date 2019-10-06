@@ -42,6 +42,7 @@ namespace TokoEmasAppNET
 
             LoadViewInventory();
             LoadComboCategories();
+            LoadComboStatus();
         }
 
         public void Refresh()
@@ -81,7 +82,10 @@ namespace TokoEmasAppNET
                 itemsDict.Clear();
             }
 
-            itemList = manager.GetAllInventories();
+            if (cbStatus.SelectedIndex == 0)
+                itemList = manager.GetAllInventories();
+            else
+                itemList = manager.GetAllInventoriesByStatus(cbStatus.SelectedIndex);
 
             FillDGViewInventory();
 
@@ -95,7 +99,10 @@ namespace TokoEmasAppNET
                 itemsDict.Clear();
             }
 
-            itemList = manager.GetAllInventoriesByCat(cat_id);
+            if (cbStatus.SelectedIndex == 0)
+                itemList = manager.GetAllInventoriesByCat(cat_id);
+            else
+                itemList = manager.GetAllInventoriesByCatStatus(cat_id, cbStatus.SelectedIndex);
 
             FillDGViewInventory();
 
@@ -109,10 +116,25 @@ namespace TokoEmasAppNET
                 itemsDict.Clear();
             }
 
-            itemList = manager.GetAllInventoriesBySub(cat_id, sub_id);
+            if (cbStatus.SelectedIndex == 0)
+                itemList = manager.GetAllInventoriesBySub(cat_id, sub_id);
+            else
+                itemList = manager.GetAllInventoriesBySubStatus(cat_id, sub_id, cbStatus.SelectedIndex);
 
             FillDGViewInventory();
 
+        }
+
+        private void LoadComboStatus()
+        {
+            if(cbStatus.Items.Count == 0)
+            {
+                cbStatus.Items.Add("ALL");
+                cbStatus.Items.Add("INSIDE");
+                cbStatus.Items.Add("OUTSIDE");
+                cbStatus.Items.Add("SOLD");
+                cbStatus.Items.Add("UNKNOWN");
+            }
         }
 
         private void LoadComboCategories()
@@ -236,6 +258,29 @@ namespace TokoEmasAppNET
             else
             {
                 MessageBox.Show("Please select items first!");
+            }
+        }
+
+        private void cbStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cbCatItems.SelectedIndex == 0)
+            {
+                LoadViewInventory();
+            } 
+            else
+            {
+                if(cbSubItems.SelectedIndex == 0)
+                {
+                    Category sel_cat = null;
+                    comboDictionaryCat.TryGetValue(cbCatItems.SelectedIndex, out sel_cat);
+                    LoadViewInventoryByCat(sel_cat.category_id);
+                }
+                else
+                {
+                    Subcategory sel_sub = null;
+                    comboDictionarySub.TryGetValue(cbSubItems.SelectedIndex, out sel_sub);
+                    LoadViewInventoryBySub(sel_sub.parent.category_id, sel_sub.subcategory_id);
+                }
             }
         }
     }

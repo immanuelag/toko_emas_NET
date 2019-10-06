@@ -45,6 +45,7 @@
             this.picInv = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
             this.btnInvDetBrowse = new System.Windows.Forms.Button();
+            this.btnGenID = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picInv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,7 +73,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(27, 28);
+            this.label1.Location = new System.Drawing.Point(27, 109);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(21, 16);
             this.label1.TabIndex = 10;
@@ -92,7 +93,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(27, 67);
+            this.label3.Location = new System.Drawing.Point(26, 27);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 16);
             this.label3.TabIndex = 12;
@@ -102,7 +103,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(27, 106);
+            this.label4.Location = new System.Drawing.Point(26, 66);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(85, 16);
             this.label4.TabIndex = 13;
@@ -130,7 +131,7 @@
             // 
             // txbInvDetilID
             // 
-            this.txbInvDetilID.Location = new System.Drawing.Point(139, 27);
+            this.txbInvDetilID.Location = new System.Drawing.Point(139, 108);
             this.txbInvDetilID.Name = "txbInvDetilID";
             this.txbInvDetilID.Size = new System.Drawing.Size(76, 20);
             this.txbInvDetilID.TabIndex = 16;
@@ -138,7 +139,7 @@
             // cbCatItemDetil
             // 
             this.cbCatItemDetil.FormattingEnabled = true;
-            this.cbCatItemDetil.Location = new System.Drawing.Point(139, 66);
+            this.cbCatItemDetil.Location = new System.Drawing.Point(138, 26);
             this.cbCatItemDetil.Name = "cbCatItemDetil";
             this.cbCatItemDetil.Size = new System.Drawing.Size(121, 21);
             this.cbCatItemDetil.TabIndex = 17;
@@ -147,7 +148,7 @@
             // cbSubCatItemDetil
             // 
             this.cbSubCatItemDetil.FormattingEnabled = true;
-            this.cbSubCatItemDetil.Location = new System.Drawing.Point(139, 105);
+            this.cbSubCatItemDetil.Location = new System.Drawing.Point(138, 65);
             this.cbSubCatItemDetil.Name = "cbSubCatItemDetil";
             this.cbSubCatItemDetil.Size = new System.Drawing.Size(121, 21);
             this.cbSubCatItemDetil.TabIndex = 18;
@@ -202,11 +203,22 @@
             this.btnInvDetBrowse.Text = "Browse";
             this.btnInvDetBrowse.UseVisualStyleBackColor = true;
             // 
+            // btnGenID
+            // 
+            this.btnGenID.Location = new System.Drawing.Point(254, 106);
+            this.btnGenID.Name = "btnGenID";
+            this.btnGenID.Size = new System.Drawing.Size(102, 23);
+            this.btnGenID.TabIndex = 25;
+            this.btnGenID.Text = "Generate";
+            this.btnGenID.UseVisualStyleBackColor = true;
+            this.btnGenID.Click += new System.EventHandler(this.btnGenID_Click);
+            // 
             // FormInvDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(379, 490);
+            this.Controls.Add(this.btnGenID);
             this.Controls.Add(this.btnInvDetBrowse);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.picInv);
@@ -252,5 +264,6 @@
         private System.Windows.Forms.PictureBox picInv;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnInvDetBrowse;
+        private System.Windows.Forms.Button btnGenID;
     }
 }

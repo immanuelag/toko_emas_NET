@@ -751,6 +751,62 @@ namespace TokoEmasAppNET
             return result;
         }
 
+        public List<Inventory> GetAllInventoriesByStatus(int status)
+        {
+            List<Inventory> result = new List<Inventory>();
+
+            string mySelectQuery = "SELECT master_items.id, master_items.category, master_category.nama, master_items.subcategory, " +
+                " master_subcategory.nama, master_items.nama, master_items.supplier, karat, master_carat.carat, berat, stocks" +
+                " FROM master_items, master_category, master_subcategory, master_carat " +
+                " WHERE master_subcategory.category=master_category.id AND " +
+                " master_items.category = master_category.id AND karat=master_carat.id AND master_items.stocks=" +
+                status.ToString() + " GROUP BY master_items.id;";
+            MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
+
+            if (isDBConnected)
+            {
+                MySqlDataReader myReader;
+                myReader = myCommand.ExecuteReader();
+                try
+                {
+                    while (myReader.Read())
+                    {
+                        Inventory items = new Inventory();
+                        int idx = 0;
+                        items.inventory_id = myReader.GetString(idx++);
+                        string cat_id = myReader.GetString(idx++);
+                        string cat_name = myReader.GetString(idx++);
+                        Category new_cat = new Category(cat_id, cat_name);
+                        string sub_id = myReader.GetString(idx++);
+                        string sub_nama = myReader.GetString(idx++);
+                        Subcategory subs = new Subcategory(new_cat, sub_id, sub_nama);
+                        items.inventory_sub = subs;
+                        if (!myReader.IsDBNull(idx))
+                            items.inventory_name = myReader.GetString(idx++);
+                        else
+                        {
+                            idx++;
+                            items.inventory_name = string.Empty;
+                        }
+                        items.inventory_supplier = myReader.GetString(idx++);
+                        int car_id = myReader.GetInt32(idx++);
+                        string car_value = myReader.GetString(idx++);
+                        items.inventory_weight = myReader.GetFloat(idx++);
+                        items.inventory_carats = car_id;
+                        items.inventory_status = status;
+
+                        result.Add(items);
+                    }
+                }
+                finally
+                {
+                    myReader.Close();
+                }
+            }
+
+            return result;
+        }
+
         public List<Inventory> GetAllInventoriesByCatStatus(string cat_id, int status)
         {
             List<Inventory> result = new List<Inventory>();
@@ -984,6 +1040,35 @@ namespace TokoEmasAppNET
             return result;
         }
 
+        public string GetLastInventoryIDByCatSub(string cat_id, string sub_id)
+        {
+            string LastInventoryID = string.Empty;
+
+            string mySelectQuery = "SELECT master_items.id FROM master_items WHERE category='" + cat_id + "' AND" +
+                " subcategory='" + sub_id + "' ORDER BY id DESC LIMIT 1;";
+
+            MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
+
+            if (isDBConnected)
+            {
+                MySqlDataReader myReader;
+                myReader = myCommand.ExecuteReader();
+                try
+                {
+                    if (myReader.HasRows)
+                    {
+                        
+                        LastInventoryID = myReader.GetString(0);
+                    }
+                }
+                finally
+                {
+                    myReader.Close();
+                }
+            }
+
+            return LastInventoryID;
+        }
         public bool AddNewInventory(Inventory item)
         {
             bool result = false;

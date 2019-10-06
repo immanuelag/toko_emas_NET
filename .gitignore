@@ -6,3 +6,5 @@ sources/WindowsFormsApp1/.vs/WindowsFormsApp1/v16/Server/sqlite3/db.lock
 *.exe
 
 sources/WindowsFormsApp1/WindowsFormsApp1/obj/Debug/
+
+sources/WindowsFormsApp1/WindowsFormsApp1/bin/Debug/

@@ -59,6 +59,7 @@ namespace TokoEmasAppNET
 
             if(data_mode == 2)
             {
+                btnGenID.Enabled = false;
                 txbInvDetilID.Text = itemInv.inventory_id;
                 txbInvName.Text = itemInv.inventory_name;
                 txbInvWeight.Text = itemInv.inventory_weight.ToString("0.000");
@@ -90,7 +91,11 @@ namespace TokoEmasAppNET
                         break;
                     }
                 }
-            }
+            } 
+            else if(data_mode == 1)
+            {
+                btnGenID.Enabled = true;
+            } 
         }
 
         private void LoadComboCategories()
@@ -230,6 +235,24 @@ namespace TokoEmasAppNET
         private void CbCatItemDetil_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadComboSubCategories();
+        }
+
+        private void btnGenID_Click(object sender, EventArgs e)
+        {
+            Category sel_cat = null;
+            comboDictionaryCat.TryGetValue(cbCatItemDetil.SelectedIndex, out sel_cat);
+            Subcategory sel_sub = null;
+            comboDictionarySub.TryGetValue(cbSubCatItemDetil.SelectedIndex, out sel_sub);
+            string LastInvID = manager.GetLastInventoryIDByCatSub(sel_cat.category_id, sel_sub.subcategory_id);
+            if(LastInvID == string.Empty)
+            {
+                txbInvDetilID.Text = sel_cat.category_id + sel_sub.subcategory_id + "001";
+            }
+            else
+            {
+                int new_id = int.Parse(LastInvID.Substring(2, 3)) + 1;
+                txbInvDetilID.Text = sel_cat.category_id + sel_sub.subcategory_id + new_id.ToString("000"); 
+            }
         }
     }
 }

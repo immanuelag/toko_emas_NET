@@ -67,9 +67,9 @@ namespace TokoEmasAppNET
         {
             switch(inventory_status)
             {
-                case 0: return "SOLD";
                 case 1: return "INSIDE";
                 case 2: return "OUTSIDE";
+                case 3: return "SOLD";
                 default: return "UNKNOWN";
             }
         }
