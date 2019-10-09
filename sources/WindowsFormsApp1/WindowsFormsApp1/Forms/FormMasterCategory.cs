@@ -19,6 +19,8 @@ namespace TokoEmasAppNET
         public List<Subcategory> subcategories;
         public int data_mode_cat;
         public int data_mode_sub;
+        public string cat_id_selected;
+        public string sub_id_selected;
 
         public FormMasterCategory()
         {
@@ -231,6 +233,9 @@ namespace TokoEmasAppNET
                 txbSubID.Text = (string)row.Cells[0].Value;
                 txbSubID.Enabled = false;
                 txbSubName.Text = (string)row.Cells[2].Value;
+                cat_id_selected = (string)row.Cells[1].Value;
+                cat_id_selected = cat_id_selected.Substring(0, 1);
+                sub_id_selected = txbSubID.Text;
                 data_mode_sub = 2; //Edit mode
             }
             else
@@ -243,8 +248,9 @@ namespace TokoEmasAppNET
         {
             if (txbSubID.TextLength > 0 & txbSubName.TextLength > 0)
             {
-                Category cats;
-                if (comboDictionary.TryGetValue(cbCatName.SelectedIndex, out cats))
+                Category cats = manager.GetCategoryByID(cat_id_selected);
+                if(cats != null)
+                //if (comboDictionary.TryGetValue(cbCatName.SelectedIndex, out cats))
                 {
 
                     Subcategory new_subcat = new Subcategory(cats, txbSubID.Text, txbSubName.Text);

@@ -68,16 +68,16 @@ namespace TokoEmasAppNET
             manDB = new MySQLDBManager(mysql_host, port, mysql_db_name, mysql_username, mysql_password);
             string errMsg = string.Empty;
             
-            manDB.OpenConnection(ref errMsg);
-            if(!manDB.IsConnected)
-            {
-                MessageBox.Show("Error Message: " + errMsg, "Error Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //manDB.OpenConnection(ref errMsg);
+            //if(!manDB.IsConnected)
+            //{
+            //    MessageBox.Show("Error Message: " + errMsg, "Error Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 
-            }
-            else
-            {
-                statusStrip1.Items[0].Text = "Connected";
-            }
+            //}
+            //else
+            //{
+            //    statusStrip1.Items[0].Text = "Connected";
+            //}
             
         }
 
@@ -153,10 +153,10 @@ namespace TokoEmasAppNET
         /// <param name="e"></param>
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(manDB.IsConnected)
-            {
-                manDB.CloseConnection();
-            }
+            //if(manDB.IsConnected)
+            //{
+            //    manDB.CloseConnection();
+            //}
 
             Application.Exit();
         }
@@ -269,10 +269,10 @@ namespace TokoEmasAppNET
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (manDB.IsConnected)
-            {
-                manDB.CloseConnection();
-            }
+            //if (manDB.IsConnected)
+            //{
+            //    manDB.CloseConnection();
+            //}
         }
     }
 }

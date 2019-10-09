@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace TokoEmasAppNET
 {
@@ -23,6 +26,9 @@ namespace TokoEmasAppNET
         public int data_mode;
         public FormInvDetail frmInvDetail;
 
+        public int nRowTotal;
+        public int nRowSelected;
+
         public FormMasterInventori()
         {
             InitializeComponent();
@@ -33,6 +39,8 @@ namespace TokoEmasAppNET
             categories = new List<Category>();
             subcategories = new List<Subcategory>();
             data_mode = 0; //nothing
+            nRowSelected = 0;
+            nRowTotal = 0;
         }
 
         private void FormMasterInventori_Load(object sender, EventArgs e)
@@ -45,7 +53,7 @@ namespace TokoEmasAppNET
             LoadComboStatus();
         }
 
-        public void Refresh()
+        public void RefreshView()
         {
             LoadViewInventory();
             LoadComboCategories();
@@ -72,6 +80,9 @@ namespace TokoEmasAppNET
                 itemsDict.Add(itemList[i].inventory_id, itemList[i]);
                 dgvInventory.Rows.Add(row);
             }
+
+            nRowTotal = dgvInventory.Rows.Count;
+            lblTotalRows.Text = nRowTotal.ToString();
         }
 
         private void LoadViewInventory()
@@ -82,7 +93,7 @@ namespace TokoEmasAppNET
                 itemsDict.Clear();
             }
 
-            if (cbStatus.SelectedIndex == 0)
+            if (cbStatus.SelectedIndex <= 0)
                 itemList = manager.GetAllInventories();
             else
                 itemList = manager.GetAllInventoriesByStatus(cbStatus.SelectedIndex);
@@ -99,7 +110,7 @@ namespace TokoEmasAppNET
                 itemsDict.Clear();
             }
 
-            if (cbStatus.SelectedIndex == 0)
+            if (cbStatus.SelectedIndex <= 0)
                 itemList = manager.GetAllInventoriesByCat(cat_id);
             else
                 itemList = manager.GetAllInventoriesByCatStatus(cat_id, cbStatus.SelectedIndex);
@@ -116,7 +127,7 @@ namespace TokoEmasAppNET
                 itemsDict.Clear();
             }
 
-            if (cbStatus.SelectedIndex == 0)
+            if (cbStatus.SelectedIndex <= 0)
                 itemList = manager.GetAllInventoriesBySub(cat_id, sub_id);
             else
                 itemList = manager.GetAllInventoriesBySubStatus(cat_id, sub_id, cbStatus.SelectedIndex);
@@ -135,6 +146,9 @@ namespace TokoEmasAppNET
                 cbStatus.Items.Add("SOLD");
                 cbStatus.Items.Add("UNKNOWN");
             }
+
+            if(cbStatus.SelectedIndex < 0)
+                cbStatus.SelectedIndex = 0;
         }
 
         private void LoadComboCategories()
@@ -237,7 +251,7 @@ namespace TokoEmasAppNET
 
         private void BtnEditItems_Click(object sender, EventArgs e)
         {
-            if (dgvInventory.SelectedRows.Count > 0)
+            if (dgvInventory.SelectedRows.Count == 1)
             {
                 if (frmInvDetail == null || frmInvDetail.IsDisposed)
                 {
@@ -282,6 +296,51 @@ namespace TokoEmasAppNET
                     LoadViewInventoryBySub(sel_sub.parent.category_id, sel_sub.subcategory_id);
                 }
             }
+        }
+
+        private void BtnXCode_Click(object sender, EventArgs e)
+        {
+            if (dgvInventory.SelectedRows.Count > 1 && (dgvInventory.SelectedRows.Count % 2) == 0 && dgvInventory.SelectedRows.Count <= 10)
+            { 
+                Excel.Application MyApp = new Excel.Application();
+                Excel.Workbook xlWorkBook;
+                Excel.Worksheet xlWorkSheet;
+
+                string filename = @"D:\GIT\toko_emas_NET\template\template2.xls";
+                xlWorkBook = MyApp.Workbooks.Open(filename);
+                xlWorkSheet = xlWorkBook.Worksheets["Sheet1"];
+
+                ((Range)xlWorkSheet.Range["A2", "E21"]).Clear();
+
+                int nRow = dgvInventory.SelectedRows.Count;
+                int iRow = 2;
+                for (int i = 0; i < nRow; i++)
+                {
+                    DataGridViewRow sel_row = dgvInventory.SelectedRows[i];
+
+                    xlWorkSheet.Cells[iRow + i, 1].value = (string)sel_row.Cells[1].Value + " " + (string)sel_row.Cells[2].Value;
+                    xlWorkSheet.Cells[iRow + i, 2].value = (string)sel_row.Cells[0].Value;
+                    xlWorkSheet.Cells[iRow + i, 3].value = "'" + (string)sel_row.Cells[5].Value;
+                    xlWorkSheet.Cells[iRow + i, 4].value = "'" + (string)sel_row.Cells[4].Value;
+                    xlWorkSheet.Cells[iRow + i, 5].value = (string)sel_row.Cells[6].Value;
+                }
+                xlWorkBook.Save();
+                //xlWorkBook.SaveAs(filename, XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, false, false, XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
+                xlWorkBook.Close();
+                MyApp.Quit();
+            }
+            else
+            {
+                MessageBox.Show("Please select 2 or more (even) rows (max 10)!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void DgvInventory_SelectionChanged(object sender, EventArgs e)
+        {
+            
+            nRowSelected = dgvInventory.SelectedRows.Count;
+
+            lblSelectedRows.Text = nRowSelected.ToString();
         }
     }
 }

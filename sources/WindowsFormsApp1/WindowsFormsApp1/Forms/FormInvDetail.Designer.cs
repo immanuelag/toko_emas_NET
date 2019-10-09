@@ -46,12 +46,14 @@
             this.label7 = new System.Windows.Forms.Label();
             this.btnInvDetBrowse = new System.Windows.Forms.Button();
             this.btnGenID = new System.Windows.Forms.Button();
+            this.cbStatus = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picInv)).BeginInit();
             this.SuspendLayout();
             // 
             // btnInvCancel
             // 
-            this.btnInvCancel.Location = new System.Drawing.Point(194, 455);
+            this.btnInvCancel.Location = new System.Drawing.Point(194, 484);
             this.btnInvCancel.Name = "btnInvCancel";
             this.btnInvCancel.Size = new System.Drawing.Size(75, 23);
             this.btnInvCancel.TabIndex = 9;
@@ -61,7 +63,7 @@
             // 
             // btnInvSave
             // 
-            this.btnInvSave.Location = new System.Drawing.Point(278, 455);
+            this.btnInvSave.Location = new System.Drawing.Point(278, 484);
             this.btnInvSave.Name = "btnInvSave";
             this.btnInvSave.Size = new System.Drawing.Size(75, 23);
             this.btnInvSave.TabIndex = 8;
@@ -131,7 +133,7 @@
             // 
             // txbInvDetilID
             // 
-            this.txbInvDetilID.Location = new System.Drawing.Point(139, 108);
+            this.txbInvDetilID.Location = new System.Drawing.Point(138, 108);
             this.txbInvDetilID.Name = "txbInvDetilID";
             this.txbInvDetilID.Size = new System.Drawing.Size(76, 20);
             this.txbInvDetilID.TabIndex = 16;
@@ -155,7 +157,7 @@
             // 
             // txbInvName
             // 
-            this.txbInvName.Location = new System.Drawing.Point(139, 144);
+            this.txbInvName.Location = new System.Drawing.Point(138, 144);
             this.txbInvName.Name = "txbInvName";
             this.txbInvName.Size = new System.Drawing.Size(217, 20);
             this.txbInvName.TabIndex = 19;
@@ -163,14 +165,14 @@
             // cbInvCarat
             // 
             this.cbInvCarat.FormattingEnabled = true;
-            this.cbInvCarat.Location = new System.Drawing.Point(139, 183);
+            this.cbInvCarat.Location = new System.Drawing.Point(138, 183);
             this.cbInvCarat.Name = "cbInvCarat";
             this.cbInvCarat.Size = new System.Drawing.Size(76, 21);
             this.cbInvCarat.TabIndex = 20;
             // 
             // txbInvWeight
             // 
-            this.txbInvWeight.Location = new System.Drawing.Point(139, 222);
+            this.txbInvWeight.Location = new System.Drawing.Point(138, 222);
             this.txbInvWeight.Name = "txbInvWeight";
             this.txbInvWeight.Size = new System.Drawing.Size(76, 20);
             this.txbInvWeight.TabIndex = 21;
@@ -178,9 +180,9 @@
             // picInv
             // 
             this.picInv.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picInv.Location = new System.Drawing.Point(139, 258);
+            this.picInv.Location = new System.Drawing.Point(138, 303);
             this.picInv.Name = "picInv";
-            this.picInv.Size = new System.Drawing.Size(217, 180);
+            this.picInv.Size = new System.Drawing.Size(160, 160);
             this.picInv.TabIndex = 22;
             this.picInv.TabStop = false;
             // 
@@ -188,7 +190,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(27, 267);
+            this.label7.Location = new System.Drawing.Point(27, 310);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 16);
             this.label7.TabIndex = 23;
@@ -196,7 +198,7 @@
             // 
             // btnInvDetBrowse
             // 
-            this.btnInvDetBrowse.Location = new System.Drawing.Point(30, 415);
+            this.btnInvDetBrowse.Location = new System.Drawing.Point(30, 444);
             this.btnInvDetBrowse.Name = "btnInvDetBrowse";
             this.btnInvDetBrowse.Size = new System.Drawing.Size(75, 23);
             this.btnInvDetBrowse.TabIndex = 24;
@@ -213,11 +215,31 @@
             this.btnGenID.UseVisualStyleBackColor = true;
             this.btnGenID.Click += new System.EventHandler(this.btnGenID_Click);
             // 
+            // cbStatus
+            // 
+            this.cbStatus.FormattingEnabled = true;
+            this.cbStatus.Location = new System.Drawing.Point(138, 261);
+            this.cbStatus.Name = "cbStatus";
+            this.cbStatus.Size = new System.Drawing.Size(120, 21);
+            this.cbStatus.TabIndex = 26;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(26, 262);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(45, 16);
+            this.label8.TabIndex = 27;
+            this.label8.Text = "Status";
+            // 
             // FormInvDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(379, 490);
+            this.ClientSize = new System.Drawing.Size(379, 522);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.cbStatus);
             this.Controls.Add(this.btnGenID);
             this.Controls.Add(this.btnInvDetBrowse);
             this.Controls.Add(this.label7);
@@ -265,5 +287,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnInvDetBrowse;
         private System.Windows.Forms.Button btnGenID;
+        private System.Windows.Forms.ComboBox cbStatus;
+        private System.Windows.Forms.Label label8;
     }
 }

@@ -64,7 +64,7 @@ namespace TokoEmasAppNET
         /// Public Functions
         /// </summary>
         /// <param name="error"></param>
-        public void OpenConnection(ref string error)
+        private void OpenConnection(ref string error)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace TokoEmasAppNET
             }
         }
 
-        public void CloseConnection()
+        private void CloseConnection()
         {
             if(isDBConnected)
             {
@@ -96,25 +96,29 @@ namespace TokoEmasAppNET
             string mySelectQuery = "SELECT id, carat FROM master_carat;";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
-            if (isDBConnected)
+            //if (isDBConnected)
+            //{
+            MySqlDataReader myReader;
+            string error = string.Empty;
+            OpenConnection(ref error);
+            myReader = myCommand.ExecuteReader();
+            try
             {
-                MySqlDataReader myReader;
-                myReader = myCommand.ExecuteReader();
-                try
+                
+                while (myReader.Read())
                 {
-                    while (myReader.Read())
-                    {
                         int id = myReader.GetInt32("id");
                         string value = myReader.GetString("carat");
                         Carat _carat = new Carat(id, value);
                         result.Add(_carat);
-                    }
-                }
-                finally
-                {
-                    myReader.Close();
                 }
             }
+            finally
+            {
+                myReader.Close();
+                CloseConnection();
+            }
+        //}
             return result;
         }
 
@@ -125,28 +129,33 @@ namespace TokoEmasAppNET
             string mySelectQuery = "SELECT carat FROM master_carat WHERE id=" + id.ToString() + ";";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
-            if (isDBConnected)
+            //if (isDBConnected)
+            //{
+            string error = string.Empty;
+            OpenConnection(ref error);
+            MySqlDataReader myReader;
+            myReader = myCommand.ExecuteReader();
+            try
             {
-                MySqlDataReader myReader;
-                myReader = myCommand.ExecuteReader();
-                try
+                if (myReader.HasRows)
                 {
-                    if (myReader.HasRows)
-                    {
-                        myReader.Read();
-                        string value = myReader.GetString("carat");
-                        result = new Carat(id, value);
-                    }
-                    else
-                    {
-                        throw new Exception("Error ID: " + id + " not found in carat!");
-                    }
+                    myReader.Read();
+                    string value = myReader.GetString("carat");
+                    result = new Carat(id, value);
                 }
-                finally
+                else
                 {
                     myReader.Close();
+                    CloseConnection();
+                    throw new Exception("Error ID: " + id + " not found in carat!");
                 }
             }
+            finally
+            {
+                myReader.Close();
+                CloseConnection();
+            }
+            //}
 
             return result;
         }
@@ -161,11 +170,15 @@ namespace TokoEmasAppNET
 
             try
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 int rows = myCommand.ExecuteNonQuery();
+                CloseConnection();
                 if (rows > 0) return true;
             }
             catch (Exception ex)
             {
+                CloseConnection();
                 throw new Exception("Error insert into master_carat! " + ex.Message);
             }
 
@@ -182,11 +195,15 @@ namespace TokoEmasAppNET
 
             try
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 int rows = myCommand.ExecuteNonQuery();
+                CloseConnection();
                 if (rows > 0) return true;
             }
             catch (Exception ex)
             {
+                CloseConnection();
                 throw new Exception("Error update master_carat! " + ex.Message);
             }
 
@@ -202,11 +219,15 @@ namespace TokoEmasAppNET
 
             try
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 int rows = myCommand.ExecuteNonQuery();
+                CloseConnection();
                 if (rows > 0) return true;
             }
             catch (Exception ex)
             {
+                CloseConnection();
                 throw new Exception("Error delete master_carat! " + ex.Message);
             }
 
@@ -224,9 +245,11 @@ namespace TokoEmasAppNET
             string mySelectQuery = "SELECT username, password, role FROM master_user";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
-            if (isDBConnected)
-            {
-                MySqlDataReader myReader;
+            //if (isDBConnected)
+            //{
+            string error = string.Empty;
+            OpenConnection(ref error);
+            MySqlDataReader myReader;
                 myReader = myCommand.ExecuteReader();
                 try
                 {
@@ -242,8 +265,9 @@ namespace TokoEmasAppNET
                 finally
                 {
                     myReader.Close();
+                CloseConnection();
                 }
-            }
+            //}
             return result;
         }
 
@@ -254,14 +278,17 @@ namespace TokoEmasAppNET
             string mySelectQuery = "SELECT username, password, role FROM master_user WHERE username='" + username + "'";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
-            if (isDBConnected)
+            //if (isDBConnected)
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 MySqlDataReader myReader;
                 myReader = myCommand.ExecuteReader();
                 try
                 {
                     if (myReader.HasRows)
                     {
+                        myReader.Read();
                         string nama = myReader.GetString("username");
                         string password = myReader.GetString("password");
                         int role = myReader.GetInt32("role");
@@ -269,12 +296,14 @@ namespace TokoEmasAppNET
                     }
                     else
                     {
+                        CloseConnection();
                         throw new Exception("Error ID: " + username + " not found in master_user!");
                     }
                 }
                 finally
                 {
                     myReader.Close();
+                    CloseConnection();
                 }
             }
 
@@ -291,11 +320,15 @@ namespace TokoEmasAppNET
 
             try
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 int rows = myCommand.ExecuteNonQuery();
+                CloseConnection();
                 if (rows > 0) return true;
             }
             catch (Exception ex)
             {
+                CloseConnection();
                 throw new Exception("Error insert into master_user! " + ex.Message);
             }
 
@@ -312,11 +345,15 @@ namespace TokoEmasAppNET
 
             try
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 int rows = myCommand.ExecuteNonQuery();
+                CloseConnection();
                 if (rows > 0) return true;
             }
             catch (Exception ex)
             {
+                CloseConnection();
                 throw new Exception("Error update master_user! " + ex.Message);
             }
 
@@ -332,11 +369,15 @@ namespace TokoEmasAppNET
 
             try
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 int rows = myCommand.ExecuteNonQuery();
+                CloseConnection();
                 if (rows > 0) return true;
             }
             catch (Exception ex)
             {
+                CloseConnection();
                 throw new Exception("Error delete master_user! " + ex.Message);
             }
 
@@ -354,8 +395,10 @@ namespace TokoEmasAppNET
             string mySelectQuery = "SELECT id, nama FROM master_category";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
-            if (isDBConnected)
+            //if (isDBConnected)
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 MySqlDataReader myReader;
                 myReader = myCommand.ExecuteReader();
                 try
@@ -371,6 +414,7 @@ namespace TokoEmasAppNET
                 finally
                 {
                     myReader.Close();
+                    CloseConnection();
                 }
             }
             return result;
@@ -383,25 +427,30 @@ namespace TokoEmasAppNET
             string mySelectQuery = "SELECT nama FROM master_category WHERE id='" + id + "'";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
-            if (isDBConnected)
+            //if (isDBConnected)
             {
                 MySqlDataReader myReader;
+                string error = string.Empty;
+                OpenConnection(ref error);
                 myReader = myCommand.ExecuteReader();
                 try
                 {
                     if (myReader.HasRows)
                     {
+                        myReader.Read();
                         string nama = myReader.GetString("nama");
                         result = new Category(id, nama);
                     }
                     else
                     {
+                        CloseConnection();
                         throw new Exception("Error ID: " + id + " not found in category!");
                     }
                 }
                 finally
                 {
                     myReader.Close();
+                    CloseConnection();
                 }
             }
 
@@ -418,11 +467,15 @@ namespace TokoEmasAppNET
 
             try
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 int rows = myCommand.ExecuteNonQuery();
+                CloseConnection();
                 if (rows > 0) return true;
             }
             catch (Exception ex)
             {
+                CloseConnection();
                 throw new Exception("Error insert into master_category! " + ex.Message);
             }
 
@@ -439,11 +492,15 @@ namespace TokoEmasAppNET
 
             try
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 int rows = myCommand.ExecuteNonQuery();
+                CloseConnection();
                 if (rows > 0) return true;
             }
             catch (Exception ex)
             {
+                CloseConnection();
                 throw new Exception("Error update master_category! " + ex.Message);
             }
 
@@ -459,11 +516,15 @@ namespace TokoEmasAppNET
 
             try
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 int rows = myCommand.ExecuteNonQuery();
+                CloseConnection();
                 if (rows > 0) return true;
             }
             catch (Exception ex)
             {
+                CloseConnection();
                 throw new Exception("Error delete master_category! " + ex.Message);
             }
 
@@ -481,8 +542,10 @@ namespace TokoEmasAppNET
             string mySelectQuery = "SELECT master_subcategory.id, category, master_category.nama, master_subcategory.nama FROM master_subcategory, master_category WHERE master_subcategory.category=master_category.id";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
-            if (isDBConnected)
+            //if (isDBConnected)
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 MySqlDataReader myReader;
                 myReader = myCommand.ExecuteReader();
                 try
@@ -501,6 +564,7 @@ namespace TokoEmasAppNET
                 finally
                 {
                     myReader.Close();
+                    CloseConnection();
                 }
             }
             return result;
@@ -513,8 +577,10 @@ namespace TokoEmasAppNET
                 cat_id + "' AND category=master_category.id;";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
-            if (isDBConnected)
+            //if (isDBConnected)
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 MySqlDataReader myReader;
                 myReader = myCommand.ExecuteReader();
                 try
@@ -532,6 +598,7 @@ namespace TokoEmasAppNET
                 finally
                 {
                     myReader.Close();
+                    CloseConnection();
                 }
             }
             return result;
@@ -545,26 +612,31 @@ namespace TokoEmasAppNET
                 "' AND category='" + cat_id + "';";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
-            if (isDBConnected)
+            //if (isDBConnected)
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 MySqlDataReader myReader;
                 myReader = myCommand.ExecuteReader();
                 try
                 {
                     if (myReader.HasRows)
                     {
+                        myReader.Read();
                         string nama = myReader.GetString("nama");
                         Category cat = GetCategoryByID(cat_id);
                         result = new Subcategory(cat, id, nama);
                     }
                     else
                     {
+                        CloseConnection();
                         throw new Exception("Error ID: " + id + " and CatID: " + cat_id + " not found in subcategory!");
                     }
                 }
                 finally
                 {
                     myReader.Close();
+                    CloseConnection();
                 }
             }
 
@@ -581,11 +653,15 @@ namespace TokoEmasAppNET
 
             try
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 int rows = myCommand.ExecuteNonQuery();
+                CloseConnection();
                 if (rows > 0) return true;
             }
             catch (Exception ex)
             {
+                CloseConnection();
                 throw new Exception("Error insert into master_subcategory! " + ex.Message);
             }
 
@@ -602,11 +678,15 @@ namespace TokoEmasAppNET
 
             try
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 int rows = myCommand.ExecuteNonQuery();
+                CloseConnection();
                 if (rows > 0) return true;
             }
             catch (Exception ex)
             {
+                CloseConnection();
                 throw new Exception("Error update master_subcategory! " + ex.Message);
             }
 
@@ -623,11 +703,15 @@ namespace TokoEmasAppNET
 
             try
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 int rows = myCommand.ExecuteNonQuery();
+                CloseConnection();
                 if (rows > 0) return true;
             }
             catch (Exception ex)
             {
+                CloseConnection();
                 throw new Exception("Error delete master_subcategory! " + ex.Message);
             }
 
@@ -646,12 +730,14 @@ namespace TokoEmasAppNET
             string mySelectQuery = "SELECT master_items.id, master_items.category, master_category.nama, master_items.subcategory, " +
                 " master_subcategory.nama, master_items.nama, master_items.supplier, karat, master_carat.carat, berat, stocks" + 
                 " FROM master_items, master_category, master_subcategory, master_carat " +
-                " WHERE master_subcategory.category=master_category.id AND " +
+                " WHERE master_items.subcategory=master_subcategory.id AND master_subcategory.category=master_category.id AND " +
                 " master_items.category = master_category.id AND karat=master_carat.id GROUP BY master_items.id;";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
-            if (isDBConnected)
+            //if (isDBConnected)
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 MySqlDataReader myReader;
                 myReader = myCommand.ExecuteReader();
                 try
@@ -688,6 +774,7 @@ namespace TokoEmasAppNET
                 finally
                 {
                     myReader.Close();
+                    CloseConnection();
                 }
             }
 
@@ -701,13 +788,15 @@ namespace TokoEmasAppNET
             string mySelectQuery = "SELECT master_items.id, master_items.category, master_category.nama, master_items.subcategory, " +
                 " master_subcategory.nama, master_items.nama, master_items.supplier, karat, master_carat.carat, berat, stocks" +
                 " FROM master_items, master_category, master_subcategory, master_carat " +
-                " WHERE master_subcategory.category=master_category.id AND " +
+                " WHERE master_subcategory.category=master_category.id AND master_items.subcategory=master_subcategory.id AND " +
                 " master_items.category = master_category.id AND karat=master_carat.id AND master_items.category='" +
                 cat_id + "' GROUP BY master_items.id;";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
-            if (isDBConnected)
+            //if (isDBConnected)
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 MySqlDataReader myReader;
                 myReader = myCommand.ExecuteReader();
                 try
@@ -745,6 +834,7 @@ namespace TokoEmasAppNET
                 finally
                 {
                     myReader.Close();
+                    CloseConnection();
                 }
             }
 
@@ -758,13 +848,15 @@ namespace TokoEmasAppNET
             string mySelectQuery = "SELECT master_items.id, master_items.category, master_category.nama, master_items.subcategory, " +
                 " master_subcategory.nama, master_items.nama, master_items.supplier, karat, master_carat.carat, berat, stocks" +
                 " FROM master_items, master_category, master_subcategory, master_carat " +
-                " WHERE master_subcategory.category=master_category.id AND " +
+                " WHERE master_subcategory.category=master_category.id AND master_items.subcategory=master_subcategory.id AND" +
                 " master_items.category = master_category.id AND karat=master_carat.id AND master_items.stocks=" +
                 status.ToString() + " GROUP BY master_items.id;";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
-            if (isDBConnected)
+            //if (isDBConnected)
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 MySqlDataReader myReader;
                 myReader = myCommand.ExecuteReader();
                 try
@@ -801,6 +893,7 @@ namespace TokoEmasAppNET
                 finally
                 {
                     myReader.Close();
+                    CloseConnection();
                 }
             }
 
@@ -814,13 +907,15 @@ namespace TokoEmasAppNET
             string mySelectQuery = "SELECT master_items.id, master_items.category, master_category.nama, master_items.subcategory, " +
                 " master_subcategory.nama, master_items.nama, master_items.supplier, karat, master_carat.carat, berat" +
                 " FROM master_items, master_category, master_subcategory, master_carat " +
-                " WHERE master_subcategory.category=master_category.id AND " +
+                " WHERE master_subcategory.category=master_category.id AND master_items.subcategory=master_subcategory.id AND" +
                 " master_items.category = master_category.id AND karat=master_carat.id AND master_items.category='" +
                 cat_id + "' AND stocks=" + status + " GROUP BY master_items.id;";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
-            if (isDBConnected)
+            //if (isDBConnected)
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 MySqlDataReader myReader;
                 myReader = myCommand.ExecuteReader();
                 try
@@ -859,6 +954,7 @@ namespace TokoEmasAppNET
                 finally
                 {
                     myReader.Close();
+                    CloseConnection();
                 }
             }
 
@@ -877,8 +973,10 @@ namespace TokoEmasAppNET
                 cat_id + "' AND master_items.subcategory='" + sub_id + "' GROUP BY master_items.id;";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
-            if (isDBConnected)
+            //if (isDBConnected)
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 MySqlDataReader myReader;
                 myReader = myCommand.ExecuteReader();
                 try
@@ -916,6 +1014,7 @@ namespace TokoEmasAppNET
                 finally
                 {
                     myReader.Close();
+                    CloseConnection();
                 }
             }
 
@@ -934,8 +1033,10 @@ namespace TokoEmasAppNET
                 cat_id + "' AND master_items.subcategory='" + sub_id + "' AND master_items.stocks=" + status + " GROUP BY master_items.id;";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
-            if (isDBConnected)
+            //if (isDBConnected)
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 MySqlDataReader myReader;
                 myReader = myCommand.ExecuteReader();
                 try
@@ -974,6 +1075,7 @@ namespace TokoEmasAppNET
                 finally
                 {
                     myReader.Close();
+                    CloseConnection();
                 }
             }
 
@@ -992,14 +1094,17 @@ namespace TokoEmasAppNET
                 " master_items.id ='" + id + "';";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
-            if (isDBConnected)
+            //if (isDBConnected)
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 MySqlDataReader myReader;
                 myReader = myCommand.ExecuteReader();
                 try
                 {
                     if (myReader.HasRows)
                     {
+                        myReader.Read();
                         Inventory items = new Inventory();
                         int idx = 0;
                         items.inventory_id = myReader.GetString(idx++);
@@ -1028,12 +1133,14 @@ namespace TokoEmasAppNET
                     }
                     else
                     {
+                        CloseConnection();
                         throw new Exception("Error ID: " + id + " not found in master_inventory!");
                     }
                 }
                 finally
                 {
                     myReader.Close();
+                    CloseConnection();
                 }
             }
 
@@ -1049,21 +1156,24 @@ namespace TokoEmasAppNET
 
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
-            if (isDBConnected)
+            //if (isDBConnected)
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 MySqlDataReader myReader;
                 myReader = myCommand.ExecuteReader();
                 try
                 {
                     if (myReader.HasRows)
                     {
-                        
+                        myReader.Read();
                         LastInventoryID = myReader.GetString(0);
                     }
                 }
                 finally
                 {
                     myReader.Close();
+                    CloseConnection();
                 }
             }
 
@@ -1081,11 +1191,15 @@ namespace TokoEmasAppNET
 
             try
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 int rows = myCommand.ExecuteNonQuery();
+                CloseConnection();
                 if (rows > 0) return true;
             }
             catch (Exception ex)
             {
+                CloseConnection();
                 throw new Exception("Error insert into master_items! " + ex.Message);
             }
 
@@ -1105,11 +1219,15 @@ namespace TokoEmasAppNET
 
             try
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 int rows = myCommand.ExecuteNonQuery();
+                CloseConnection();
                 if (rows > 0) return true;
             }
             catch (Exception ex)
             {
+                CloseConnection();
                 throw new Exception("Error update master_items! " + ex.Message);
             }
 
@@ -1125,11 +1243,15 @@ namespace TokoEmasAppNET
 
             try
             {
+                string error = string.Empty;
+                OpenConnection(ref error);
                 int rows = myCommand.ExecuteNonQuery();
+                CloseConnection();
                 if (rows > 0) return true;
             }
             catch (Exception ex)
             {
+                CloseConnection();
                 throw new Exception("Error delete master_items! " + ex.Message);
             }
 

@@ -44,6 +44,19 @@ namespace TokoEmasAppNET
             itemInv = _inventory;
         }
 
+        private void ResetForm()
+        {
+            cbCatItemDetil.SelectedIndex = 0;
+            LoadComboSubCategories();
+            if(cbSubCatItemDetil.Items.Count > 0)
+                cbSubCatItemDetil.SelectedIndex = 0;
+            txbInvDetilID.Text = "";
+            txbInvName.Text = "";
+            txbInvWeight.Text = "";
+            cbInvCarat.SelectedIndex = 0;
+            cbStatus.SelectedIndex = 0;
+        }
+
         private void FormInvDetail_Load(object sender, EventArgs e)
         {
             comboDictionaryCat = new Dictionary<int, Category>();
@@ -56,6 +69,8 @@ namespace TokoEmasAppNET
 
             LoadComboCarat();
             LoadComboCategories();
+            LoadComboStatus();
+            
 
             if(data_mode == 2)
             {
@@ -91,10 +106,12 @@ namespace TokoEmasAppNET
                         break;
                     }
                 }
+                cbStatus.SelectedIndex = itemInv.inventory_status - 1;
             } 
             else if(data_mode == 1)
             {
                 btnGenID.Enabled = true;
+                ResetForm();
             } 
         }
 
@@ -174,9 +191,25 @@ namespace TokoEmasAppNET
             cbInvCarat.SelectedIndex = 0;
         }
 
+        private void LoadComboStatus()
+        {
+            if (cbStatus.Items.Count == 0)
+            {
+                
+                cbStatus.Items.Add("INSIDE");
+                cbStatus.Items.Add("OUTSIDE");
+                cbStatus.Items.Add("SOLD");
+                cbStatus.Items.Add("UNKNOWN");
+            }
+
+            if (cbStatus.SelectedIndex < 0)
+                cbStatus.SelectedIndex = 0;
+        }
+
         private void BtnInvCancel_Click(object sender, EventArgs e)
         {
             frmParent.data_mode = 0;
+            ResetForm();
             this.Hide();
         }
 
@@ -194,6 +227,7 @@ namespace TokoEmasAppNET
                 Carat carat = null;
                 comboDictionaryCarat.TryGetValue(cbInvCarat.SelectedIndex, out carat);
                 item.inventory_carats = carat.id;
+                item.inventory_status = cbStatus.SelectedIndex + 1;
 
                 try
                 {
@@ -205,7 +239,7 @@ namespace TokoEmasAppNET
                             this.Hide();
 
                             frmParent.data_mode = 0;
-                            frmParent.Refresh();
+                            frmParent.RefreshView();
                         }
                     }
                     else if(data_mode == 2)
@@ -216,7 +250,7 @@ namespace TokoEmasAppNET
                             this.Hide();
 
                             frmParent.data_mode = 0;
-                            frmParent.Refresh();
+                            frmParent.RefreshView();
                         }
                     }
                 }

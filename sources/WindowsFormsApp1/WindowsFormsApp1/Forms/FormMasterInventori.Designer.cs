@@ -46,6 +46,11 @@
             this.cbSubItems = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.cbStatus = new System.Windows.Forms.ComboBox();
+            this.btnXCode = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblSelectedRows = new System.Windows.Forms.Label();
+            this.lblTotalRows = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInventory)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,12 +80,12 @@
             this.colStock});
             this.dgvInventory.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvInventory.Location = new System.Drawing.Point(34, 66);
-            this.dgvInventory.MultiSelect = false;
             this.dgvInventory.Name = "dgvInventory";
             this.dgvInventory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvInventory.ShowEditingIcon = false;
             this.dgvInventory.Size = new System.Drawing.Size(812, 357);
             this.dgvInventory.TabIndex = 4;
+            this.dgvInventory.SelectionChanged += new System.EventHandler(this.DgvInventory_SelectionChanged);
             // 
             // colItemID
             // 
@@ -209,11 +214,66 @@
             this.cbStatus.TabIndex = 15;
             this.cbStatus.SelectedIndexChanged += new System.EventHandler(this.cbStatus_SelectedIndexChanged);
             // 
+            // btnXCode
+            // 
+            this.btnXCode.Location = new System.Drawing.Point(34, 438);
+            this.btnXCode.Name = "btnXCode";
+            this.btnXCode.Size = new System.Drawing.Size(251, 23);
+            this.btnXCode.TabIndex = 16;
+            this.btnXCode.Text = "Generate XLS Barcode";
+            this.btnXCode.UseVisualStyleBackColor = true;
+            this.btnXCode.Click += new System.EventHandler(this.BtnXCode_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(526, 441);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(68, 16);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Selected :";
+            // 
+            // lblSelectedRows
+            // 
+            this.lblSelectedRows.AutoSize = true;
+            this.lblSelectedRows.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelectedRows.Location = new System.Drawing.Point(600, 441);
+            this.lblSelectedRows.Name = "lblSelectedRows";
+            this.lblSelectedRows.Size = new System.Drawing.Size(16, 16);
+            this.lblSelectedRows.TabIndex = 18;
+            this.lblSelectedRows.Text = "0";
+            // 
+            // lblTotalRows
+            // 
+            this.lblTotalRows.AutoSize = true;
+            this.lblTotalRows.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalRows.Location = new System.Drawing.Point(439, 441);
+            this.lblTotalRows.Name = "lblTotalRows";
+            this.lblTotalRows.Size = new System.Drawing.Size(16, 16);
+            this.lblTotalRows.TabIndex = 20;
+            this.lblTotalRows.Text = "0";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(378, 441);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(45, 16);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "Total :";
+            // 
             // FormMasterInventori
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(874, 481);
+            this.Controls.Add(this.lblTotalRows);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.lblSelectedRows);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.btnXCode);
             this.Controls.Add(this.cbStatus);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cbSubItems);
@@ -254,5 +314,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStock;
+        private System.Windows.Forms.Button btnXCode;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblSelectedRows;
+        private System.Windows.Forms.Label lblTotalRows;
+        private System.Windows.Forms.Label label8;
     }
 }
