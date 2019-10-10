@@ -70,7 +70,10 @@ namespace TokoEmasAppNET
             LoadComboCarat();
             LoadComboCategories();
             LoadComboStatus();
-            
+
+            if (cbSupplier.Items.Count == 0)
+                cbSupplier.Items.Add("UBS");
+            cbSupplier.SelectedIndex = 0;
 
             if(data_mode == 2)
             {
@@ -107,6 +110,7 @@ namespace TokoEmasAppNET
                     }
                 }
                 cbStatus.SelectedIndex = itemInv.inventory_status - 1;
+                cbSupplier.SelectedIndex = 0;
             } 
             else if(data_mode == 1)
             {
@@ -228,6 +232,7 @@ namespace TokoEmasAppNET
                 comboDictionaryCarat.TryGetValue(cbInvCarat.SelectedIndex, out carat);
                 item.inventory_carats = carat.id;
                 item.inventory_status = cbStatus.SelectedIndex + 1;
+                item.inventory_supplier = (string)cbSupplier.SelectedItem;
 
                 try
                 {

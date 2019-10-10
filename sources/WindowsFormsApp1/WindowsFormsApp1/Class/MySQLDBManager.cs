@@ -530,6 +530,42 @@ namespace TokoEmasAppNET
 
             return result;
         }
+
+        public int GetCountCategory()
+        {
+            int count = 0;
+
+            string myDeleteQuery = "SELECT COUNT(id) FROM master_category";
+            MySqlCommand myCommand = new MySqlCommand(myDeleteQuery, dbConn);
+
+            
+            MySqlDataReader myReader;
+            string error = string.Empty;
+            OpenConnection(ref error);
+            myReader = myCommand.ExecuteReader();
+
+            try
+            {
+                
+                if (myReader.HasRows)
+                {
+                    myReader.Read();
+                    count = myReader.GetInt32(0);
+                }
+                else
+                {
+                    CloseConnection();
+                    throw new Exception("Error Get count category!");
+                }
+            }
+            finally
+            {
+                myReader.Close();
+                CloseConnection();
+            }
+
+            return count;
+        }
         #endregion
 
         /*
@@ -716,6 +752,42 @@ namespace TokoEmasAppNET
             }
 
             return result;
+        }
+
+        public int GetCountSubcategory(string cat_id)
+        {
+            int count = 0;
+
+            string myDeleteQuery = "SELECT COUNT(id) FROM master_subcategory WHERE category='" + cat_id + "';";
+            MySqlCommand myCommand = new MySqlCommand(myDeleteQuery, dbConn);
+
+
+            MySqlDataReader myReader;
+            string error = string.Empty;
+            OpenConnection(ref error);
+            myReader = myCommand.ExecuteReader();
+
+            try
+            {
+
+                if (myReader.HasRows)
+                {
+                    myReader.Read();
+                    count = myReader.GetInt32(0);
+                }
+                else
+                {
+                    CloseConnection();
+                    throw new Exception("Error Get count subcategory!");
+                }
+            }
+            finally
+            {
+                myReader.Close();
+                CloseConnection();
+            }
+
+            return count;
         }
         #endregion
 
@@ -1213,8 +1285,8 @@ namespace TokoEmasAppNET
             string myUpdateQuery = "UPDATE master_items SET category='" + item.inventory_sub.parent.category_id +
                 "', subcategory='" + item.inventory_sub.subcategory_id + "', nama='"+
                 item.inventory_name + "', karat=" + item.inventory_carats.ToString() + ", berat=" +
-                item.inventory_weight.ToString("0.000") + ", supplier='" + item.inventory_supplier + "' WHERE id='" +
-                item.inventory_id + "';";
+                item.inventory_weight.ToString("0.000") + ", supplier='" + item.inventory_supplier + "', stocks=" +
+                item.inventory_status + " WHERE id='" + item.inventory_id + "';";
             MySqlCommand myCommand = new MySqlCommand(myUpdateQuery, dbConn);
 
             try
@@ -1256,6 +1328,148 @@ namespace TokoEmasAppNET
             }
 
             return result;
+        }
+
+        public int GetCountInventory()
+        {
+            int count = 0;
+
+            string myDeleteQuery = "SELECT COUNT(id) FROM master_items";
+            MySqlCommand myCommand = new MySqlCommand(myDeleteQuery, dbConn);
+
+            MySqlDataReader myReader;
+            string error = string.Empty;
+            OpenConnection(ref error);
+            myReader = myCommand.ExecuteReader();
+
+            try
+            {
+                if (myReader.HasRows)
+                {
+                    myReader.Read();
+                    count = myReader.GetInt32(0);
+                }
+                else
+                {
+                    CloseConnection();
+                    throw new Exception("Error get count inventory!");
+                }
+            }
+            finally
+            {
+                myReader.Close();
+                CloseConnection();
+            }
+
+            return count;
+        }
+
+        public int GetCountInventoryByCat(string cat_id)
+        {
+            int count = 0;
+
+            string myDeleteQuery = "SELECT COUNT(id) FROM master_items WHERE category='" + cat_id + "'";
+            MySqlCommand myCommand = new MySqlCommand(myDeleteQuery, dbConn);
+
+
+            MySqlDataReader myReader;
+            string error = string.Empty;
+            OpenConnection(ref error);
+            myReader = myCommand.ExecuteReader();
+
+            try
+            {
+
+                if (myReader.HasRows)
+                {
+                    myReader.Read();
+                    count = myReader.GetInt32(0);
+                }
+                else
+                {
+                    CloseConnection();
+                    throw new Exception("Error Get count inventory by category!");
+                }
+            }
+            finally
+            {
+                myReader.Close();
+                CloseConnection();
+            }
+
+            return count;
+        }
+
+        public int GetCountInventoryInside()
+        {
+            int count = 0;
+
+            string myDeleteQuery = "SELECT COUNT(id) FROM master_items WHERE stocks=1";
+            MySqlCommand myCommand = new MySqlCommand(myDeleteQuery, dbConn);
+
+
+            MySqlDataReader myReader;
+            string error = string.Empty;
+            OpenConnection(ref error);
+            myReader = myCommand.ExecuteReader();
+
+            try
+            {
+
+                if (myReader.HasRows)
+                {
+                    myReader.Read();
+                    count = myReader.GetInt32(0);
+                }
+                else
+                {
+                    CloseConnection();
+                    throw new Exception("Error Get count inventory inside!");
+                }
+            }
+            finally
+            {
+                myReader.Close();
+                CloseConnection();
+            }
+
+            return count;
+        }
+
+        public int GetCountInventoryOutside()
+        {
+            int count = 0;
+
+            string myDeleteQuery = "SELECT COUNT(id) FROM master_items WHERE stocks=2";
+            MySqlCommand myCommand = new MySqlCommand(myDeleteQuery, dbConn);
+
+
+            MySqlDataReader myReader;
+            string error = string.Empty;
+            OpenConnection(ref error);
+            myReader = myCommand.ExecuteReader();
+
+            try
+            {
+
+                if (myReader.HasRows)
+                {
+                    myReader.Read();
+                    count = myReader.GetInt32(0);
+                }
+                else
+                {
+                    CloseConnection();
+                    throw new Exception("Error Get count inventory outside!");
+                }
+            }
+            finally
+            {
+                myReader.Close();
+                CloseConnection();
+            }
+
+            return count;
         }
 
         #endregion

@@ -301,7 +301,8 @@ namespace TokoEmasAppNET
         private void BtnXCode_Click(object sender, EventArgs e)
         {
             if (dgvInventory.SelectedRows.Count > 1 && (dgvInventory.SelectedRows.Count % 2) == 0 && dgvInventory.SelectedRows.Count <= 10)
-            { 
+            {
+                this.Cursor = Cursors.WaitCursor;
                 Excel.Application MyApp = new Excel.Application();
                 Excel.Workbook xlWorkBook;
                 Excel.Worksheet xlWorkSheet;
@@ -328,6 +329,9 @@ namespace TokoEmasAppNET
                 //xlWorkBook.SaveAs(filename, XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, false, false, XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
                 xlWorkBook.Close();
                 MyApp.Quit();
+                this.Cursor = Cursors.Default;
+
+                MessageBox.Show("Successfully update template2.xls! Open barcode file to print!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
