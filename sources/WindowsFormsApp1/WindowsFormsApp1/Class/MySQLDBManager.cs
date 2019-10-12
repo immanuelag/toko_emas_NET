@@ -250,23 +250,23 @@ namespace TokoEmasAppNET
             string error = string.Empty;
             OpenConnection(ref error);
             MySqlDataReader myReader;
-                myReader = myCommand.ExecuteReader();
-                try
+            myReader = myCommand.ExecuteReader();
+            try
+            {
+                while (myReader.Read())
                 {
-                    while (myReader.Read())
-                    {
-                        string username = myReader.GetString("username");
-                        string password = myReader.GetString("password");
-                        int role = myReader.GetInt32("role");
-                        UserClass _user = new UserClass(username, password, role);
-                        result.Add(_user);
-                    }
+                    string username = myReader.GetString("username");
+                    string password = myReader.GetString("password");
+                    int role = myReader.GetInt32("role");
+                    UserClass _user = new UserClass(username, password, role);
+                    result.Add(_user);
                 }
-                finally
-                {
-                    myReader.Close();
+            }
+            finally
+            {
+                myReader.Close();
                 CloseConnection();
-                }
+            }
             //}
             return result;
         }
@@ -379,6 +379,194 @@ namespace TokoEmasAppNET
             {
                 CloseConnection();
                 throw new Exception("Error delete master_user! " + ex.Message);
+            }
+
+            return result;
+        }
+        #endregion
+
+        /*
+         * Master Supplier
+         */
+        #region MasterSupplier
+        public List<Supplier> GetAllSupplier()
+        {
+            List<Supplier> result = new List<Supplier>();
+            string mySelectQuery = "SELECT id, code, nama FROM master_supplier";
+            MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
+
+            //if (isDBConnected)
+            //{
+            string error = string.Empty;
+            OpenConnection(ref error);
+            MySqlDataReader myReader;
+                myReader = myCommand.ExecuteReader();
+                try
+                {
+                    while (myReader.Read())
+                    {
+                        int id = myReader.GetInt32("id");
+                        string code = myReader.GetString("code");
+                        string nama = myReader.GetString("nama");
+                        Supplier _sup = new Supplier(id, code, nama);
+                        result.Add(_sup);
+                    }
+                }
+                finally
+                {
+                    myReader.Close();
+                CloseConnection();
+                }
+            //}
+            return result;
+        }
+
+        public Supplier GetSupplierByID(int id)
+        {
+            Supplier result = null;
+
+            string mySelectQuery = "SELECT code,nama FROM master_supplier WHERE id=" + id;
+            MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
+
+            //if (isDBConnected)
+            {
+                string error = string.Empty;
+                OpenConnection(ref error);
+                MySqlDataReader myReader;
+                myReader = myCommand.ExecuteReader();
+                try
+                {
+                    if (myReader.HasRows)
+                    {
+                        myReader.Read();
+                        
+                        string code = myReader.GetString("code");
+                        string nama = myReader.GetString("nama");
+                        result = new Supplier(id, code, nama);
+                    }
+                    else
+                    {
+                        CloseConnection();
+                        throw new Exception("Error ID: " + id + " not found in master_supplier!");
+                    }
+                }
+                finally
+                {
+                    myReader.Close();
+                    CloseConnection();
+                }
+            }
+
+            return result;
+        }
+
+        public int GetNewSupplierID()
+        {
+            int newID = -1;
+
+            string mySelectQuery = "SELECT MAX(id) FROM master_supplier";
+            MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
+
+            //if (isDBConnected)
+            {
+                string error = string.Empty;
+                OpenConnection(ref error);
+                MySqlDataReader myReader;
+                myReader = myCommand.ExecuteReader();
+                try
+                {
+                    if (myReader.HasRows)
+                    {
+                        myReader.Read();
+
+                        newID = myReader.GetInt32(0) + 1;
+                        
+                    }
+                    else
+                    {
+                        CloseConnection();
+                        throw new Exception("Error get new ID!");
+                    }
+                }
+                finally
+                {
+                    myReader.Close();
+                    CloseConnection();
+                }
+            }
+
+            return newID;
+        }
+
+        public bool AddNewSupplier(Supplier supplier)
+        {
+            bool result = false;
+
+            string myInsertQuery = "INSERT INTO master_supplier (id, code, nama) VALUES (" + supplier.id + ",'" +
+                supplier.code + "','" + supplier.nama + "');";
+            MySqlCommand myCommand = new MySqlCommand(myInsertQuery, dbConn);
+
+            try
+            {
+                string error = string.Empty;
+                OpenConnection(ref error);
+                int rows = myCommand.ExecuteNonQuery();
+                CloseConnection();
+                if (rows > 0) return true;
+            }
+            catch (Exception ex)
+            {
+                CloseConnection();
+                throw new Exception("Error insert into master_supplier! " + ex.Message);
+            }
+
+            return result;
+        }
+
+        public bool UpdateSupplier(Supplier supplier)
+        {
+            bool result = false;
+
+            string myUpdateQuery = "UPDATE master_supplier SET code='" + supplier.code + "', nama='" + supplier.nama + "' WHERE id=" +
+                supplier.id + ";";
+            MySqlCommand myCommand = new MySqlCommand(myUpdateQuery, dbConn);
+
+            try
+            {
+                string error = string.Empty;
+                OpenConnection(ref error);
+                int rows = myCommand.ExecuteNonQuery();
+                CloseConnection();
+                if (rows > 0) return true;
+            }
+            catch (Exception ex)
+            {
+                CloseConnection();
+                throw new Exception("Error update master_supplier! " + ex.Message);
+            }
+
+            return result;
+        }
+
+        public bool DeleteSupplier(Supplier supplier)
+        {
+            bool result = false;
+
+            string myDeleteQuery = "DELETE FROM master_supplier WHERE id=" + supplier.id + ";";
+            MySqlCommand myCommand = new MySqlCommand(myDeleteQuery, dbConn);
+
+            try
+            {
+                string error = string.Empty;
+                OpenConnection(ref error);
+                int rows = myCommand.ExecuteNonQuery();
+                CloseConnection();
+                if (rows > 0) return true;
+            }
+            catch (Exception ex)
+            {
+                CloseConnection();
+                throw new Exception("Error delete master_supplier! " + ex.Message);
             }
 
             return result;
