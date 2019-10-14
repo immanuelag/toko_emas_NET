@@ -143,6 +143,7 @@
             this.btnSave.TabIndex = 7;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // label4
             // 
@@ -187,11 +188,11 @@
             // 
             // txbID
             // 
+            this.txbID.Enabled = false;
             this.txbID.Location = new System.Drawing.Point(98, 23);
             this.txbID.Name = "txbID";
             this.txbID.Size = new System.Drawing.Size(57, 20);
             this.txbID.TabIndex = 1;
-            this.txbID.Visible = false;
             // 
             // btnEdit
             // 

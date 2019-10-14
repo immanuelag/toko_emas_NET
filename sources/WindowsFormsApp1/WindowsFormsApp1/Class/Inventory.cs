@@ -57,7 +57,8 @@ namespace TokoEmasAppNET
         public int inventory_carats;
         public float inventory_weight;
         public int inventory_status;
-        public string inventory_supplier;
+        public Supplier inventory_supplier;
+
 
         public Inventory()
         {

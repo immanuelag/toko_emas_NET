@@ -37,6 +37,7 @@ namespace TokoEmasAppNET
         private FormPurchasing frmPurchasing;
         private FormServices frmServices;
         private FormStatusStocks frmStatusStocks;
+        private FormSupplier frmSupplier;
 
         public MainForm()
         {
@@ -116,6 +117,9 @@ namespace TokoEmasAppNET
 
             frmStatusStocks = new FormStatusStocks();
             frmStatusStocks.MdiParent = this;
+
+            frmSupplier = new FormSupplier();
+            frmSupplier.MdiParent = this;
         }
 
         /// <summary>
@@ -286,6 +290,16 @@ namespace TokoEmasAppNET
                 frmStatusStocks.MdiParent = this;
             }
             frmStatusStocks.Show();
+        }
+
+        private void supplierToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(frmSupplier == null || frmSupplier.IsDisposed)
+            {
+                frmSupplier = new FormSupplier();
+                frmSupplier.MdiParent = this;
+            }
+            frmSupplier.Show();
         }
     }
 }

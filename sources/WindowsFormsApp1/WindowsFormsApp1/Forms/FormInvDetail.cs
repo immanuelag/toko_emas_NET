@@ -18,6 +18,7 @@ namespace TokoEmasAppNET
         public List<Category> categories;
         public List<Subcategory> subcategories;
         public List<Carat> carats;
+        public List<Supplier> suppliers;
         public MySQLDBManager manager;
         public FormMasterInventori frmParent;
         public int data_mode;
@@ -55,6 +56,7 @@ namespace TokoEmasAppNET
             txbInvWeight.Text = "";
             cbInvCarat.SelectedIndex = 0;
             cbStatus.SelectedIndex = 0;
+            cbSupplier.SelectedIndex = 0;
         }
 
         private void FormInvDetail_Load(object sender, EventArgs e)
@@ -66,14 +68,12 @@ namespace TokoEmasAppNET
             categories = new List<Category>();
             subcategories = new List<Subcategory>();
             carats = new List<Carat>();
+            suppliers = new List<Supplier>();
 
             LoadComboCarat();
             LoadComboCategories();
             LoadComboStatus();
-
-            if (cbSupplier.Items.Count == 0)
-                cbSupplier.Items.Add("UBS");
-            cbSupplier.SelectedIndex = 0;
+            LoadComboSuppliers();
 
             if(data_mode == 2)
             {
@@ -110,13 +110,28 @@ namespace TokoEmasAppNET
                     }
                 }
                 cbStatus.SelectedIndex = itemInv.inventory_status - 1;
-                cbSupplier.SelectedIndex = 0;
+                cbSupplier.SelectedIndex = itemInv.inventory_supplier.id;
             } 
             else if(data_mode == 1)
             {
                 btnGenID.Enabled = true;
                 ResetForm();
             } 
+        }
+
+        private void LoadComboSuppliers()
+        {
+            if(cbSupplier.Items.Count > 0)
+            {
+                cbSupplier.Items.Clear();
+            }
+
+            suppliers = manager.GetAllSupplier();
+            for(int i=0;i<suppliers.Count;i++)
+            {
+                cbSupplier.Items.Add(suppliers[i].code);
+            }
+            cbSupplier.SelectedIndex = 0;
         }
 
         private void LoadComboCategories()
@@ -232,7 +247,8 @@ namespace TokoEmasAppNET
                 comboDictionaryCarat.TryGetValue(cbInvCarat.SelectedIndex, out carat);
                 item.inventory_carats = carat.id;
                 item.inventory_status = cbStatus.SelectedIndex + 1;
-                item.inventory_supplier = (string)cbSupplier.SelectedItem;
+                int sup_id = cbSupplier.SelectedIndex;
+                item.inventory_supplier = manager.GetSupplierByID(sup_id);
 
                 try
                 {

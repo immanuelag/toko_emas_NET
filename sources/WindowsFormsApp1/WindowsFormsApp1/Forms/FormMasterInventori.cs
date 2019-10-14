@@ -61,6 +61,12 @@ namespace TokoEmasAppNET
 
         private void FillDGViewInventory()
         {
+            if (dgvInventory.Rows.Count > 0)
+            {
+                dgvInventory.Rows.Clear();
+                itemsDict.Clear();
+            }
+
             for (int i = 0; i < itemList.Count; i++)
             {
                 DataGridViewRow row = new DataGridViewRow();
@@ -73,7 +79,7 @@ namespace TokoEmasAppNET
                 Carat carat = manager.GetCaratByID(itemList[i].inventory_carats);
                 row.Cells[4].Value = carat.value;
                 row.Cells[5].Value = itemList[i].inventory_weight.ToString("0.000");
-                row.Cells[6].Value = itemList[i].inventory_supplier;
+                row.Cells[6].Value = itemList[i].inventory_supplier.code;
                 row.Cells[7].Value = itemList[i].GetStatus();
 
                 //listCat.Add(categories[i].category_id, categories[i].category_name);
@@ -87,12 +93,6 @@ namespace TokoEmasAppNET
 
         private void LoadViewInventory()
         {
-            if (dgvInventory.Rows.Count > 0)
-            {
-                dgvInventory.Rows.Clear();
-                itemsDict.Clear();
-            }
-
             if (cbStatus.SelectedIndex <= 0)
                 itemList = manager.GetAllInventories();
             else
@@ -319,7 +319,10 @@ namespace TokoEmasAppNET
                 {
                     DataGridViewRow sel_row = dgvInventory.SelectedRows[i];
 
-                    xlWorkSheet.Cells[iRow + i, 1].value = (string)sel_row.Cells[1].Value + " " + (string)sel_row.Cells[2].Value;
+                    string nama = (string)sel_row.Cells[1].Value + " " + (string)sel_row.Cells[2].Value + " " + (string)sel_row.Cells[3].Value;
+                    if(nama.Length > 10)
+                        nama = nama.Substring(0, 10);
+                    xlWorkSheet.Cells[iRow + i, 1].value = nama;
                     xlWorkSheet.Cells[iRow + i, 2].value = (string)sel_row.Cells[0].Value;
                     xlWorkSheet.Cells[iRow + i, 3].value = "'" + (string)sel_row.Cells[5].Value;
                     xlWorkSheet.Cells[iRow + i, 4].value = "'" + (string)sel_row.Cells[4].Value;
@@ -345,6 +348,29 @@ namespace TokoEmasAppNET
             nRowSelected = dgvInventory.SelectedRows.Count;
 
             lblSelectedRows.Text = nRowSelected.ToString();
+        }
+
+        private void btnFind_Click(object sender, EventArgs e)
+        {
+            if(txbFindName.TextLength > 0)
+            {
+                cbCatItems.SelectedIndex = 0;
+                cbSubItems.Enabled = false;
+                cbStatus.SelectedIndex = 0;
+
+                itemList = manager.GetAllInventoriesSearch(txbFindName.Text);
+                FillDGViewInventory();
+            }
+            else
+            {
+                MessageBox.Show("Please insert item name to find!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txbFindName.Text = string.Empty;
+            LoadViewInventory();
         }
     }
 }

@@ -51,6 +51,10 @@
             this.lblSelectedRows = new System.Windows.Forms.Label();
             this.lblTotalRows = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txbFindName = new System.Windows.Forms.TextBox();
+            this.btnFind = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInventory)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,7 +83,7 @@
             this.colSupplier,
             this.colStock});
             this.dgvInventory.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvInventory.Location = new System.Drawing.Point(34, 66);
+            this.dgvInventory.Location = new System.Drawing.Point(34, 104);
             this.dgvInventory.Name = "dgvInventory";
             this.dgvInventory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvInventory.ShowEditingIcon = false;
@@ -158,7 +162,7 @@
             // 
             // btnEditItems
             // 
-            this.btnEditItems.Location = new System.Drawing.Point(767, 438);
+            this.btnEditItems.Location = new System.Drawing.Point(767, 476);
             this.btnEditItems.Name = "btnEditItems";
             this.btnEditItems.Size = new System.Drawing.Size(75, 23);
             this.btnEditItems.TabIndex = 9;
@@ -168,7 +172,7 @@
             // 
             // btnAddItems
             // 
-            this.btnAddItems.Location = new System.Drawing.Point(677, 438);
+            this.btnAddItems.Location = new System.Drawing.Point(677, 476);
             this.btnAddItems.Name = "btnAddItems";
             this.btnAddItems.Size = new System.Drawing.Size(75, 23);
             this.btnAddItems.TabIndex = 10;
@@ -216,7 +220,7 @@
             // 
             // btnXCode
             // 
-            this.btnXCode.Location = new System.Drawing.Point(34, 438);
+            this.btnXCode.Location = new System.Drawing.Point(34, 476);
             this.btnXCode.Name = "btnXCode";
             this.btnXCode.Size = new System.Drawing.Size(251, 23);
             this.btnXCode.TabIndex = 16;
@@ -228,7 +232,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(526, 441);
+            this.label5.Location = new System.Drawing.Point(526, 479);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(68, 16);
             this.label5.TabIndex = 17;
@@ -238,7 +242,7 @@
             // 
             this.lblSelectedRows.AutoSize = true;
             this.lblSelectedRows.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSelectedRows.Location = new System.Drawing.Point(600, 441);
+            this.lblSelectedRows.Location = new System.Drawing.Point(600, 479);
             this.lblSelectedRows.Name = "lblSelectedRows";
             this.lblSelectedRows.Size = new System.Drawing.Size(16, 16);
             this.lblSelectedRows.TabIndex = 18;
@@ -248,7 +252,7 @@
             // 
             this.lblTotalRows.AutoSize = true;
             this.lblTotalRows.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalRows.Location = new System.Drawing.Point(439, 441);
+            this.lblTotalRows.Location = new System.Drawing.Point(439, 479);
             this.lblTotalRows.Name = "lblTotalRows";
             this.lblTotalRows.Size = new System.Drawing.Size(16, 16);
             this.lblTotalRows.TabIndex = 20;
@@ -258,17 +262,58 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(378, 441);
+            this.label8.Location = new System.Drawing.Point(378, 479);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(45, 16);
             this.label8.TabIndex = 19;
             this.label8.Text = "Total :";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(31, 71);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(102, 16);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "Find Item Name";
+            // 
+            // txbFindName
+            // 
+            this.txbFindName.Location = new System.Drawing.Point(162, 68);
+            this.txbFindName.Name = "txbFindName";
+            this.txbFindName.Size = new System.Drawing.Size(432, 20);
+            this.txbFindName.TabIndex = 22;
+            // 
+            // btnFind
+            // 
+            this.btnFind.Location = new System.Drawing.Point(603, 68);
+            this.btnFind.Name = "btnFind";
+            this.btnFind.Size = new System.Drawing.Size(75, 23);
+            this.btnFind.TabIndex = 23;
+            this.btnFind.Text = "Find";
+            this.btnFind.UseVisualStyleBackColor = true;
+            this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(699, 68);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 24;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // FormMasterInventori
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(874, 481);
+            this.ClientSize = new System.Drawing.Size(874, 523);
+            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.btnFind);
+            this.Controls.Add(this.txbFindName);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.lblTotalRows);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.lblSelectedRows);
@@ -319,5 +364,9 @@
         private System.Windows.Forms.Label lblSelectedRows;
         private System.Windows.Forms.Label lblTotalRows;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txbFindName;
+        private System.Windows.Forms.Button btnFind;
+        private System.Windows.Forms.Button btnClear;
     }
 }
