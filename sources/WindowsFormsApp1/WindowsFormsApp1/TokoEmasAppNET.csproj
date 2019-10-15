@@ -60,6 +60,18 @@
     <Compile Include="FormItemStocksDetails.Designer.cs">
       <DependentUpon>FormItemStocksDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSearchItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSearchItem.Designer.cs">
+      <DependentUpon>FormSearchItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStockItemDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStockItemDetails.Designer.cs">
+      <DependentUpon>FormStockItemDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormSupplier.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +176,12 @@
     <Compile Include="Supplier.cs" />
     <EmbeddedResource Include="FormItemStocksDetails.resx">
       <DependentUpon>FormItemStocksDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSearchItem.resx">
+      <DependentUpon>FormSearchItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStockItemDetails.resx">
+      <DependentUpon>FormStockItemDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSupplier.resx">
       <DependentUpon>FormSupplier.cs</DependentUpon>

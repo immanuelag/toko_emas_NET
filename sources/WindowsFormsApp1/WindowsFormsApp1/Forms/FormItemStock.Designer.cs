@@ -48,6 +48,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.cbYear = new System.Windows.Forms.ComboBox();
+            this.cbMonth = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.gbItemStocks.SuspendLayout();
             this.SuspendLayout();
@@ -242,11 +245,39 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "ID";
             // 
+            // cbYear
+            // 
+            this.cbYear.FormattingEnabled = true;
+            this.cbYear.Location = new System.Drawing.Point(79, 27);
+            this.cbYear.Name = "cbYear";
+            this.cbYear.Size = new System.Drawing.Size(72, 21);
+            this.cbYear.TabIndex = 4;
+            // 
+            // cbMonth
+            // 
+            this.cbMonth.FormattingEnabled = true;
+            this.cbMonth.Location = new System.Drawing.Point(161, 27);
+            this.cbMonth.Name = "cbMonth";
+            this.cbMonth.Size = new System.Drawing.Size(121, 21);
+            this.cbMonth.TabIndex = 5;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 30);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(29, 13);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Filter";
+            // 
             // FormItemStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(549, 511);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.cbMonth);
+            this.Controls.Add(this.cbYear);
             this.Controls.Add(this.gbItemStocks);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnEdit);
@@ -257,6 +288,7 @@
             this.gbItemStocks.ResumeLayout(false);
             this.gbItemStocks.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -281,5 +313,8 @@
         private System.Windows.Forms.DateTimePicker dtpTimeStock;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cbYear;
+        private System.Windows.Forms.ComboBox cbMonth;
+        private System.Windows.Forms.Label label6;
     }
 }
