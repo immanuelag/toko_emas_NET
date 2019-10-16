@@ -300,7 +300,7 @@ namespace TokoEmasAppNET
 
         private void BtnXCode_Click(object sender, EventArgs e)
         {
-            if (dgvInventory.SelectedRows.Count > 1 && (dgvInventory.SelectedRows.Count % 2) == 0 && dgvInventory.SelectedRows.Count <= 10)
+            if (dgvInventory.SelectedRows.Count > 1 && dgvInventory.SelectedRows.Count <= 10)
             {
                 this.Cursor = Cursors.WaitCursor;
                 Excel.Application MyApp = new Excel.Application();
@@ -320,8 +320,8 @@ namespace TokoEmasAppNET
                     DataGridViewRow sel_row = dgvInventory.SelectedRows[i];
 
                     string nama = (string)sel_row.Cells[1].Value + " " + (string)sel_row.Cells[2].Value + " " + (string)sel_row.Cells[3].Value;
-                    if(nama.Length > 10)
-                        nama = nama.Substring(0, 10);
+                    if(nama.Length > 20)
+                        nama = nama.Substring(0, 20);
                     xlWorkSheet.Cells[iRow + i, 1].value = nama;
                     xlWorkSheet.Cells[iRow + i, 2].value = (string)sel_row.Cells[0].Value;
                     xlWorkSheet.Cells[iRow + i, 3].value = "'" + (string)sel_row.Cells[5].Value;

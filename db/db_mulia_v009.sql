@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2019 at 06:36 PM
+-- Generation Time: Oct 16, 2019 at 06:02 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `toko_emas_main_db`
+-- Database: `db_mulia`
 --
 
 -- --------------------------------------------------------
@@ -106,6 +106,7 @@ INSERT INTO `master_category` (`id`, `nama`) VALUES
 --
 -- Table structure for table `master_items`
 --
+
 CREATE TABLE `master_items` (
   `id` char(5) NOT NULL,
   `category` char(1) NOT NULL,
@@ -126,9 +127,9 @@ INSERT INTO `master_items` (`id`, `category`, `subcategory`, `nama`, `supplier`,
 ('GB002', 'G', 'B', '', 0, 1, 4.49, 1),
 ('GB003', 'G', 'B', '', 0, 1, 8.83, 1),
 ('GB004', 'G', 'B', '', 0, 1, 6.4, 1),
-('GK001', 'G', 'K', 'DUA WARU', 1, 2, 3.07, 1),
-('GK002', 'G', 'K', 'WARU STGH AD', 0, 2, 3.11, 1),
-('GK003', 'G', 'K', 'ANK WARU STGH AD', 0, 2, 3.23, 1),
+('GK001', 'G', 'K', 'ANK 2 WARU AD', 3, 2, 3.07, 1),
+('GK002', 'G', 'K', 'ANK STGH  WARU AD', 3, 2, 3.11, 1),
+('GK003', 'G', 'K', 'ANK STGH  WARU AD', 3, 2, 3.2, 1),
 ('KF001', 'K', 'F', NULL, 0, 2, 4.96, 1),
 ('KF002', 'K', 'F', NULL, 0, 2, 5.1, 1),
 ('KF003', 'K', 'F', NULL, 0, 2, 10.14, 1),
@@ -219,10 +220,10 @@ INSERT INTO `master_items` (`id`, `category`, `subcategory`, `nama`, `supplier`,
 ('KS013', 'K', 'S', NULL, 0, 1, 2.9, 1),
 ('KS014', 'K', 'S', NULL, 0, 1, 6.04, 1),
 ('KS015', 'K', 'S', NULL, 0, 1, 2.88, 1),
-('KS016', 'K', 'S', NULL, 0, 1, 8.00, 1),
+('KS016', 'K', 'S', NULL, 0, 1, 8, 1),
 ('KS017', 'K', 'S', NULL, 0, 1, 11.9, 1),
 ('KS018', 'K', 'S', NULL, 0, 1, 2.03, 1),
-('KS019', 'K', 'S', NULL, 0, 1, 7.10, 1),
+('KS019', 'K', 'S', NULL, 0, 1, 7.1, 1),
 ('KS020', 'K', 'S', NULL, 0, 1, 5.06, 1),
 ('KS021', 'K', 'S', NULL, 0, 1, 4.84, 1),
 ('KS022', 'K', 'S', NULL, 0, 1, 6.05, 1),
@@ -235,10 +236,16 @@ INSERT INTO `master_items` (`id`, `category`, `subcategory`, `nama`, `supplier`,
 ('KS029', 'K', 'S', NULL, 0, 1, 2.99, 1),
 ('KS030', 'K', 'S', NULL, 0, 1, 2.04, 1),
 ('KS031', 'K', 'S', NULL, 0, 1, 4.96, 1),
-('KS032', 'K', 'S', NULL, 0, 1, 2.00, 1),
+('KS032', 'K', 'S', NULL, 0, 1, 2, 1),
 ('KS033', 'K', 'S', NULL, 0, 1, 7.08, 1),
 ('KS034', 'K', 'S', NULL, 0, 1, 6.08, 1),
-('KS035', 'K', 'S', NULL, 0, 1, 9.89, 1);
+('KS035', 'K', 'S', NULL, 0, 1, 9.89, 1),
+('GK004', 'G', 'K', 'ANK 2 WARU AD', 3, 2, 3.1, 1),
+('GK005', 'G', 'K', 'ANK 2 WARU AD', 3, 2, 3.06, 1),
+('GK006', 'G', 'K', 'ANK STGH WARU AD', 3, 2, 3.23, 1),
+('GK007', 'G', 'K', 'ANK STGH WARU AD', 3, 2, 3.04, 1),
+('GK008', 'G', 'K', 'ANK WAJIK', 3, 2, 3.26, 1),
+('GK009', 'G', 'K', 'ANK STGH WARU AD PINK', 3, 2, 3.32, 1);
 
 -- --------------------------------------------------------
 

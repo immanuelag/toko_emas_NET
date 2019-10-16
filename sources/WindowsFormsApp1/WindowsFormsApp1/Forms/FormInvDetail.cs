@@ -256,11 +256,19 @@ namespace TokoEmasAppNET
                     {
                         if (manager.AddNewInventory(item))
                         {
-                            MessageBox.Show("Add new items succeed!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.Hide();
+                            if (MessageBox.Show("Add new items succeed! Add more item?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No)
+                            {
+                                this.Hide();
 
-                            frmParent.data_mode = 0;
-                            frmParent.RefreshView();
+                                frmParent.data_mode = 0;
+                                frmParent.RefreshView();
+                            }
+                            else
+                            {
+                                txbInvDetilID.Text = string.Empty;
+                                txbInvName.Text = string.Empty;
+                                txbInvWeight.Text = string.Empty;
+                            }
                         }
                     }
                     else if(data_mode == 2)

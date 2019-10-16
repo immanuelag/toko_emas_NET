@@ -38,6 +38,7 @@ namespace TokoEmasAppNET
         private FormServices frmServices;
         private FormStatusStocks frmStatusStocks;
         private FormSupplier frmSupplier;
+        private FormSearchItem frmSearchItem;
 
         public MainForm()
         {
@@ -119,6 +120,9 @@ namespace TokoEmasAppNET
             frmStatusStocks.MdiParent = this;
 
             frmSupplier = new FormSupplier();
+            frmSupplier.MdiParent = this;
+
+            frmSearchItem = new FormSearchItem();
             frmSupplier.MdiParent = this;
         }
 
@@ -300,6 +304,11 @@ namespace TokoEmasAppNET
                 frmSupplier.MdiParent = this;
             }
             frmSupplier.Show();
+        }
+
+        private void searchItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
