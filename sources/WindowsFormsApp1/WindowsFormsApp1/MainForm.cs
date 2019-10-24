@@ -123,7 +123,7 @@ namespace TokoEmasAppNET
             frmSupplier.MdiParent = this;
 
             frmSearchItem = new FormSearchItem();
-            frmSupplier.MdiParent = this;
+            frmSearchItem.MdiParent = this;
         }
 
         /// <summary>
@@ -308,7 +308,12 @@ namespace TokoEmasAppNET
 
         private void searchItemToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if(frmSearchItem == null || frmSearchItem.IsDisposed)
+            {
+                frmSearchItem = new FormSearchItem();
+                frmSearchItem.MdiParent = this;
+            }
+            frmSearchItem.Show();
         }
     }
 }

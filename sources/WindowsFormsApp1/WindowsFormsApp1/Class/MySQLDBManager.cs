@@ -68,6 +68,10 @@ namespace TokoEmasAppNET
         {
             try
             {
+                if (dbConn.State == System.Data.ConnectionState.Open || 
+                    dbConn.State == System.Data.ConnectionState.Connecting || 
+                    dbConn.State == System.Data.ConnectionState.Broken) 
+                    dbConn.Close();
                 dbConn.Open();
                 isDBConnected = true;
             }
@@ -998,6 +1002,69 @@ namespace TokoEmasAppNET
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
             //if (isDBConnected)
+            
+            string error = string.Empty;
+            OpenConnection(ref error);
+            MySqlDataReader myReader;
+
+            try
+            {
+                myReader = myCommand.ExecuteReader();
+                while (myReader.Read())
+                {
+                    Inventory items = new Inventory();
+                    int idx = 0;
+                    items.inventory_id = myReader.GetString(idx++);
+                    string cat_id = myReader.GetString(idx++);
+                    string cat_name = myReader.GetString(idx++);
+                    Category new_cat = new Category(cat_id, cat_name);
+                    string sub_id = myReader.GetString(idx++);
+                    string sub_nama = myReader.GetString(idx++);
+                    Subcategory subs = new Subcategory(new_cat, sub_id, sub_nama);
+                    items.inventory_sub = subs;
+                    if (!myReader.IsDBNull(idx))
+                        items.inventory_name = myReader.GetString(idx++);
+                    else
+                    {
+                        idx++;
+                        items.inventory_name = string.Empty;
+                    }
+
+                    int car_id = myReader.GetInt32(idx++);
+                    string car_value = myReader.GetString(idx++);
+                    items.inventory_weight = myReader.GetFloat(idx++);
+                    items.inventory_carats = car_id;
+                    items.inventory_status = myReader.GetInt32(idx++);
+                    int sup_id = myReader.GetInt32(idx++);
+                    string sup_code = myReader.GetString(idx++);
+                    string sup_nama = myReader.GetString(idx++);
+                    items.inventory_supplier = new Supplier(sup_id, sup_code, sup_nama);
+                    result.Add(items);
+                }
+                myReader.Close();
+            }
+            finally
+            {
+                CloseConnection();
+            }
+            
+
+            return result;
+        }
+
+        public List<Inventory> GetAllInventoriesSearch(string searchName)
+        {
+            List<Inventory> result = new List<Inventory>();
+
+            string mySelectQuery = "SELECT master_items.id, master_items.category, master_category.nama, master_items.subcategory, " +
+                " master_subcategory.nama, master_items.nama, karat, master_carat.carat, berat, stocks, master_items.supplier, master_supplier.code, master_supplier.nama" +
+                " FROM master_items, master_category, master_subcategory, master_carat, master_supplier " +
+                " WHERE master_items.subcategory=master_subcategory.id AND master_subcategory.category=master_category.id AND " +
+                " master_items.category = master_category.id AND karat=master_carat.id  AND master_items.supplier = master_supplier.id AND " +
+                " master_items.nama LIKE '%" + searchName + "%' GROUP BY master_items.id;";
+            MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
+
+            //if (isDBConnected)
             {
                 string error = string.Empty;
                 OpenConnection(ref error);
@@ -1024,7 +1091,7 @@ namespace TokoEmasAppNET
                             idx++;
                             items.inventory_name = string.Empty;
                         }
-                        
+
                         int car_id = myReader.GetInt32(idx++);
                         string car_value = myReader.GetString(idx++);
                         items.inventory_weight = myReader.GetFloat(idx++);
@@ -1047,7 +1114,7 @@ namespace TokoEmasAppNET
             return result;
         }
 
-        public List<Inventory> GetAllInventoriesSearch(string searchName)
+        public List<Inventory> GetAllInventoriesByKeyword(Dictionary<int, string> keyword)
         {
             List<Inventory> result = new List<Inventory>();
 
@@ -1055,8 +1122,25 @@ namespace TokoEmasAppNET
                 " master_subcategory.nama, master_items.nama, karat, master_carat.carat, berat, stocks, master_items.supplier, master_supplier.code, master_supplier.nama" +
                 " FROM master_items, master_category, master_subcategory, master_carat, master_supplier " +
                 " WHERE master_items.subcategory=master_subcategory.id AND master_subcategory.category=master_category.id AND " +
-                " master_items.category = master_category.id AND karat=master_carat.id  AND master_items.supplier = master_supplier.id AND " +
-                " master_items.nama LIKE '%" + searchName + "%' GROUP BY master_items.id;";
+                " master_items.category = master_category.id AND karat=master_carat.id  AND master_items.supplier = master_supplier.id ";
+
+            string searchkey = "";
+            foreach (KeyValuePair<int, string> kvp in keyword)
+            {
+                searchkey += " AND ";
+                if (kvp.Key == 0) searchkey += "master_items.category='" + kvp.Value + "'";
+                else if (kvp.Key == 1) searchkey += "master_items.subcategory='" + kvp.Value + "'";
+                else if (kvp.Key == 2) searchkey += "master_supplier.code='" + kvp.Value + "'";
+                else if (kvp.Key == 3) searchkey += "master_items.karat=" + kvp.Value;
+                else if (kvp.Key == 4) searchkey += "master_items.stocks=" + kvp.Value;
+                else if (kvp.Key == 5) searchkey += "master_items.id='" + kvp.Value + "'";
+                else if (kvp.Key == 6) searchkey += "master_items.nama LIKE '%" + kvp.Value + "%'";
+                else if (kvp.Key == 7) searchkey += "master_items.berat >= " + kvp.Value;
+                else if (kvp.Key == 8) searchkey += "master_items.berat <= " + kvp.Value;
+
+            }
+            mySelectQuery += searchkey;
+            mySelectQuery += " GROUP BY master_items.id;";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
             //if (isDBConnected)

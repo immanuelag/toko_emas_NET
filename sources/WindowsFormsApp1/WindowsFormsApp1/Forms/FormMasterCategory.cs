@@ -248,7 +248,11 @@ namespace TokoEmasAppNET
         {
             if (txbSubID.TextLength > 0 & txbSubName.TextLength > 0)
             {
-                Category cats = manager.GetCategoryByID(cat_id_selected);
+                Category cats;
+                if (!comboDictionary.TryGetValue(cbCatName.SelectedIndex, out cats))
+                {
+                    return;
+                }
                 if(cats != null)
                 //if (comboDictionary.TryGetValue(cbCatName.SelectedIndex, out cats))
                 {

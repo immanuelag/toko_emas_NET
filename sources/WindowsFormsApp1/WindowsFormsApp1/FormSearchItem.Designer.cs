@@ -46,12 +46,6 @@
             this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.cbStatus = new System.Windows.Forms.CheckBox();
             this.dgvSearch = new System.Windows.Forms.DataGridView();
-            this.btnXcode = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.cbItemID = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSubcat = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,6 +54,12 @@
             this.colCarat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnXcode = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.cbItemID = new System.Windows.Forms.CheckBox();
+            this.txbItemID = new System.Windows.Forms.TextBox();
             this.btnReset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSearch)).BeginInit();
             this.SuspendLayout();
@@ -88,6 +88,7 @@
             // 
             // txbNama
             // 
+            this.txbNama.Enabled = false;
             this.txbNama.Location = new System.Drawing.Point(493, 69);
             this.txbNama.Name = "txbNama";
             this.txbNama.Size = new System.Drawing.Size(198, 20);
@@ -95,6 +96,7 @@
             // 
             // txbMinWeight
             // 
+            this.txbMinWeight.Enabled = false;
             this.txbMinWeight.Location = new System.Drawing.Point(520, 103);
             this.txbMinWeight.Name = "txbMinWeight";
             this.txbMinWeight.Size = new System.Drawing.Size(62, 20);
@@ -120,6 +122,7 @@
             // 
             // txbMaxWeight
             // 
+            this.txbMaxWeight.Enabled = false;
             this.txbMaxWeight.Location = new System.Drawing.Point(630, 103);
             this.txbMaxWeight.Name = "txbMaxWeight";
             this.txbMaxWeight.Size = new System.Drawing.Size(61, 20);
@@ -243,61 +246,6 @@
             this.dgvSearch.Size = new System.Drawing.Size(700, 204);
             this.dgvSearch.TabIndex = 17;
             // 
-            // btnXcode
-            // 
-            this.btnXcode.Location = new System.Drawing.Point(29, 427);
-            this.btnXcode.Name = "btnXcode";
-            this.btnXcode.Size = new System.Drawing.Size(169, 23);
-            this.btnXcode.TabIndex = 18;
-            this.btnXcode.Text = "Generate XLS Barcode";
-            this.btnXcode.UseVisualStyleBackColor = true;
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Location = new System.Drawing.Point(551, 427);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(75, 23);
-            this.btnEdit.TabIndex = 19;
-            this.btnEdit.Text = "Edit";
-            this.btnEdit.UseVisualStyleBackColor = true;
-            // 
-            // btnClose
-            // 
-            this.btnClose.Location = new System.Drawing.Point(650, 427);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 20;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(589, 155);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(101, 34);
-            this.btnSearch.TabIndex = 21;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // cbItemID
-            // 
-            this.cbItemID.AutoSize = true;
-            this.cbItemID.Location = new System.Drawing.Point(417, 37);
-            this.cbItemID.Name = "cbItemID";
-            this.cbItemID.Size = new System.Drawing.Size(60, 17);
-            this.cbItemID.TabIndex = 22;
-            this.cbItemID.Text = "Item ID";
-            this.cbItemID.UseVisualStyleBackColor = true;
-            this.cbItemID.CheckedChanged += new System.EventHandler(this.cbItemID_CheckedChanged);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(495, 35);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 23;
-            // 
             // colID
             // 
             this.colID.HeaderText = "Item ID";
@@ -362,6 +310,62 @@
             this.colStatus.ReadOnly = true;
             this.colStatus.Width = 80;
             // 
+            // btnXcode
+            // 
+            this.btnXcode.Location = new System.Drawing.Point(29, 427);
+            this.btnXcode.Name = "btnXcode";
+            this.btnXcode.Size = new System.Drawing.Size(169, 23);
+            this.btnXcode.TabIndex = 18;
+            this.btnXcode.Text = "Generate XLS Barcode";
+            this.btnXcode.UseVisualStyleBackColor = true;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(551, 427);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnEdit.TabIndex = 19;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(650, 427);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(75, 23);
+            this.btnClose.TabIndex = 20;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(589, 155);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(101, 34);
+            this.btnSearch.TabIndex = 21;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // cbItemID
+            // 
+            this.cbItemID.AutoSize = true;
+            this.cbItemID.Location = new System.Drawing.Point(417, 37);
+            this.cbItemID.Name = "cbItemID";
+            this.cbItemID.Size = new System.Drawing.Size(60, 17);
+            this.cbItemID.TabIndex = 22;
+            this.cbItemID.Text = "Item ID";
+            this.cbItemID.UseVisualStyleBackColor = true;
+            this.cbItemID.CheckedChanged += new System.EventHandler(this.cbItemID_CheckedChanged);
+            // 
+            // txbItemID
+            // 
+            this.txbItemID.Enabled = false;
+            this.txbItemID.Location = new System.Drawing.Point(495, 35);
+            this.txbItemID.Name = "txbItemID";
+            this.txbItemID.Size = new System.Drawing.Size(100, 20);
+            this.txbItemID.TabIndex = 23;
+            // 
             // btnReset
             // 
             this.btnReset.Location = new System.Drawing.Point(467, 155);
@@ -377,7 +381,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(757, 473);
             this.Controls.Add(this.btnReset);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txbItemID);
             this.Controls.Add(this.cbItemID);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.btnClose);
@@ -435,7 +439,7 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.CheckBox cbItemID;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txbItemID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCat;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSubcat;
