@@ -13,7 +13,8 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace TokoEmasAppNET
 {
-    public partial class FormMasterInventori : Form
+    
+    public partial class FormMasterInventori : FormInvDetailParent
     {
         public MySQLDBManager manager;
         public Dictionary<string,Inventory> itemsDict;
@@ -23,7 +24,6 @@ namespace TokoEmasAppNET
         public List<Category> categories;
         public List<Subcategory> subcategories;
 
-        public int data_mode;
         public FormInvDetail frmInvDetail;
 
         public int nRowTotal;
@@ -53,7 +53,7 @@ namespace TokoEmasAppNET
             LoadComboStatus();
         }
 
-        public void RefreshView()
+        public override void RefreshView()
         {
             LoadViewInventory();
             LoadComboCategories();
@@ -265,13 +265,17 @@ namespace TokoEmasAppNET
                 string inv_id = (string)row.Cells[0].Value;
                 Inventory sel_inv = null;
                 itemsDict.TryGetValue(inv_id, out sel_inv);
-                frmInvDetail.SetInventory(sel_inv);
+                if (sel_inv != null)
+                {
+                    frmInvDetail.SetInventory(sel_inv);
 
-                frmInvDetail.ShowDialog(this);
+                    frmInvDetail.ShowDialog(this);
+                }
             }
             else
             {
                 MessageBox.Show("Please select items first!");
+                dgvInventory.Focus();
             }
         }
 

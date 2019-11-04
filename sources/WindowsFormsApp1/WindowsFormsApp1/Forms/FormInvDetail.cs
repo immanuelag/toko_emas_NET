@@ -20,11 +20,17 @@ namespace TokoEmasAppNET
         public List<Carat> carats;
         public List<Supplier> suppliers;
         public MySQLDBManager manager;
-        public FormMasterInventori frmParent;
+        public FormInvDetailParent frmParent;
         public int data_mode;
         public Inventory itemInv;
 
         public FormInvDetail(FormMasterInventori parent)
+        {
+            InitializeComponent();
+            frmParent = parent;
+        }
+
+        public FormInvDetail(FormSearchItem parent)
         {
             InitializeComponent();
             frmParent = parent;

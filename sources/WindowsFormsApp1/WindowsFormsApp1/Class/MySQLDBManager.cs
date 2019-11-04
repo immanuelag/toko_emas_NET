@@ -1043,6 +1043,10 @@ namespace TokoEmasAppNET
                 }
                 myReader.Close();
             }
+            catch(Exception ex)
+            {
+                throw new Exception("Error MySQL DB : " + ex.Message, ex);
+            }
             finally
             {
                 CloseConnection();

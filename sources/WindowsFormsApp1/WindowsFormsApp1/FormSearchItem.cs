@@ -10,19 +10,21 @@ using System.Windows.Forms;
 
 namespace TokoEmasAppNET
 {
-    public partial class FormSearchItem : Form
+    public partial class FormSearchItem : FormInvDetailParent
     {
         public MySQLDBManager manager;
         public Dictionary<int, Category> comboDictionaryCat;
         public Dictionary<int, Subcategory> comboDictionarySub;
         public Dictionary<int, Carat> comboDictionaryCarat;
         public Dictionary<int, string> searchKeyword;
+        public Dictionary<string, Inventory> itemsDict;
         public List<Category> categories;
         public List<Subcategory> subcategories;
         public List<Carat> carats;
         public List<Supplier> suppliers;
         public Inventory itemInv;
         public List<Inventory> itemList;
+        bool searchMode = false;
 
         private int numSearch;
 
@@ -74,7 +76,7 @@ namespace TokoEmasAppNET
             carats = new List<Carat>();
             suppliers = new List<Supplier>();
             itemList = new List<Inventory>();
-
+            itemsDict = new Dictionary<string, Inventory>();
             itemList = manager.GetAllInventories();
             FillDGViewInventory();
 
@@ -82,12 +84,24 @@ namespace TokoEmasAppNET
 
         }
 
+        public override void RefreshView()
+        {
+            if (searchMode)
+            {
+                itemList = manager.GetAllInventoriesByKeyword(searchKeyword);
+            }
+            else
+            {
+                itemList = manager.GetAllInventories();
+            }
+            FillDGViewInventory();
+        }
         private void FillDGViewInventory()
         {
             if (dgvSearch.Rows.Count > 0)
             {
                 dgvSearch.Rows.Clear();
-                //itemsDict.Clear();
+                itemsDict.Clear();
             }
 
             for (int i = 0; i < itemList.Count; i++)
@@ -106,7 +120,7 @@ namespace TokoEmasAppNET
                 row.Cells[7].Value = itemList[i].GetStatus();
 
                 //listCat.Add(categories[i].category_id, categories[i].category_name);
-                //itemsDict.Add(itemList[i].inventory_id, itemList[i]);
+                itemsDict.Add(itemList[i].inventory_id, itemList[i]);
                 dgvSearch.Rows.Add(row);
             }
 
@@ -416,6 +430,33 @@ namespace TokoEmasAppNET
             {
                 itemList = manager.GetAllInventoriesByKeyword(searchKeyword);
                 FillDGViewInventory();
+                searchMode = true;
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if(dgvSearch.SelectedRows.Count == 1)
+            {
+                FormInvDetail formInvDetail = new FormInvDetail(this);
+                data_mode = 2;
+                formInvDetail.SetDataMode(data_mode);
+                formInvDetail.SetDBManager(manager);
+                DataGridViewRow row = dgvSearch.SelectedRows[0];
+                string inv_id = (string)row.Cells[0].Value;
+                Inventory sel_inv = null;
+                itemsDict.TryGetValue(inv_id, out sel_inv);
+                if (sel_inv != null)
+                {
+                    formInvDetail.SetInventory(sel_inv);
+
+                    formInvDetail.ShowDialog(this);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select items first!");
+                dgvSearch.Focus();
             }
         }
     }

@@ -227,7 +227,6 @@
             // 
             this.dgvSearch.AllowUserToAddRows = false;
             this.dgvSearch.AllowUserToDeleteRows = false;
-            this.dgvSearch.AllowUserToOrderColumns = true;
             this.dgvSearch.AllowUserToResizeColumns = false;
             this.dgvSearch.AllowUserToResizeRows = false;
             this.dgvSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -243,6 +242,7 @@
             this.dgvSearch.Location = new System.Drawing.Point(28, 209);
             this.dgvSearch.Name = "dgvSearch";
             this.dgvSearch.ReadOnly = true;
+            this.dgvSearch.RowHeadersWidth = 82;
             this.dgvSearch.Size = new System.Drawing.Size(700, 204);
             this.dgvSearch.TabIndex = 17;
             // 
@@ -327,6 +327,7 @@
             this.btnEdit.TabIndex = 19;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnClose
             // 
@@ -379,7 +380,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(757, 473);
+            this.ClientSize = new System.Drawing.Size(752, 460);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.txbItemID);
             this.Controls.Add(this.cbItemID);
@@ -405,6 +406,7 @@
             this.Controls.Add(this.txbNama);
             this.Controls.Add(this.cbBerat);
             this.Controls.Add(this.cbNama);
+            this.MaximizeBox = false;
             this.Name = "FormSearchItem";
             this.Text = "Search Item";
             this.Load += new System.EventHandler(this.FormSearchItem_Load);
