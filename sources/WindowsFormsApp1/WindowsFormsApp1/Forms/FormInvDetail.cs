@@ -51,7 +51,7 @@ namespace TokoEmasAppNET
             itemInv = _inventory;
         }
 
-        private void ResetForm()
+        private void ResetFormInvDetail()
         {
             cbCatItemDetil.SelectedIndex = 0;
             LoadComboSubCategories();
@@ -121,7 +121,7 @@ namespace TokoEmasAppNET
             else if(data_mode == 1)
             {
                 btnGenID.Enabled = true;
-                ResetForm();
+                ResetFormInvDetail();
             } 
         }
 
@@ -234,65 +234,67 @@ namespace TokoEmasAppNET
         private void BtnInvCancel_Click(object sender, EventArgs e)
         {
             frmParent.data_mode = 0;
-            ResetForm();
+            ResetFormInvDetail();
             this.Hide();
         }
 
         private void BtnInvSave_Click(object sender, EventArgs e)
         {
-            if(manager.IsConnected)
+            try
             {
-                Inventory item = new Inventory();
-                item.inventory_id = txbInvDetilID.Text;
-                Subcategory sel_sub = null;
-                comboDictionarySub.TryGetValue(cbSubCatItemDetil.SelectedIndex, out sel_sub);
-                item.inventory_sub = sel_sub;
-                item.inventory_name = txbInvName.Text;
-                item.inventory_weight = float.Parse(txbInvWeight.Text);
-                Carat carat = null;
-                comboDictionaryCarat.TryGetValue(cbInvCarat.SelectedIndex, out carat);
-                item.inventory_carats = carat.id;
-                item.inventory_status = cbStatus.SelectedIndex + 1;
-                int sup_id = cbSupplier.SelectedIndex;
-                item.inventory_supplier = manager.GetSupplierByID(sup_id);
-
-                try
+                if (manager.IsConnected)
                 {
-                    if (data_mode == 1)
-                    {
-                        if (manager.AddNewInventory(item))
+                    Inventory item = new Inventory();
+                    item.inventory_id = txbInvDetilID.Text;
+                    Subcategory sel_sub = null;
+                    comboDictionarySub.TryGetValue(cbSubCatItemDetil.SelectedIndex, out sel_sub);
+                    item.inventory_sub = sel_sub;
+                    item.inventory_name = txbInvName.Text;
+                    item.inventory_weight = float.Parse(txbInvWeight.Text);
+                    Carat carat = null;
+                    comboDictionaryCarat.TryGetValue(cbInvCarat.SelectedIndex, out carat);
+                    item.inventory_carats = carat.id;
+                    item.inventory_status = cbStatus.SelectedIndex + 1;
+                    int sup_id = cbSupplier.SelectedIndex;
+                    item.inventory_supplier = manager.GetSupplierByID(sup_id);
+
+                
+                        if (data_mode == 1)
                         {
-                            if (MessageBox.Show("Add new items succeed! Add more item?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No)
+                            if (manager.AddNewInventory(item))
                             {
+                                if (MessageBox.Show("Add new items succeed! Add more item?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No)
+                                {
+                                    this.Hide();
+
+                                    frmParent.data_mode = 0;
+                                    frmParent.RefreshView();
+                                }
+                                else
+                                {
+                                    txbInvDetilID.Text = string.Empty;
+                                    txbInvName.Text = string.Empty;
+                                    txbInvWeight.Text = string.Empty;
+                                }
+                            }
+                        }
+                        else if(data_mode == 2)
+                        {
+                            if (manager.UpdateInventory(item))
+                            {
+                                MessageBox.Show("Update items succeed!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 this.Hide();
 
                                 frmParent.data_mode = 0;
                                 frmParent.RefreshView();
                             }
-                            else
-                            {
-                                txbInvDetilID.Text = string.Empty;
-                                txbInvName.Text = string.Empty;
-                                txbInvWeight.Text = string.Empty;
-                            }
                         }
-                    }
-                    else if(data_mode == 2)
-                    {
-                        if (manager.UpdateInventory(item))
-                        {
-                            MessageBox.Show("Update items succeed!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.Hide();
-
-                            frmParent.data_mode = 0;
-                            frmParent.RefreshView();
-                        }
-                    }
+                
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
