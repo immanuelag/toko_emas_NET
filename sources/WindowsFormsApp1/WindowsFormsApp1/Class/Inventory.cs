@@ -76,5 +76,45 @@ namespace TokoEmasAppNET
         }
     }
 
+    public class StockItem
+    {
+        public int id;
+        public string timestamp;
+        public string user;
+        public int status;
+        public string GetStatus()
+        {
+            switch(status)
+            {
+                case 0:
+                    return "ON GOING";
+                case 1:
+                    return "FINISHED";
+                case -1:
+                    return "CANCELLED";
+                default:
+                    return string.Empty;
+            }
+        }
+    }
 
+    public class StockItemDetail
+    {
+        public int stockItemID;
+        public string itemID;
+        public int checkStatus;
+
+        public string GetCheckStatus()
+        {
+            switch(checkStatus)
+            {
+                case 0:
+                    return "UNCHECKED";
+                case 1:
+                    return "CHECKED";
+                default:
+                    return string.Empty;
+            }
+        }
+    }
 }

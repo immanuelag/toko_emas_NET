@@ -1841,6 +1841,94 @@ namespace TokoEmasAppNET
         }
 
         #endregion
+
+        /*
+         Stock Item
+             */
+        public List<StockItem> GetAllStockItems()
+        {
+            List<StockItem> result = new List<StockItem>();
+
+            string mySelectQuery = "SELECT id, timestamp, user, status FROM items_check";
+            MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
+
+            //if (isDBConnected)
+            {
+                string error = string.Empty;
+                OpenConnection(ref error);
+                MySqlDataReader myReader;
+                myReader = myCommand.ExecuteReader();
+                try
+                {
+                    while (myReader.Read())
+                    {
+                        StockItem stockItem = new StockItem();
+                        stockItem.id = myReader.GetInt32(0);
+                        stockItem.timestamp = myReader.GetString(1);
+                        stockItem.user = myReader.GetString(2);
+                        stockItem.status = myReader.GetInt32(3); 
+                        result.Add(stockItem);
+                    }
+                }
+                finally
+                {
+                    myReader.Close();
+                    CloseConnection();
+                }
+            }
+
+            return result;
+        }
+
+        public bool AddNewStockItem(StockItem stockItem)
+        {
+            bool result = false;
+
+            string myInsertQuery = "INSERT INTO items_check (id, timestamp, user, status) VALUES (" +
+                stockItem.id + ",'" + stockItem.timestamp + "','" + stockItem.user + "'," + stockItem.status + ");";
+            MySqlCommand myCommand = new MySqlCommand(myInsertQuery, dbConn);
+
+            try
+            {
+                string error = string.Empty;
+                OpenConnection(ref error);
+                int rows = myCommand.ExecuteNonQuery();
+                CloseConnection();
+                if (rows > 0) return true;
+            }
+            catch (Exception ex)
+            {
+                CloseConnection();
+                throw new Exception("Error insert into StockItems! " + ex.Message);
+            }
+
+            return result;
+        }
+
+        public bool UpdateStockItem(StockItem stockItem)
+        {
+            bool result = false;
+
+            string myInsertQuery = "UPDATE items_check SET id=" + stockItem.id + ", timestamp='" + stockItem.timestamp + "', user='" + stockItem.user + "', status=" + stockItem.status + ";";
+            MySqlCommand myCommand = new MySqlCommand(myInsertQuery, dbConn);
+
+            try
+            {
+                string error = string.Empty;
+                OpenConnection(ref error);
+                int rows = myCommand.ExecuteNonQuery();
+                CloseConnection();
+                if (rows > 0) return true;
+            }
+            catch (Exception ex)
+            {
+                CloseConnection();
+                throw new Exception("Error insert into StockItems! " + ex.Message);
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Private Functions
         /// </summary>

@@ -12,6 +12,8 @@ namespace TokoEmasAppNET
 {
     public partial class FormItemStock : Form
     {
+        MySQLDBManager manager;
+
         public FormItemStock()
         {
             InitializeComponent();
