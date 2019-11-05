@@ -82,6 +82,7 @@ namespace TokoEmasAppNET
         public string timestamp;
         public string user;
         public int status;
+        public int in_out;
         public string GetStatus()
         {
             switch(status)

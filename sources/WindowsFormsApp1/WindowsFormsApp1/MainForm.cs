@@ -327,7 +327,7 @@ namespace TokoEmasAppNET
                 frmItemStock = new FormItemStock();
                 frmItemStock.MdiParent = this;
             }
-            frmItemStock.StatusStock = 0;
+            frmItemStock.StatusStock = 1;
             frmItemStock.Show();
         }
 
@@ -338,7 +338,7 @@ namespace TokoEmasAppNET
                 frmItemStock = new FormItemStock();
                 frmItemStock.MdiParent = this;
             }
-            frmItemStock.StatusStock = 1;
+            frmItemStock.StatusStock = 2;
             frmItemStock.Show();
         }
     }

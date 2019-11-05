@@ -15,7 +15,9 @@ namespace TokoEmasAppNET
         public int StatusStock;
         public MySQLDBManager manager;
         public List<StockItem> stockItemsList;
+        public Dictionary<int, StockItem> dictStockItem;
         public int startYear, endYear;
+        FormItemStocksDetails frmDetails;
         MainForm parent;
 
         //private List<StockItem>
@@ -24,10 +26,11 @@ namespace TokoEmasAppNET
             InitializeComponent();
 
             stockItemsList = new List<StockItem>();
+            dictStockItem = new Dictionary<int, StockItem>();
             startYear = 2019;
             endYear = DateTime.Now.Year;
 
-            StatusStock = 0; // default to INSIDE
+            StatusStock = 1; // default to INSIDE
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -43,6 +46,41 @@ namespace TokoEmasAppNET
             //load month and year combo box
             LoadMonthCombo();
             LoadYearCombo();
+            LoadStockItemListView();
+
+            if(StatusStock == 1)
+            {
+                lblTitle.Text = "STOCK CHECK INSIDE";
+            } 
+            else
+            {
+                lblTitle.Text = "STOCK CHECK OUTSIDE";
+            }
+        }
+
+        private void LoadStockItemListView()
+        {
+            if(dgvStockItem.Rows.Count > 0)
+            {
+                dgvStockItem.Rows.Clear();
+                dictStockItem.Clear();
+            }
+
+            stockItemsList = manager.GetAllStockItems(StatusStock);
+
+            for(int i=0;i<stockItemsList.Count;i++)
+            {
+                DataGridViewRow row = new DataGridViewRow();
+                row.CreateCells(dgvStockItem);
+
+                row.Cells[0].Value = stockItemsList[i].id;
+                row.Cells[1].Value = stockItemsList[i].timestamp;
+                row.Cells[2].Value = stockItemsList[i].user;
+                row.Cells[3].Value = stockItemsList[i].GetStatus();
+
+                dgvStockItem.Rows.Add(row);
+                dictStockItem.Add(stockItemsList[i].id, stockItemsList[i]);
+            }
         }
 
         private void LoadYearCombo()
@@ -66,7 +104,7 @@ namespace TokoEmasAppNET
                 cbMonth.Items.Add(t.ToString("MMMM"));
             }
         }
-        }
+        
 
         private void btnChecking_Click(object sender, EventArgs e)
         {

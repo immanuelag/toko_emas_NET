@@ -1849,7 +1849,7 @@ namespace TokoEmasAppNET
         {
             List<StockItem> result = new List<StockItem>();
 
-            string mySelectQuery = "SELECT id, timestamp, user, status FROM items_check";
+            string mySelectQuery = "SELECT id, timestamp, user, status, in_out FROM items_check";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
             //if (isDBConnected)
@@ -1866,7 +1866,44 @@ namespace TokoEmasAppNET
                         stockItem.id = myReader.GetInt32(0);
                         stockItem.timestamp = myReader.GetString(1);
                         stockItem.user = myReader.GetString(2);
-                        stockItem.status = myReader.GetInt32(3); 
+                        stockItem.status = myReader.GetInt32(3);
+                        stockItem.in_out = myReader.GetInt32(4);
+                        result.Add(stockItem);
+                    }
+                }
+                finally
+                {
+                    myReader.Close();
+                    CloseConnection();
+                }
+            }
+
+            return result;
+        }
+
+        public List<StockItem> GetAllStockItems(int in_out)
+        {
+            List<StockItem> result = new List<StockItem>();
+
+            string mySelectQuery = "SELECT id, timestamp, user, status FROM items_check WHERE in_out=" + in_out.ToString();
+            MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
+
+            //if (isDBConnected)
+            {
+                string error = string.Empty;
+                OpenConnection(ref error);
+                MySqlDataReader myReader;
+                myReader = myCommand.ExecuteReader();
+                try
+                {
+                    while (myReader.Read())
+                    {
+                        StockItem stockItem = new StockItem();
+                        stockItem.id = myReader.GetInt32(0);
+                        stockItem.timestamp = myReader.GetString(1);
+                        stockItem.user = myReader.GetString(2);
+                        stockItem.status = myReader.GetInt32(3);
+                        stockItem.in_out = in_out;
                         result.Add(stockItem);
                     }
                 }
