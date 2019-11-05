@@ -19,8 +19,8 @@ namespace TokoEmasAppNET
         public int startYear, endYear;
         FormItemStocksDetails frmDetails;
         MainForm parent;
+        int data_mode;
 
-        //private List<StockItem>
         public FormItemStock()
         {
             InitializeComponent();
@@ -31,11 +31,23 @@ namespace TokoEmasAppNET
             endYear = DateTime.Now.Year;
 
             StatusStock = 1; // default to INSIDE
+            data_mode = 0; // default
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-
+            gbItemStocks.Enabled = true;
+            int newID = manager.GetStockItemNewID();
+            if(newID == -1)
+            {
+                MessageBox.Show("Error Get New ID!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                gbItemStocks.Enabled = false;
+            } 
+            else
+            {
+                dtpTimeStock.Value = DateTime.Now;
+                data_mode = 1; // add new
+            }
         }
 
         private void FormItemStock_Load(object sender, EventArgs e)
@@ -104,7 +116,18 @@ namespace TokoEmasAppNET
                 cbMonth.Items.Add(t.ToString("MMMM"));
             }
         }
-        
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if(data_mode == 1)
+            {
+                
+            } 
+            else if(data_mode == 2)
+            {
+
+            }
+        }
 
         private void btnChecking_Click(object sender, EventArgs e)
         {

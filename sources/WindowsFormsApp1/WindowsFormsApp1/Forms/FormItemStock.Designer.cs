@@ -30,6 +30,10 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvStockItem = new System.Windows.Forms.DataGridView();
+            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTimestamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.gbItemStocks = new System.Windows.Forms.GroupBox();
@@ -48,10 +52,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnChecking = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTimestamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblTitle = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockItem)).BeginInit();
             this.gbItemStocks.SuspendLayout();
@@ -85,6 +85,37 @@
             this.dgvStockItem.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvStockItem.Size = new System.Drawing.Size(525, 219);
             this.dgvStockItem.TabIndex = 0;
+            // 
+            // colID
+            // 
+            this.colID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colID.HeaderText = "ID";
+            this.colID.MinimumWidth = 10;
+            this.colID.Name = "colID";
+            this.colID.ReadOnly = true;
+            this.colID.Width = 60;
+            // 
+            // colTimestamp
+            // 
+            this.colTimestamp.HeaderText = "Timestamp";
+            this.colTimestamp.MinimumWidth = 120;
+            this.colTimestamp.Name = "colTimestamp";
+            this.colTimestamp.ReadOnly = true;
+            this.colTimestamp.Width = 180;
+            // 
+            // colUser
+            // 
+            this.colUser.HeaderText = "User";
+            this.colUser.MinimumWidth = 10;
+            this.colUser.Name = "colUser";
+            this.colUser.ReadOnly = true;
+            // 
+            // colStatus
+            // 
+            this.colStatus.HeaderText = "Status";
+            this.colStatus.MinimumWidth = 10;
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
             // 
             // btnEdit
             // 
@@ -145,6 +176,7 @@
             this.btnSave.TabIndex = 9;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // textBox3
             // 
@@ -270,37 +302,6 @@
             this.button1.TabIndex = 8;
             this.button1.Text = "Set Done";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // colID
-            // 
-            this.colID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.colID.HeaderText = "ID";
-            this.colID.MinimumWidth = 10;
-            this.colID.Name = "colID";
-            this.colID.ReadOnly = true;
-            this.colID.Width = 60;
-            // 
-            // colTimestamp
-            // 
-            this.colTimestamp.HeaderText = "Timestamp";
-            this.colTimestamp.MinimumWidth = 120;
-            this.colTimestamp.Name = "colTimestamp";
-            this.colTimestamp.ReadOnly = true;
-            this.colTimestamp.Width = 180;
-            // 
-            // colUser
-            // 
-            this.colUser.HeaderText = "User";
-            this.colUser.MinimumWidth = 10;
-            this.colUser.Name = "colUser";
-            this.colUser.ReadOnly = true;
-            // 
-            // colStatus
-            // 
-            this.colStatus.HeaderText = "Status";
-            this.colStatus.MinimumWidth = 10;
-            this.colStatus.Name = "colStatus";
-            this.colStatus.ReadOnly = true;
             // 
             // lblTitle
             // 

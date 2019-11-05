@@ -1845,6 +1845,29 @@ namespace TokoEmasAppNET
         /*
          Stock Item
              */
+
+        public int GetStockItemNewID()
+        {
+            int newID = -1;
+
+            string mySelectQuery = "SELECT MAX(id) FROM items_check";
+            MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
+
+            string error = string.Empty;
+            OpenConnection(ref error);
+            MySqlDataReader myReader;
+            myReader = myCommand.ExecuteReader();
+
+            if(myReader.HasRows)
+            {
+                int maxID = myReader.GetInt32(0);
+                newID = maxID + 1;
+
+                myReader.Close();
+                CloseConnection();
+            }
+            return newID;
+        }
         public List<StockItem> GetAllStockItems()
         {
             List<StockItem> result = new List<StockItem>();
