@@ -51,17 +51,21 @@
             this.colItemSub,
             this.colItemWeight,
             this.colItemStatus});
-            this.dataGridView1.Location = new System.Drawing.Point(23, 66);
+            this.dataGridView1.Location = new System.Drawing.Point(46, 127);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(636, 338);
+            this.dataGridView1.RowHeadersWidth = 82;
+            this.dataGridView1.Size = new System.Drawing.Size(1272, 650);
             this.dataGridView1.TabIndex = 0;
             // 
             // colItemID
             // 
             this.colItemID.HeaderText = "Item ID";
+            this.colItemID.MinimumWidth = 10;
             this.colItemID.Name = "colItemID";
             this.colItemID.ReadOnly = true;
+            this.colItemID.Width = 200;
             // 
             // colItemCat
             // 
@@ -85,6 +89,7 @@
             this.colItemWeight.MinimumWidth = 60;
             this.colItemWeight.Name = "colItemWeight";
             this.colItemWeight.ReadOnly = true;
+            this.colItemWeight.Width = 200;
             // 
             // colItemStatus
             // 
@@ -97,37 +102,42 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 33);
+            this.label1.Location = new System.Drawing.Point(40, 63);
+            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.Size = new System.Drawing.Size(78, 25);
             this.label1.TabIndex = 1;
             this.label1.Text = "Item ID";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(78, 30);
+            this.textBox1.Location = new System.Drawing.Point(156, 58);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.Size = new System.Drawing.Size(196, 31);
             this.textBox1.TabIndex = 2;
             // 
             // btnChecked
             // 
-            this.btnChecked.Location = new System.Drawing.Point(194, 28);
+            this.btnChecked.Location = new System.Drawing.Point(388, 54);
+            this.btnChecked.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnChecked.Name = "btnChecked";
-            this.btnChecked.Size = new System.Drawing.Size(75, 23);
+            this.btnChecked.Size = new System.Drawing.Size(150, 44);
             this.btnChecked.TabIndex = 3;
             this.btnChecked.Text = "Checked";
             this.btnChecked.UseVisualStyleBackColor = true;
+            this.btnChecked.Click += new System.EventHandler(this.btnChecked_Click);
             // 
             // FormItemStocksDetails
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(679, 450);
+            this.ClientSize = new System.Drawing.Size(1358, 865);
             this.Controls.Add(this.btnChecked);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "FormItemStocksDetails";
             this.Text = "FormItemStocksDetails";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

@@ -51,6 +51,7 @@
             this.cbYear = new System.Windows.Forms.ComboBox();
             this.cbMonth = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.btnChecking = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.gbItemStocks.SuspendLayout();
             this.SuspendLayout();
@@ -68,7 +69,7 @@
             this.colUser,
             this.colStatus});
             this.dataGridView1.Location = new System.Drawing.Point(24, 129);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(6);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -121,7 +122,7 @@
             // btnEdit
             // 
             this.btnEdit.Location = new System.Drawing.Point(926, 581);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(6);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(150, 44);
             this.btnEdit.TabIndex = 1;
@@ -131,7 +132,7 @@
             // btnAdd
             // 
             this.btnAdd.Location = new System.Drawing.Point(764, 581);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(6);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(150, 44);
             this.btnAdd.TabIndex = 2;
@@ -153,9 +154,9 @@
             this.gbItemStocks.Controls.Add(this.label2);
             this.gbItemStocks.Controls.Add(this.label1);
             this.gbItemStocks.Location = new System.Drawing.Point(24, 637);
-            this.gbItemStocks.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gbItemStocks.Margin = new System.Windows.Forms.Padding(6);
             this.gbItemStocks.Name = "gbItemStocks";
-            this.gbItemStocks.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gbItemStocks.Padding = new System.Windows.Forms.Padding(6);
             this.gbItemStocks.Size = new System.Drawing.Size(1050, 323);
             this.gbItemStocks.TabIndex = 3;
             this.gbItemStocks.TabStop = false;
@@ -163,7 +164,7 @@
             // btnCancel
             // 
             this.btnCancel.Location = new System.Drawing.Point(684, 231);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(150, 44);
             this.btnCancel.TabIndex = 10;
@@ -173,7 +174,7 @@
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(862, 231);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(6);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(150, 44);
             this.btnSave.TabIndex = 9;
@@ -183,7 +184,7 @@
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(812, 137);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(6);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(196, 31);
             this.textBox3.TabIndex = 8;
@@ -191,7 +192,7 @@
             // txbUser
             // 
             this.txbUser.Location = new System.Drawing.Point(812, 60);
-            this.txbUser.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txbUser.Margin = new System.Windows.Forms.Padding(6);
             this.txbUser.Name = "txbUser";
             this.txbUser.Size = new System.Drawing.Size(196, 31);
             this.txbUser.TabIndex = 7;
@@ -210,7 +211,7 @@
             // 
             this.txbID.Enabled = false;
             this.txbID.Location = new System.Drawing.Point(238, 60);
-            this.txbID.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txbID.Margin = new System.Windows.Forms.Padding(6);
             this.txbID.Name = "txbID";
             this.txbID.Size = new System.Drawing.Size(196, 31);
             this.txbID.TabIndex = 5;
@@ -218,7 +219,7 @@
             // dtpTimeStock
             // 
             this.dtpTimeStock.Location = new System.Drawing.Point(238, 135);
-            this.dtpTimeStock.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.dtpTimeStock.Margin = new System.Windows.Forms.Padding(6);
             this.dtpTimeStock.MaxDate = new System.DateTime(2030, 12, 31, 0, 0, 0, 0);
             this.dtpTimeStock.MinDate = new System.DateTime(2019, 1, 1, 0, 0, 0, 0);
             this.dtpTimeStock.Name = "dtpTimeStock";
@@ -273,7 +274,7 @@
             // 
             this.cbYear.FormattingEnabled = true;
             this.cbYear.Location = new System.Drawing.Point(158, 52);
-            this.cbYear.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cbYear.Margin = new System.Windows.Forms.Padding(6);
             this.cbYear.Name = "cbYear";
             this.cbYear.Size = new System.Drawing.Size(140, 33);
             this.cbYear.TabIndex = 4;
@@ -282,7 +283,7 @@
             // 
             this.cbMonth.FormattingEnabled = true;
             this.cbMonth.Location = new System.Drawing.Point(322, 52);
-            this.cbMonth.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cbMonth.Margin = new System.Windows.Forms.Padding(6);
             this.cbMonth.Name = "cbMonth";
             this.cbMonth.Size = new System.Drawing.Size(238, 33);
             this.cbMonth.TabIndex = 5;
@@ -297,11 +298,23 @@
             this.label6.TabIndex = 6;
             this.label6.Text = "Filter";
             // 
+            // btnChecking
+            // 
+            this.btnChecking.Location = new System.Drawing.Point(29, 581);
+            this.btnChecking.Margin = new System.Windows.Forms.Padding(6);
+            this.btnChecking.Name = "btnChecking";
+            this.btnChecking.Size = new System.Drawing.Size(238, 44);
+            this.btnChecking.TabIndex = 7;
+            this.btnChecking.Text = "Start Checking";
+            this.btnChecking.UseVisualStyleBackColor = true;
+            this.btnChecking.Click += new System.EventHandler(this.btnChecking_Click);
+            // 
             // FormItemStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1098, 983);
+            this.Controls.Add(this.btnChecking);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.cbMonth);
             this.Controls.Add(this.cbYear);
@@ -309,7 +322,7 @@
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.dataGridView1);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "FormItemStock";
             this.Text = "Item Stocks";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -344,5 +357,6 @@
         private System.Windows.Forms.ComboBox cbYear;
         private System.Windows.Forms.ComboBox cbMonth;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnChecking;
     }
 }

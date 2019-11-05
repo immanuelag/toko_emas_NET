@@ -12,9 +12,15 @@ namespace TokoEmasAppNET
 {
     public partial class FormItemStocksDetails : Form
     {
+        public MySQLDBManager manager;
         public FormItemStocksDetails()
         {
             InitializeComponent();
+        }
+
+        private void btnChecked_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
