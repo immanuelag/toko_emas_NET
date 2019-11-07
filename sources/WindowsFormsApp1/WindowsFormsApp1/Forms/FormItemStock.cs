@@ -121,10 +121,12 @@ namespace TokoEmasAppNET
         {
             if(data_mode == 1)
             {
-                
+                // add stock item
+                // add stock item detil
             } 
             else if(data_mode == 2)
             {
+                // update stock item
 
             }
         }

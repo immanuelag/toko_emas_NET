@@ -1840,6 +1840,38 @@ namespace TokoEmasAppNET
             return count;
         }
 
+        public List<string> GetAllIDInventoryByStock(int stock)
+        {
+            List<string> result = new List<string>();
+
+            string mySelectQuery = "SELECT id FROM `master_items` WHERE master_items.stocks=" + stock.ToString();
+            MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
+
+            string error = string.Empty;
+            OpenConnection(ref error);
+            MySqlDataReader myReader;
+            myReader = myCommand.ExecuteReader();
+
+            try
+            { 
+                while(myReader.Read())
+                {
+                    string id = myReader.GetString(0);
+                    result.Add(id);
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+            finally
+            {
+                myReader.Close();
+                CloseConnection();
+            }
+            return result;
+        }
+
         #endregion
 
         /*
@@ -1934,6 +1966,84 @@ namespace TokoEmasAppNET
                 {
                     myReader.Close();
                     CloseConnection();
+                }
+            }
+
+            return result;
+        }
+
+        public List<StockItemDetail> GetAllStockItemsDetails(int idStock)
+        {
+            List<StockItemDetail> result = new List<StockItemDetail>();
+
+            string mySelectQuery = "SELECT id_items, check_status FROM items_check_detail WHERE id_stock_check=" + idStock.ToString();
+            MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
+
+            //if (isDBConnected)
+            {
+                string error = string.Empty;
+                OpenConnection(ref error);
+                MySqlDataReader myReader;
+                myReader = myCommand.ExecuteReader();
+                try
+                {
+                    while (myReader.Read())
+                    {
+                        StockItemDetail stockItemDetail = new StockItemDetail();
+                        stockItemDetail.itemID = myReader.GetString(0);
+                        stockItemDetail.checkStatus = myReader.GetInt32(1);
+                        stockItemDetail.stockItemID = idStock;
+                        
+                        result.Add(stockItemDetail);
+                    }
+                }
+                finally
+                {
+                    myReader.Close();
+                    CloseConnection();
+                }
+            }
+
+            return result;
+        }
+
+        public bool AddBulkStockItemDetail(int idStock, int in_out)
+        {
+            bool result = false;
+
+            List<string> listID = null;
+
+            listID=GetAllIDInventoryByStock(in_out);
+
+            if (listID.Count > 0)
+            {
+                string myInsertQuery = "INSERT INTO items_check_detail (id_stock_check, id_items, check_status) VALUES ";
+                for(int i=0;i<listID.Count;i++)
+                {
+                    myInsertQuery += "(" + idStock.ToString() + listID[i] + "," + in_out +")";
+                    if(i==listID.Count-1)
+                    {
+                        myInsertQuery += ";";
+                    }
+                    else
+                    {
+                        myInsertQuery += ",";
+                    }
+                }
+                MySqlCommand myCommand = new MySqlCommand(myInsertQuery, dbConn);
+
+                try
+                {
+                    string error = string.Empty;
+                    OpenConnection(ref error);
+                    int rows = myCommand.ExecuteNonQuery();
+                    CloseConnection();
+                    if (rows > 0) return true;
+                }
+                catch (Exception ex)
+                {
+                    CloseConnection();
+                    throw new Exception("Error insert into StockItems! " + ex.Message);
                 }
             }
 
