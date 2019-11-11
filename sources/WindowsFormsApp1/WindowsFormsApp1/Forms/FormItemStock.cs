@@ -122,7 +122,12 @@ namespace TokoEmasAppNET
             if(data_mode == 1)
             {
                 // add stock item
+                StockItem stock = new StockItem();
+                int.TryParse(txbID.Text, out stock.id);
+                stock.timestamp = dtpTimeStock.Value.ToString("yyyy-MM-dd HH:mm:ss");
+                stock.user = txbUser.Text;
                 // add stock item detil
+
             } 
             else if(data_mode == 2)
             {

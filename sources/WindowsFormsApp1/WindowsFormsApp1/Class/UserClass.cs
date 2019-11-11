@@ -36,5 +36,17 @@ namespace TokoEmasAppNET
             }
             
         }
+
+        public string GetRole()
+        {
+            switch (role)
+            {
+                case UserRole.Administrator: return "Administrator";
+                case UserRole.Owner: return "Owner";
+                case UserRole.Employee:
+                default:
+                    return "Employee";
+            }
+        }
     }
 }

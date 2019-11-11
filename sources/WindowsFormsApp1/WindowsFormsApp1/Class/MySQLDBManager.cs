@@ -1304,7 +1304,7 @@ namespace TokoEmasAppNET
                         string car_value = myReader.GetString(idx++);
                         items.inventory_weight = myReader.GetFloat(idx++);
                         items.inventory_carats = car_id;
-                        items.inventory_status = status;
+                        items.inventory_status = myReader.GetInt32(idx++);
                         int sup_id = myReader.GetInt32(idx++);
                         string sup_code = myReader.GetString(idx++);
                         string sup_nama = myReader.GetString(idx++);
