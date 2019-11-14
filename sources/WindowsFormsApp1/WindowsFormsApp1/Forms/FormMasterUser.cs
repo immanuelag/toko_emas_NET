@@ -66,7 +66,7 @@ namespace TokoEmasAppNET
             data_mode = 0;
             txbUsername.Text = "";
             txbPassword.Text = "";
-            cb
+            
             dgvUser.Focus();
         }
     }

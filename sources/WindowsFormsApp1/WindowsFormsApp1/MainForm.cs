@@ -322,24 +322,24 @@ namespace TokoEmasAppNET
 
         private void checkInsideToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(frmItemStock == null || frmItemStock.IsDisposed)
-            {
-                frmItemStock = new FormItemStock();
-                frmItemStock.MdiParent = this;
-            }
-            frmItemStock.StatusStock = 1;
-            frmItemStock.Show();
+            //if(frmItemStock == null || frmItemStock.IsDisposed)
+            //{
+            //    frmItemStock = new FormItemStock();
+            //    frmItemStock.MdiParent = this;
+            //}
+            //frmItemStock.StatusStock = 1;
+            //frmItemStock.Show();
         }
 
         private void checkOutsideToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (frmItemStock == null || frmItemStock.IsDisposed)
-            {
-                frmItemStock = new FormItemStock();
-                frmItemStock.MdiParent = this;
-            }
-            frmItemStock.StatusStock = 2;
-            frmItemStock.Show();
+            //if (frmItemStock == null || frmItemStock.IsDisposed)
+            //{
+            //    frmItemStock = new FormItemStock();
+            //    frmItemStock.MdiParent = this;
+            //}
+            //frmItemStock.StatusStock = 2;
+            //frmItemStock.Show();
         }
     }
 }
