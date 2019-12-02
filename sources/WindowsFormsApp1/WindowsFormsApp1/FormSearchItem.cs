@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace TokoEmasAppNET
 {
@@ -457,6 +460,55 @@ namespace TokoEmasAppNET
             {
                 MessageBox.Show("Please select items first!");
                 dgvSearch.Focus();
+            }
+        }
+
+        private void btnXReport_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnXcode_Click(object sender, EventArgs e)
+        {
+            if (dgvSearch.SelectedRows.Count > 1 && dgvSearch.SelectedRows.Count <= 10)
+            {
+                this.Cursor = Cursors.WaitCursor;
+                Excel.Application MyApp = new Excel.Application();
+                Excel.Workbook xlWorkBook;
+                Excel.Worksheet xlWorkSheet;
+
+                string filename = @"D:\GIT\toko_emas_NET\template\template2.xls";
+                xlWorkBook = MyApp.Workbooks.Open(filename);
+                xlWorkSheet = xlWorkBook.Worksheets["Sheet1"];
+
+                ((Range)xlWorkSheet.Range["A2", "E21"]).Clear();
+
+                int nRow = dgvSearch.SelectedRows.Count;
+                int iRow = 2;
+                for (int i = 0; i < nRow; i++)
+                {
+                    DataGridViewRow sel_row = dgvSearch.SelectedRows[i];
+
+                    string nama = (string)sel_row.Cells[1].Value + " " + (string)sel_row.Cells[2].Value + " " + (string)sel_row.Cells[3].Value;
+                    if (nama.Length > 20)
+                        nama = nama.Substring(0, 20);
+                    xlWorkSheet.Cells[iRow + i, 1].value = nama;
+                    xlWorkSheet.Cells[iRow + i, 2].value = (string)sel_row.Cells[0].Value;
+                    xlWorkSheet.Cells[iRow + i, 3].value = "'" + (string)sel_row.Cells[5].Value;
+                    xlWorkSheet.Cells[iRow + i, 4].value = "'" + (string)sel_row.Cells[4].Value;
+                    xlWorkSheet.Cells[iRow + i, 5].value = (string)sel_row.Cells[6].Value;
+                }
+                xlWorkBook.Save();
+                //xlWorkBook.SaveAs(filename, XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, false, false, XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
+                xlWorkBook.Close();
+                MyApp.Quit();
+                this.Cursor = Cursors.Default;
+
+                MessageBox.Show("Successfully update template2.xls! Open barcode file to print!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Please select 2 or more (even) rows (max 10)!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -61,6 +61,7 @@
             this.cbItemID = new System.Windows.Forms.CheckBox();
             this.txbItemID = new System.Windows.Forms.TextBox();
             this.btnReset = new System.Windows.Forms.Button();
+            this.btnXReport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSearch)).BeginInit();
             this.SuspendLayout();
             // 
@@ -318,6 +319,7 @@
             this.btnXcode.TabIndex = 18;
             this.btnXcode.Text = "Generate XLS Barcode";
             this.btnXcode.UseVisualStyleBackColor = true;
+            this.btnXcode.Click += new System.EventHandler(this.btnXcode_Click);
             // 
             // btnEdit
             // 
@@ -376,11 +378,22 @@
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
             // 
+            // btnXReport
+            // 
+            this.btnXReport.Location = new System.Drawing.Point(238, 427);
+            this.btnXReport.Name = "btnXReport";
+            this.btnXReport.Size = new System.Drawing.Size(169, 23);
+            this.btnXReport.TabIndex = 25;
+            this.btnXReport.Text = "Generate XLS Report";
+            this.btnXReport.UseVisualStyleBackColor = true;
+            this.btnXReport.Click += new System.EventHandler(this.btnXReport_Click);
+            // 
             // FormSearchItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(752, 460);
+            this.Controls.Add(this.btnXReport);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.txbItemID);
             this.Controls.Add(this.cbItemID);
@@ -451,5 +464,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Button btnXReport;
     }
 }
