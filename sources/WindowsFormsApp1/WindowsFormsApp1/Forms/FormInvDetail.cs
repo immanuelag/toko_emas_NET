@@ -317,12 +317,12 @@ namespace TokoEmasAppNET
             string LastInvID = manager.GetLastInventoryIDByCatSub(sel_cat.category_id, sel_sub.subcategory_id);
             if(LastInvID == string.Empty)
             {
-                txbInvDetilID.Text = sel_cat.category_id + sel_sub.subcategory_id + "001";
+                txbInvDetilID.Text = sel_cat.category_id + sel_sub.subcategory_id + "0001";
             }
             else
             {
                 int new_id = int.Parse(LastInvID.Substring(2, 3)) + 1;
-                txbInvDetilID.Text = sel_cat.category_id + sel_sub.subcategory_id + new_id.ToString("000"); 
+                txbInvDetilID.Text = sel_cat.category_id + sel_sub.subcategory_id + new_id.ToString("0000"); 
             }
         }
     }
