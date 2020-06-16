@@ -250,7 +250,7 @@ namespace TokoEmasAppNET
                     comboDictionarySub.TryGetValue(cbSubCatItemDetil.SelectedIndex, out sel_sub);
                     item.inventory_sub = sel_sub;
                     item.inventory_name = txbInvName.Text;
-                    item.inventory_weight = float.Parse(txbInvWeight.Text);
+                    item.inventory_weight = float.Parse(txbInvWeight.Text.Replace(',','.'));
                     Carat carat = null;
                     comboDictionaryCarat.TryGetValue(cbInvCarat.SelectedIndex, out carat);
                     item.inventory_carats = carat.id;
@@ -321,7 +321,7 @@ namespace TokoEmasAppNET
             }
             else
             {
-                int new_id = int.Parse(LastInvID.Substring(2, 3)) + 1;
+                int new_id = int.Parse(LastInvID.Substring(2, LastInvID.Length-2)) + 1;
                 txbInvDetilID.Text = sel_cat.category_id + sel_sub.subcategory_id + new_id.ToString("0000"); 
             }
         }

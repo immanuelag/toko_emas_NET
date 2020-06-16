@@ -1592,7 +1592,7 @@ namespace TokoEmasAppNET
             string LastInventoryID = string.Empty;
 
             string mySelectQuery = "SELECT master_items.id FROM master_items WHERE category='" + cat_id + "' AND" +
-                " subcategory='" + sub_id + "' ORDER BY id DESC LIMIT 1;";
+                " subcategory='" + sub_id + "' ORDER BY MID(id,3,4)+0 DESC LIMIT 1;";
 
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
