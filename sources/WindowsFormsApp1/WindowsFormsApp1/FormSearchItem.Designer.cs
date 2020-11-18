@@ -46,14 +46,6 @@
             this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.cbStatus = new System.Windows.Forms.CheckBox();
             this.dgvSearch = new System.Windows.Forms.DataGridView();
-            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSubcat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colItemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCarat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnXcode = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
@@ -62,6 +54,16 @@
             this.txbItemID = new System.Windows.Forms.TextBox();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnXReport = new System.Windows.Forms.Button();
+            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSubcat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colItemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCarat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUpdateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSearch)).BeginInit();
             this.SuspendLayout();
             // 
@@ -239,77 +241,15 @@
             this.colWeight,
             this.colCarat,
             this.colSupplier,
-            this.colStatus});
+            this.colStatus,
+            this.colCreateTime,
+            this.colUpdateTime});
             this.dgvSearch.Location = new System.Drawing.Point(28, 209);
             this.dgvSearch.Name = "dgvSearch";
             this.dgvSearch.ReadOnly = true;
             this.dgvSearch.RowHeadersWidth = 82;
             this.dgvSearch.Size = new System.Drawing.Size(700, 204);
             this.dgvSearch.TabIndex = 17;
-            // 
-            // colID
-            // 
-            this.colID.HeaderText = "Item ID";
-            this.colID.MinimumWidth = 20;
-            this.colID.Name = "colID";
-            this.colID.ReadOnly = true;
-            this.colID.Width = 70;
-            // 
-            // colCat
-            // 
-            this.colCat.HeaderText = "Category";
-            this.colCat.MinimumWidth = 20;
-            this.colCat.Name = "colCat";
-            this.colCat.ReadOnly = true;
-            this.colCat.Width = 70;
-            // 
-            // colSubcat
-            // 
-            this.colSubcat.HeaderText = "Subcategory";
-            this.colSubcat.MinimumWidth = 30;
-            this.colSubcat.Name = "colSubcat";
-            this.colSubcat.ReadOnly = true;
-            this.colSubcat.Width = 90;
-            // 
-            // colItemName
-            // 
-            this.colItemName.HeaderText = "Item Name";
-            this.colItemName.MinimumWidth = 50;
-            this.colItemName.Name = "colItemName";
-            this.colItemName.ReadOnly = true;
-            this.colItemName.Width = 160;
-            // 
-            // colWeight
-            // 
-            this.colWeight.HeaderText = "Weight";
-            this.colWeight.MinimumWidth = 40;
-            this.colWeight.Name = "colWeight";
-            this.colWeight.ReadOnly = true;
-            this.colWeight.Width = 70;
-            // 
-            // colCarat
-            // 
-            this.colCarat.HeaderText = "Carat";
-            this.colCarat.MinimumWidth = 40;
-            this.colCarat.Name = "colCarat";
-            this.colCarat.ReadOnly = true;
-            this.colCarat.Width = 50;
-            // 
-            // colSupplier
-            // 
-            this.colSupplier.HeaderText = "Supplier";
-            this.colSupplier.MinimumWidth = 40;
-            this.colSupplier.Name = "colSupplier";
-            this.colSupplier.ReadOnly = true;
-            this.colSupplier.Width = 60;
-            // 
-            // colStatus
-            // 
-            this.colStatus.HeaderText = "Status";
-            this.colStatus.MinimumWidth = 40;
-            this.colStatus.Name = "colStatus";
-            this.colStatus.ReadOnly = true;
-            this.colStatus.Width = 80;
             // 
             // btnXcode
             // 
@@ -388,6 +328,82 @@
             this.btnXReport.UseVisualStyleBackColor = true;
             this.btnXReport.Click += new System.EventHandler(this.btnXReport_Click);
             // 
+            // colID
+            // 
+            this.colID.HeaderText = "Item ID";
+            this.colID.MinimumWidth = 20;
+            this.colID.Name = "colID";
+            this.colID.ReadOnly = true;
+            this.colID.Width = 70;
+            // 
+            // colCat
+            // 
+            this.colCat.HeaderText = "Category";
+            this.colCat.MinimumWidth = 20;
+            this.colCat.Name = "colCat";
+            this.colCat.ReadOnly = true;
+            this.colCat.Width = 70;
+            // 
+            // colSubcat
+            // 
+            this.colSubcat.HeaderText = "Subcategory";
+            this.colSubcat.MinimumWidth = 30;
+            this.colSubcat.Name = "colSubcat";
+            this.colSubcat.ReadOnly = true;
+            this.colSubcat.Width = 90;
+            // 
+            // colItemName
+            // 
+            this.colItemName.HeaderText = "Item Name";
+            this.colItemName.MinimumWidth = 50;
+            this.colItemName.Name = "colItemName";
+            this.colItemName.ReadOnly = true;
+            this.colItemName.Width = 160;
+            // 
+            // colWeight
+            // 
+            this.colWeight.HeaderText = "Weight";
+            this.colWeight.MinimumWidth = 40;
+            this.colWeight.Name = "colWeight";
+            this.colWeight.ReadOnly = true;
+            this.colWeight.Width = 70;
+            // 
+            // colCarat
+            // 
+            this.colCarat.HeaderText = "Carat";
+            this.colCarat.MinimumWidth = 40;
+            this.colCarat.Name = "colCarat";
+            this.colCarat.ReadOnly = true;
+            this.colCarat.Width = 50;
+            // 
+            // colSupplier
+            // 
+            this.colSupplier.HeaderText = "Supplier";
+            this.colSupplier.MinimumWidth = 40;
+            this.colSupplier.Name = "colSupplier";
+            this.colSupplier.ReadOnly = true;
+            this.colSupplier.Width = 60;
+            // 
+            // colStatus
+            // 
+            this.colStatus.HeaderText = "Status";
+            this.colStatus.MinimumWidth = 40;
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
+            this.colStatus.Width = 80;
+            // 
+            // colCreateTime
+            // 
+            this.colCreateTime.HeaderText = "Create Time";
+            this.colCreateTime.Name = "colCreateTime";
+            this.colCreateTime.ReadOnly = true;
+            // 
+            // colUpdateTime
+            // 
+            this.colUpdateTime.HeaderText = "Update Time";
+            this.colUpdateTime.Name = "colUpdateTime";
+            this.colUpdateTime.ReadOnly = true;
+            // 
             // FormSearchItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -455,6 +471,8 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.CheckBox cbItemID;
         private System.Windows.Forms.TextBox txbItemID;
+        private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Button btnXReport;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCat;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSubcat;
@@ -463,7 +481,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCarat;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
-        private System.Windows.Forms.Button btnReset;
-        private System.Windows.Forms.Button btnXReport;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUpdateTime;
     }
 }

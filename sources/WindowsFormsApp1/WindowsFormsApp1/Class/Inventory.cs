@@ -58,7 +58,8 @@ namespace TokoEmasAppNET
         public float inventory_weight;
         public int inventory_status;
         public Supplier inventory_supplier;
-
+        public DateTime inventory_create_time;
+        public DateTime inventory_update_time;
 
         public Inventory()
         {
@@ -73,6 +74,16 @@ namespace TokoEmasAppNET
                 case 3: return "SOLD";
                 default: return "UNKNOWN";
             }
+        }
+
+        public string GetCreateTimestamp()
+        {
+            return inventory_create_time.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        public string GetUpdateTimestamp()
+        {
+            return inventory_update_time.ToString("yyyy-MM-dd HH:mm:ss");
         }
     }
 

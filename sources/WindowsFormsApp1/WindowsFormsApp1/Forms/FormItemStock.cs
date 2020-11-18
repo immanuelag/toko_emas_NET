@@ -45,6 +45,7 @@ namespace TokoEmasAppNET
             } 
             else
             {
+                txbID.Text = newID.ToString();
                 dtpTimeStock.Value = DateTime.Now;
                 data_mode = 1; // add new
             }
@@ -126,7 +127,29 @@ namespace TokoEmasAppNET
                 int.TryParse(txbID.Text, out stock.id);
                 stock.timestamp = dtpTimeStock.Value.ToString("yyyy-MM-dd HH:mm:ss");
                 stock.user = txbUser.Text;
+
+                try
+                {
+                    manager.AddNewStockItem(stock);
+                }
+                catch
+                {
+                    MessageBox.Show("Error add new stock item!", "Error Stock", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                LoadStockItemListView();
+
                 // add stock item detil
+                if(frmDetails == null)
+                {
+                    frmDetails = new FormItemStocksDetails();
+                    frmDetails.Parent = this;
+                    frmDetails.Show(this);
+                }
+                else
+                {
+                    frmDetails.Show(this);
+                }
 
             } 
             else if(data_mode == 2)
@@ -134,6 +157,13 @@ namespace TokoEmasAppNET
                 // update stock item
 
             }
+        }
+        
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            gbItemStocks.Enabled = false;
+            txbUser.Text = "";
+            txbID.Text = "";
         }
 
         private void btnChecking_Click(object sender, EventArgs e)

@@ -995,10 +995,11 @@ namespace TokoEmasAppNET
             List<Inventory> result = new List<Inventory>();
 
             string mySelectQuery = "SELECT master_items.id, master_items.category, master_category.nama, master_items.subcategory, " +
-                " master_subcategory.nama, master_items.nama, karat, master_carat.carat, berat, stocks, master_items.supplier, master_supplier.code, master_supplier.nama" + 
+                " master_subcategory.nama, master_items.nama, karat, master_carat.carat, berat, stocks, master_items.supplier, master_supplier.code, master_supplier.nama," +
+                " master_items.createTimestamp, master_items.updateTimestamp " +
                 " FROM master_items, master_category, master_subcategory, master_carat, master_supplier " +
                 " WHERE master_items.subcategory=master_subcategory.id AND master_subcategory.category=master_category.id AND " +
-                " master_items.category = master_category.id AND karat=master_carat.id  AND master_items.supplier = master_supplier.id GROUP BY master_items.id;";
+                " master_items.category = master_category.id AND karat=master_carat.id  AND master_items.supplier = master_supplier.id ORDER BY master_items.category ASC, master_items.subcategory ASC, MID(master_items.id,3,4)+0 ASC;";// GROUP BY master_items.id;";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
             //if (isDBConnected)
@@ -1039,6 +1040,8 @@ namespace TokoEmasAppNET
                     string sup_code = myReader.GetString(idx++);
                     string sup_nama = myReader.GetString(idx++);
                     items.inventory_supplier = new Supplier(sup_id, sup_code, sup_nama);
+                    items.inventory_create_time = myReader.GetDateTime(idx++);
+                    items.inventory_update_time = myReader.GetDateTime(idx++);
                     result.Add(items);
                 }
                 myReader.Close();
@@ -1061,11 +1064,12 @@ namespace TokoEmasAppNET
             List<Inventory> result = new List<Inventory>();
 
             string mySelectQuery = "SELECT master_items.id, master_items.category, master_category.nama, master_items.subcategory, " +
-                " master_subcategory.nama, master_items.nama, karat, master_carat.carat, berat, stocks, master_items.supplier, master_supplier.code, master_supplier.nama" +
+                " master_subcategory.nama, master_items.nama, karat, master_carat.carat, berat, stocks, master_items.supplier, master_supplier.code, master_supplier.nama," +
+                " master_items.createTimestamp, master_items.updateTimestamp " +
                 " FROM master_items, master_category, master_subcategory, master_carat, master_supplier " +
                 " WHERE master_items.subcategory=master_subcategory.id AND master_subcategory.category=master_category.id AND " +
                 " master_items.category = master_category.id AND karat=master_carat.id  AND master_items.supplier = master_supplier.id AND " +
-                " master_items.nama LIKE '%" + searchName + "%' GROUP BY master_items.id;";
+                " master_items.nama LIKE '%" + searchName + "%' ORDER BY master_items.category ASC, master_items.subcategory ASC, MID(master_items.id,3,4)+0 ASC;";// GROUP BY master_items.id;";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
             //if (isDBConnected)
@@ -1105,6 +1109,8 @@ namespace TokoEmasAppNET
                         string sup_code = myReader.GetString(idx++);
                         string sup_nama = myReader.GetString(idx++);
                         items.inventory_supplier = new Supplier(sup_id, sup_code, sup_nama);
+                        items.inventory_create_time = myReader.GetDateTime(idx++);
+                        items.inventory_update_time = myReader.GetDateTime(idx++);
                         result.Add(items);
                     }
                 }
@@ -1123,7 +1129,8 @@ namespace TokoEmasAppNET
             List<Inventory> result = new List<Inventory>();
 
             string mySelectQuery = "SELECT master_items.id, master_items.category, master_category.nama, master_items.subcategory, " +
-                " master_subcategory.nama, master_items.nama, karat, master_carat.carat, berat, stocks, master_items.supplier, master_supplier.code, master_supplier.nama" +
+                " master_subcategory.nama, master_items.nama, karat, master_carat.carat, berat, stocks, master_items.supplier, master_supplier.code, master_supplier.nama," +
+                " master_items.createTimestamp, master_items.updateTimestamp " +
                 " FROM master_items, master_category, master_subcategory, master_carat, master_supplier " +
                 " WHERE master_items.subcategory=master_subcategory.id AND master_subcategory.category=master_category.id AND " +
                 " master_items.category = master_category.id AND karat=master_carat.id  AND master_items.supplier = master_supplier.id ";
@@ -1144,7 +1151,7 @@ namespace TokoEmasAppNET
 
             }
             mySelectQuery += searchkey;
-            mySelectQuery += " GROUP BY master_items.id;";
+            mySelectQuery += " ORDER BY master_items.category ASC, master_items.subcategory ASC, MID(master_items.id,3,4)+0 ASC;";// GROUP BY master_items.id;";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
             //if (isDBConnected)
@@ -1184,6 +1191,8 @@ namespace TokoEmasAppNET
                         string sup_code = myReader.GetString(idx++);
                         string sup_nama = myReader.GetString(idx++);
                         items.inventory_supplier = new Supplier(sup_id, sup_code, sup_nama);
+                        items.inventory_create_time = myReader.GetDateTime(idx++);
+                        items.inventory_update_time = myReader.GetDateTime(idx++);
                         result.Add(items);
                     }
                 }
@@ -1202,11 +1211,12 @@ namespace TokoEmasAppNET
             List<Inventory> result = new List<Inventory>();
 
             string mySelectQuery = "SELECT master_items.id, master_items.category, master_category.nama, master_items.subcategory, " +
-                " master_subcategory.nama, master_items.nama, karat, master_carat.carat, berat, stocks, master_items.supplier, master_supplier.code, master_supplier.nama  " +
+                " master_subcategory.nama, master_items.nama, karat, master_carat.carat, berat, stocks, master_items.supplier, master_supplier.code, master_supplier.nama, " +
+                " master_items.createTimestamp, master_items.updateTimestamp " +
                 " FROM master_items, master_category, master_subcategory, master_carat, master_supplier " +
                 " WHERE master_subcategory.category=master_category.id AND master_items.subcategory=master_subcategory.id AND " +
                 " master_items.category = master_category.id AND karat=master_carat.id AND master_items.supplier=master_supplier.id AND master_items.category='" +
-                cat_id + "' GROUP BY master_items.id;";
+                cat_id + "' ORDER BY master_items.category ASC, master_items.subcategory ASC, MID(master_items.id,3,4)+0 ASC;";// GROUP BY master_items.id;";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
             //if (isDBConnected)
@@ -1247,6 +1257,8 @@ namespace TokoEmasAppNET
                         string sup_code = myReader.GetString(idx++);
                         string sup_nama = myReader.GetString(idx++);
                         items.inventory_supplier = new Supplier(sup_id, sup_code, sup_nama);
+                        items.inventory_create_time = myReader.GetDateTime(idx++);
+                        items.inventory_update_time = myReader.GetDateTime(idx++);
                         result.Add(items);
                     }
                 }
@@ -1265,11 +1277,12 @@ namespace TokoEmasAppNET
             List<Inventory> result = new List<Inventory>();
 
             string mySelectQuery = "SELECT master_items.id, master_items.category, master_category.nama, master_items.subcategory, " +
-                " master_subcategory.nama, master_items.nama, karat, master_carat.carat, berat, stocks, master_items.supplier, master_supplier.code, master_supplier.nama " +
+                " master_subcategory.nama, master_items.nama, karat, master_carat.carat, berat, stocks, master_items.supplier, master_supplier.code, master_supplier.nama, " +
+                " master_items.createTimestamp, master_items.updateTimestamp " +
                 " FROM master_items, master_category, master_subcategory, master_carat, master_supplier " +
                 " WHERE master_subcategory.category=master_category.id AND master_items.subcategory=master_subcategory.id AND" +
                 " master_items.category = master_category.id AND karat=master_carat.id AND master_items.supplier=master_supplier.id AND master_items.stocks=" +
-                status.ToString() + " GROUP BY master_items.id;";
+                status.ToString() + " ORDER BY master_items.category ASC, master_items.subcategory ASC, MID(master_items.id,3,4)+0 ASC;";// GROUP BY master_items.id;";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
             //if (isDBConnected)
@@ -1309,6 +1322,8 @@ namespace TokoEmasAppNET
                         string sup_code = myReader.GetString(idx++);
                         string sup_nama = myReader.GetString(idx++);
                         items.inventory_supplier = new Supplier(sup_id, sup_code, sup_nama);
+                        items.inventory_create_time = myReader.GetDateTime(idx++);
+                        items.inventory_update_time = myReader.GetDateTime(idx++);
                         result.Add(items);
                     }
                 }
@@ -1327,11 +1342,12 @@ namespace TokoEmasAppNET
             List<Inventory> result = new List<Inventory>();
 
             string mySelectQuery = "SELECT master_items.id, master_items.category, master_category.nama, master_items.subcategory, " +
-                " master_subcategory.nama, master_items.nama, karat, master_carat.carat, berat, master_items.supplier, master_supplier.code, master_supplier.nama " +
+                " master_subcategory.nama, master_items.nama, karat, master_carat.carat, berat, master_items.supplier, master_supplier.code, master_supplier.nama, " +
+                " master_items.createTimestamp, master_items.updateTimestamp " +
                 " FROM master_items, master_category, master_subcategory, master_carat, master_supplier " +
                 " WHERE master_subcategory.category=master_category.id AND master_items.subcategory=master_subcategory.id AND" +
                 " master_items.category = master_category.id AND karat=master_carat.id AND master_items.supplier=master_supplier.id AND master_items.category='" +
-                cat_id + "' AND stocks=" + status + " GROUP BY master_items.id;";
+                cat_id + "' AND stocks=" + status + " ORDER BY master_items.category ASC, master_items.subcategory ASC, MID(master_items.id,3,4)+0 ASC;"; // GROUP BY master_items.id;";
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
             //if (isDBConnected)
@@ -1373,7 +1389,8 @@ namespace TokoEmasAppNET
                         string sup_code = myReader.GetString(idx++);
                         string sup_nama = myReader.GetString(idx++);
                         items.inventory_supplier = new Supplier(sup_id, sup_code, sup_nama);
-
+                        items.inventory_create_time = myReader.GetDateTime(idx++);
+                        items.inventory_update_time = myReader.GetDateTime(idx++);
                         result.Add(items);
                     }
                 }
@@ -1392,11 +1409,12 @@ namespace TokoEmasAppNET
             List<Inventory> result = new List<Inventory>();
 
             string mySelectQuery = "SELECT master_items.id, master_items.category, master_category.nama, master_items.subcategory, " +
-                " master_subcategory.nama, master_items.nama, karat, master_carat.carat, berat, stocks, master_items.supplier, master_supplier.code, master_supplier.nama " +
+                " master_subcategory.nama, master_items.nama, karat, master_carat.carat, berat, stocks, master_items.supplier, master_supplier.code, master_supplier.nama, " +
+                " master_items.createTimestamp, master_items.updateTimestamp " +
                 " FROM master_items, master_category, master_subcategory, master_carat, master_supplier " +
                 " WHERE master_subcategory.category=master_category.id AND master_items.category = master_category.id AND" +
                 " master_items.subcategory = master_subcategory.id AND karat=master_carat.id AND master_items.supplier=master_supplier.id AND master_items.category='" +
-                cat_id + "' AND master_items.subcategory='" + sub_id + "' GROUP BY master_items.id;";
+                cat_id + "' AND master_items.subcategory='" + sub_id + "' ORDER BY master_items.category ASC, master_items.subcategory ASC, MID(master_items.id,3,4)+0 ASC;"; // GROUP BY master_items.id
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
             //if (isDBConnected)
@@ -1438,7 +1456,8 @@ namespace TokoEmasAppNET
                         string sup_code = myReader.GetString(idx++);
                         string sup_nama = myReader.GetString(idx++);
                         items.inventory_supplier = new Supplier(sup_id, sup_code, sup_nama);
-
+                        items.inventory_create_time = myReader.GetDateTime(idx++);
+                        items.inventory_update_time = myReader.GetDateTime(idx++);
                         result.Add(items);
                     }
                 }
@@ -1457,11 +1476,12 @@ namespace TokoEmasAppNET
             List<Inventory> result = new List<Inventory>();
 
             string mySelectQuery = "SELECT master_items.id, master_items.category, master_category.nama, master_items.subcategory, " +
-                " master_subcategory.nama, master_items.nama, karat, master_carat.carat, berat, master_items.supplier, master_supplier.code, master_supplier.nama " +
+                " master_subcategory.nama, master_items.nama, karat, master_carat.carat, berat, master_items.supplier, master_supplier.code, master_supplier.nama, " +
+                " master_items.createTimestamp, master_items.updateTimestamp " +
                 " FROM master_items, master_category, master_subcategory, master_carat, master_supplier " +
                 " WHERE master_subcategory.category=master_category.id AND master_items.category = master_category.id AND" +
                 " master_items.subcategory = master_subcategory.id AND karat=master_carat.id AND master_items.supplier=master_supplier.id AND master_items.category='" +
-                cat_id + "' AND master_items.subcategory='" + sub_id + "' AND master_items.stocks=" + status + " GROUP BY master_items.id;";
+                cat_id + "' AND master_items.subcategory='" + sub_id + "' AND master_items.stocks=" + status + " ORDER BY master_items.category ASC, master_items.subcategory ASC, MID(master_items.id,3,4)+0 ASC;"; // GROUP BY master_items.id
             MySqlCommand myCommand = new MySqlCommand(mySelectQuery, dbConn);
 
             //if (isDBConnected)
@@ -1504,7 +1524,8 @@ namespace TokoEmasAppNET
                         string sup_code = myReader.GetString(idx++);
                         string sup_nama = myReader.GetString(idx++);
                         items.inventory_supplier = new Supplier(sup_id, sup_code, sup_nama);
-
+                        items.inventory_create_time = myReader.GetDateTime(idx++);
+                        items.inventory_update_time = myReader.GetDateTime(idx++);
                         result.Add(items);
                     }
                 }
@@ -1523,7 +1544,8 @@ namespace TokoEmasAppNET
             Inventory result = null;
 
             string mySelectQuery = "SELECT master_items.id, master_items.category, master_category.nama, master_items.subcategory, " +
-                " master_subcategory.nama, master_items.nama, karat, master_carat.carat, berat, stocks, master_items.supplier, master_supplier.code, master_supplier.nama " +
+                " master_subcategory.nama, master_items.nama, karat, master_carat.carat, berat, stocks, master_items.supplier, master_supplier.code, master_supplier.nama, " +
+                " master_items.createTimestamp, master_items.updateTimestamp " +
                 " FROM master_items, master_category, master_subcategory, master_carat, master_supplier " +
                 " WHERE master_subcategory.category=master_category.id AND master_items.supplier=master_supplier.id AND " +
                 " master_items.category = master_category.id AND karat=master_carat.id AND " +
@@ -1568,7 +1590,8 @@ namespace TokoEmasAppNET
                         string sup_code = myReader.GetString(idx++);
                         string sup_nama = myReader.GetString(idx++);
                         items.inventory_supplier = new Supplier(sup_id, sup_code, sup_nama);
-
+                        items.inventory_create_time = myReader.GetDateTime(idx++);
+                        items.inventory_update_time = myReader.GetDateTime(idx++);
                         result = items;
                     }
                     else
@@ -1890,12 +1913,20 @@ namespace TokoEmasAppNET
             MySqlDataReader myReader;
             myReader = myCommand.ExecuteReader();
 
-            if(myReader.HasRows)
+            try
             {
-                int maxID = myReader.GetInt32(0);
-                newID = maxID + 1;
+                if (myReader.Read())
+                {
 
-                myReader.Close();
+                    int maxID = myReader.GetInt32(0);
+                    newID = maxID + 1;
+
+                    myReader.Close();
+                    CloseConnection();
+                }
+            }
+            catch
+            {
                 CloseConnection();
             }
             return newID;

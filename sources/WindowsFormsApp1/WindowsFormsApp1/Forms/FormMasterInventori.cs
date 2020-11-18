@@ -81,6 +81,8 @@ namespace TokoEmasAppNET
                 row.Cells[5].Value = itemList[i].inventory_weight.ToString("0.000");
                 row.Cells[6].Value = itemList[i].inventory_supplier.code;
                 row.Cells[7].Value = itemList[i].GetStatus();
+                row.Cells[8].Value = itemList[i].GetCreateTimestamp();
+                row.Cells[9].Value = itemList[i].GetUpdateTimestamp();
 
                 //listCat.Add(categories[i].category_id, categories[i].category_name);
                 itemsDict.Add(itemList[i].inventory_id, itemList[i]);

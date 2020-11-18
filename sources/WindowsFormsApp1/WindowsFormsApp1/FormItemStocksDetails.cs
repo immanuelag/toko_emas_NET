@@ -22,5 +22,10 @@ namespace TokoEmasAppNET
         {
 
         }
+
+        private void FormItemStocksDetails_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

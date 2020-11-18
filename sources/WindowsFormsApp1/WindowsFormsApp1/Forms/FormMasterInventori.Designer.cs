@@ -30,14 +30,6 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.dgvInventory = new System.Windows.Forms.DataGridView();
-            this.colItemID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCatName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSubName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNama = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCarat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.cbCatItems = new System.Windows.Forms.ComboBox();
             this.btnEditItems = new System.Windows.Forms.Button();
@@ -55,6 +47,16 @@
             this.txbFindName = new System.Windows.Forms.TextBox();
             this.btnFind = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
+            this.colItemID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCatName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSubName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNama = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCarat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUpdateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInventory)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,7 +83,9 @@
             this.colCarat,
             this.colWeight,
             this.colSupplier,
-            this.colStock});
+            this.colStock,
+            this.colCreateTime,
+            this.colUpdateTime});
             this.dgvInventory.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvInventory.Location = new System.Drawing.Point(34, 104);
             this.dgvInventory.Name = "dgvInventory";
@@ -90,56 +94,6 @@
             this.dgvInventory.Size = new System.Drawing.Size(812, 357);
             this.dgvInventory.TabIndex = 4;
             this.dgvInventory.SelectionChanged += new System.EventHandler(this.DgvInventory_SelectionChanged);
-            // 
-            // colItemID
-            // 
-            this.colItemID.HeaderText = "Item ID";
-            this.colItemID.Name = "colItemID";
-            this.colItemID.Width = 70;
-            // 
-            // colCatName
-            // 
-            this.colCatName.HeaderText = "Category";
-            this.colCatName.MinimumWidth = 30;
-            this.colCatName.Name = "colCatName";
-            this.colCatName.Width = 60;
-            // 
-            // colSubName
-            // 
-            this.colSubName.HeaderText = "Subcategory";
-            this.colSubName.MinimumWidth = 50;
-            this.colSubName.Name = "colSubName";
-            // 
-            // colNama
-            // 
-            this.colNama.HeaderText = "Item Name";
-            this.colNama.Name = "colNama";
-            this.colNama.Width = 200;
-            // 
-            // colCarat
-            // 
-            this.colCarat.HeaderText = "Carat";
-            this.colCarat.Name = "colCarat";
-            this.colCarat.Width = 70;
-            // 
-            // colWeight
-            // 
-            this.colWeight.HeaderText = "Weight";
-            this.colWeight.Name = "colWeight";
-            this.colWeight.Width = 80;
-            // 
-            // colSupplier
-            // 
-            this.colSupplier.HeaderText = "Supplier";
-            this.colSupplier.MinimumWidth = 50;
-            this.colSupplier.Name = "colSupplier";
-            // 
-            // colStock
-            // 
-            this.colStock.HeaderText = "Status";
-            this.colStock.MinimumWidth = 40;
-            this.colStock.Name = "colStock";
-            this.colStock.Width = 80;
             // 
             // label2
             // 
@@ -305,6 +259,66 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // colItemID
+            // 
+            this.colItemID.HeaderText = "Item ID";
+            this.colItemID.Name = "colItemID";
+            this.colItemID.Width = 70;
+            // 
+            // colCatName
+            // 
+            this.colCatName.HeaderText = "Category";
+            this.colCatName.MinimumWidth = 30;
+            this.colCatName.Name = "colCatName";
+            this.colCatName.Width = 60;
+            // 
+            // colSubName
+            // 
+            this.colSubName.HeaderText = "Subcategory";
+            this.colSubName.MinimumWidth = 50;
+            this.colSubName.Name = "colSubName";
+            // 
+            // colNama
+            // 
+            this.colNama.HeaderText = "Item Name";
+            this.colNama.Name = "colNama";
+            this.colNama.Width = 200;
+            // 
+            // colCarat
+            // 
+            this.colCarat.HeaderText = "Carat";
+            this.colCarat.Name = "colCarat";
+            this.colCarat.Width = 70;
+            // 
+            // colWeight
+            // 
+            this.colWeight.HeaderText = "Weight";
+            this.colWeight.Name = "colWeight";
+            this.colWeight.Width = 80;
+            // 
+            // colSupplier
+            // 
+            this.colSupplier.HeaderText = "Supplier";
+            this.colSupplier.MinimumWidth = 50;
+            this.colSupplier.Name = "colSupplier";
+            // 
+            // colStock
+            // 
+            this.colStock.HeaderText = "Status";
+            this.colStock.MinimumWidth = 40;
+            this.colStock.Name = "colStock";
+            this.colStock.Width = 80;
+            // 
+            // colCreateTime
+            // 
+            this.colCreateTime.HeaderText = "CreateTime";
+            this.colCreateTime.Name = "colCreateTime";
+            // 
+            // colUpdateTime
+            // 
+            this.colUpdateTime.HeaderText = "Update Time";
+            this.colUpdateTime.Name = "colUpdateTime";
+            // 
             // FormMasterInventori
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -351,14 +365,6 @@
         private System.Windows.Forms.ComboBox cbSubItems;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cbStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colItemID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCatName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSubName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNama;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCarat;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colStock;
         private System.Windows.Forms.Button btnXCode;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblSelectedRows;
@@ -368,5 +374,15 @@
         private System.Windows.Forms.TextBox txbFindName;
         private System.Windows.Forms.Button btnFind;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colItemID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCatName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSubName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNama;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCarat;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colStock;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUpdateTime;
     }
 }
