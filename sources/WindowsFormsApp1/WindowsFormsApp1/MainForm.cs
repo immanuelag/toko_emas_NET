@@ -24,6 +24,12 @@ namespace TokoEmasAppNET
         public string mysql_password;
 
         /*
+         * Sessions
+         */
+        public UserClass activeUser;
+        public bool bLogin;
+
+        /*
          * Forms
          */
         private FormLogin frmLogin;
@@ -71,18 +77,20 @@ namespace TokoEmasAppNET
             
             manDB = new MySQLDBManager(mysql_host, port, mysql_db_name, mysql_username, mysql_password);
             string errMsg = string.Empty;
-            
+
             //manDB.OpenConnection(ref errMsg);
             //if(!manDB.IsConnected)
             //{
             //    MessageBox.Show("Error Message: " + errMsg, "Error Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                
+
             //}
             //else
             //{
             //    statusStrip1.Items[0].Text = "Connected";
             //}
-            
+
+            activeUser = new UserClass("employee1", "employee1", (int)UserRole.Employee);
+            bLogin = false;
         }
 
         private void InitializingForms()
@@ -152,13 +160,22 @@ namespace TokoEmasAppNET
         /// <param name="e"></param>
         private void LoginToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (frmLogin == null || frmLogin.IsDisposed)
+            if (bLogin)
             {
-                frmLogin = new FormLogin();
-                frmLogin.MdiParent = this;
+                bLogin = false;
+                activeUser = new UserClass("employee1", "employee1", 3);
+                RefreshMenu();
             }
+            else
+            {
+                if (frmLogin == null || frmLogin.IsDisposed)
+                {
+                    frmLogin = new FormLogin();
+                    frmLogin.MdiParent = this;
+                }
 
-            frmLogin.Show();
+                frmLogin.Show();
+            }
         }
 
         /// <summary>
@@ -340,6 +357,18 @@ namespace TokoEmasAppNET
             }
             frmItemStock.StatusStock = 2;
             frmItemStock.Show();
+        }
+
+        public void RefreshMenu()
+        {
+            if(bLogin)
+            {
+                loginToolStripMenuItem.Text = "Logout";
+            }
+            else
+            {
+                loginToolStripMenuItem.Text = "Login";
+            }
         }
     }
 }

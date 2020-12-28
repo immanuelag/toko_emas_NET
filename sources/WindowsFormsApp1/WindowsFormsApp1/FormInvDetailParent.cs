@@ -9,6 +9,7 @@ namespace TokoEmasAppNET
 {
     public class FormInvDetailParent : Form
     {
+        public UserClass activeUser;
         public int data_mode;
         public virtual void RefreshView()
         {

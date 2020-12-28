@@ -319,7 +319,7 @@ namespace TokoEmasAppNET
             bool result = false;
 
             string myInsertQuery = "INSERT INTO master_user (username, password, role) VALUES ('" +
-                user.username + "','" + user.password + "');";
+                user.username + "',MD5('" + user.password + "')," + (int)user.role + ");";
             MySqlCommand myCommand = new MySqlCommand(myInsertQuery, dbConn);
 
             try

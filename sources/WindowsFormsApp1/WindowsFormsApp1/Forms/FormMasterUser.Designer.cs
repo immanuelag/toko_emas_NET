@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.dgvUser = new System.Windows.Forms.DataGridView();
+            this.colUsername = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRole = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.btnUserAdd = new System.Windows.Forms.Button();
             this.btnUserEdit = new System.Windows.Forms.Button();
@@ -36,13 +38,11 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnUserSave = new System.Windows.Forms.Button();
             this.cbUserRole = new System.Windows.Forms.ComboBox();
-            this.txbPassword = new System.Windows.Forms.TextBox();
             this.txbUsername = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.colUsername = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRole = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txbPassword = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUser)).BeginInit();
             this.gbUser.SuspendLayout();
             this.SuspendLayout();
@@ -62,6 +62,20 @@
             this.dgvUser.ShowEditingIcon = false;
             this.dgvUser.Size = new System.Drawing.Size(456, 160);
             this.dgvUser.TabIndex = 0;
+            // 
+            // colUsername
+            // 
+            this.colUsername.HeaderText = "Username";
+            this.colUsername.Name = "colUsername";
+            this.colUsername.ReadOnly = true;
+            this.colUsername.Width = 200;
+            // 
+            // colRole
+            // 
+            this.colRole.HeaderText = "User Role";
+            this.colRole.Name = "colRole";
+            this.colRole.ReadOnly = true;
+            this.colRole.Width = 150;
             // 
             // label1
             // 
@@ -91,6 +105,7 @@
             this.btnUserEdit.TabIndex = 3;
             this.btnUserEdit.Text = "Edit";
             this.btnUserEdit.UseVisualStyleBackColor = true;
+            this.btnUserEdit.Click += new System.EventHandler(this.btnUserEdit_Click);
             // 
             // gbUser
             // 
@@ -137,14 +152,6 @@
             this.cbUserRole.Size = new System.Drawing.Size(131, 21);
             this.cbUserRole.TabIndex = 5;
             // 
-            // txbPassword
-            // 
-            this.txbPassword.Location = new System.Drawing.Point(165, 63);
-            this.txbPassword.Name = "txbPassword";
-            this.txbPassword.PasswordChar = '*';
-            this.txbPassword.Size = new System.Drawing.Size(131, 20);
-            this.txbPassword.TabIndex = 4;
-            // 
             // txbUsername
             // 
             this.txbUsername.Location = new System.Drawing.Point(165, 28);
@@ -161,15 +168,6 @@
             this.label4.TabIndex = 2;
             this.label4.Text = "Role";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(42, 63);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 13);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Password";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -179,19 +177,22 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Username";
             // 
-            // colUsername
+            // label3
             // 
-            this.colUsername.HeaderText = "Username";
-            this.colUsername.Name = "colUsername";
-            this.colUsername.ReadOnly = true;
-            this.colUsername.Width = 200;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(42, 63);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Password";
             // 
-            // colRole
+            // txbPassword
             // 
-            this.colRole.HeaderText = "User Role";
-            this.colRole.Name = "colRole";
-            this.colRole.ReadOnly = true;
-            this.colRole.Width = 150;
+            this.txbPassword.Location = new System.Drawing.Point(165, 63);
+            this.txbPassword.Name = "txbPassword";
+            this.txbPassword.PasswordChar = '*';
+            this.txbPassword.Size = new System.Drawing.Size(131, 20);
+            this.txbPassword.TabIndex = 4;
             // 
             // FormMasterUser
             // 
@@ -224,14 +225,14 @@
         private System.Windows.Forms.Button btnUserEdit;
         private System.Windows.Forms.GroupBox gbUser;
         private System.Windows.Forms.ComboBox cbUserRole;
-        private System.Windows.Forms.TextBox txbPassword;
         private System.Windows.Forms.TextBox txbUsername;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnUserSave;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUsername;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRole;
+        private System.Windows.Forms.TextBox txbPassword;
+        private System.Windows.Forms.Label label3;
     }
 }

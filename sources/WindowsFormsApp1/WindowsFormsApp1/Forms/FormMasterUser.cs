@@ -69,5 +69,10 @@ namespace TokoEmasAppNET
             
             dgvUser.Focus();
         }
+
+        private void btnUserEdit_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

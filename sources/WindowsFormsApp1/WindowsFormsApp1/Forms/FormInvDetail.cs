@@ -23,17 +23,22 @@ namespace TokoEmasAppNET
         public FormInvDetailParent frmParent;
         public int data_mode;
         public Inventory itemInv;
+        
+        public UserClass activeUser;
+
 
         public FormInvDetail(FormMasterInventori parent)
         {
             InitializeComponent();
             frmParent = parent;
+            activeUser = parent.activeUser;
         }
 
         public FormInvDetail(FormSearchItem parent)
         {
             InitializeComponent();
             frmParent = parent;
+            activeUser = parent.activeUser;
         }
 
         public void SetDataMode(int mode)
@@ -63,6 +68,10 @@ namespace TokoEmasAppNET
             cbInvCarat.SelectedIndex = 0;
             cbStatus.SelectedIndex = 0;
             cbSupplier.SelectedIndex = 0;
+
+            txbInvName.ReadOnly = false;
+            txbInvWeight.ReadOnly = false;
+            cbInvCarat.Enabled = true;
         }
 
         private void FormInvDetail_Load(object sender, EventArgs e)
@@ -80,6 +89,8 @@ namespace TokoEmasAppNET
             LoadComboCategories();
             LoadComboStatus();
             LoadComboSuppliers();
+
+            
 
             if(data_mode == 2)
             {
@@ -117,12 +128,27 @@ namespace TokoEmasAppNET
                 }
                 cbStatus.SelectedIndex = itemInv.inventory_status - 1;
                 cbSupplier.SelectedIndex = itemInv.inventory_supplier.id;
+
+                if(activeUser.role == UserRole.Employee)
+                {
+                    txbInvName.ReadOnly = true;
+                    txbInvWeight.ReadOnly = true;
+                    cbInvCarat.Enabled = false;
+                }
+                else
+                {
+                    txbInvName.ReadOnly = false;
+                    txbInvWeight.ReadOnly = false;
+                    cbInvCarat.Enabled = true;
+                }
+
             } 
             else if(data_mode == 1)
             {
                 btnGenID.Enabled = true;
                 ResetFormInvDetail();
-            } 
+            }
+            txbInvDetilID.ReadOnly = true;
         }
 
         private void LoadComboSuppliers()

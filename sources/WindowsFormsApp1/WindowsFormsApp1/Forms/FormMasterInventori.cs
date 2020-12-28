@@ -28,7 +28,6 @@ namespace TokoEmasAppNET
 
         public int nRowTotal;
         public int nRowSelected;
-
         public FormMasterInventori()
         {
             InitializeComponent();
@@ -47,6 +46,7 @@ namespace TokoEmasAppNET
         {
             MainForm parent = (MainForm)this.MdiParent;
             manager = parent.manDB;
+            activeUser = parent.activeUser;
 
             LoadViewInventory();
             LoadComboCategories();
@@ -267,12 +267,14 @@ namespace TokoEmasAppNET
                 string inv_id = (string)row.Cells[0].Value;
                 Inventory sel_inv = null;
                 itemsDict.TryGetValue(inv_id, out sel_inv);
+
                 if (sel_inv != null)
                 {
                     frmInvDetail.SetInventory(sel_inv);
 
                     frmInvDetail.ShowDialog(this);
                 }
+
             }
             else
             {
