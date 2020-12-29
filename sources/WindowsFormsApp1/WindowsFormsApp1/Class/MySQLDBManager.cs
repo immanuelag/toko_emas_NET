@@ -296,7 +296,8 @@ namespace TokoEmasAppNET
                         string nama = myReader.GetString("username");
                         string password = myReader.GetString("password");
                         int role = myReader.GetInt32("role");
-                        result = new UserClass(username, password, role);
+                        result = new UserClass(username, "", role);
+                        result.passcode = password;
                     }
                     else
                     {
@@ -343,7 +344,32 @@ namespace TokoEmasAppNET
         {
             bool result = false;
 
-            string myUpdateQuery = "UPDATE master_user SET password='" + user.password + "', role=" + (int)user.role + " WHERE username='" +
+            string myUpdateQuery = "UPDATE master_user SET password='" + user.passcode + "', role=" + (int)user.role + " WHERE username='" +
+                user.username + "';";
+            MySqlCommand myCommand = new MySqlCommand(myUpdateQuery, dbConn);
+
+            try
+            {
+                string error = string.Empty;
+                OpenConnection(ref error);
+                int rows = myCommand.ExecuteNonQuery();
+                CloseConnection();
+                if (rows > 0) return true;
+            }
+            catch (Exception ex)
+            {
+                CloseConnection();
+                throw new Exception("Error update master_user! " + ex.Message);
+            }
+
+            return result;
+        }
+
+        public bool UpdateUserRole(UserClass user)
+        {
+            bool result = false;
+
+            string myUpdateQuery = "UPDATE master_user SET role=" + (int)user.role + " WHERE username='" +
                 user.username + "';";
             MySqlCommand myCommand = new MySqlCommand(myUpdateQuery, dbConn);
 

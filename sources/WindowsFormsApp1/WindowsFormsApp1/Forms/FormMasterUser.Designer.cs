@@ -38,11 +38,12 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnUserSave = new System.Windows.Forms.Button();
             this.cbUserRole = new System.Windows.Forms.ComboBox();
+            this.txbPassword = new System.Windows.Forms.TextBox();
             this.txbUsername = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txbPassword = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnChange = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUser)).BeginInit();
             this.gbUser.SuspendLayout();
             this.SuspendLayout();
@@ -109,6 +110,7 @@
             // 
             // gbUser
             // 
+            this.gbUser.Controls.Add(this.btnChange);
             this.gbUser.Controls.Add(this.btnCancel);
             this.gbUser.Controls.Add(this.btnUserSave);
             this.gbUser.Controls.Add(this.cbUserRole);
@@ -143,14 +145,27 @@
             this.btnUserSave.TabIndex = 6;
             this.btnUserSave.Text = "Save";
             this.btnUserSave.UseVisualStyleBackColor = true;
+            this.btnUserSave.Click += new System.EventHandler(this.btnUserSave_Click);
             // 
             // cbUserRole
             // 
             this.cbUserRole.FormattingEnabled = true;
+            this.cbUserRole.Items.AddRange(new object[] {
+            "Administrator",
+            "Owner",
+            "Employee"});
             this.cbUserRole.Location = new System.Drawing.Point(165, 97);
             this.cbUserRole.Name = "cbUserRole";
             this.cbUserRole.Size = new System.Drawing.Size(131, 21);
             this.cbUserRole.TabIndex = 5;
+            // 
+            // txbPassword
+            // 
+            this.txbPassword.Location = new System.Drawing.Point(165, 63);
+            this.txbPassword.Name = "txbPassword";
+            this.txbPassword.PasswordChar = '*';
+            this.txbPassword.Size = new System.Drawing.Size(131, 20);
+            this.txbPassword.TabIndex = 4;
             // 
             // txbUsername
             // 
@@ -168,15 +183,6 @@
             this.label4.TabIndex = 2;
             this.label4.Text = "Role";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(42, 31);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Username";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -186,13 +192,24 @@
             this.label3.TabIndex = 1;
             this.label3.Text = "Password";
             // 
-            // txbPassword
+            // label2
             // 
-            this.txbPassword.Location = new System.Drawing.Point(165, 63);
-            this.txbPassword.Name = "txbPassword";
-            this.txbPassword.PasswordChar = '*';
-            this.txbPassword.Size = new System.Drawing.Size(131, 20);
-            this.txbPassword.TabIndex = 4;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(42, 31);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(55, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Username";
+            // 
+            // btnChange
+            // 
+            this.btnChange.Location = new System.Drawing.Point(335, 61);
+            this.btnChange.Name = "btnChange";
+            this.btnChange.Size = new System.Drawing.Size(75, 23);
+            this.btnChange.TabIndex = 8;
+            this.btnChange.Text = "Change";
+            this.btnChange.UseVisualStyleBackColor = true;
+            this.btnChange.Click += new System.EventHandler(this.btnChange_Click);
             // 
             // FormMasterUser
             // 
@@ -234,5 +251,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colRole;
         private System.Windows.Forms.TextBox txbPassword;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnChange;
     }
 }
