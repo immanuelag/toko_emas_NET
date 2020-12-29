@@ -16,3 +16,7 @@ sources/WindowsFormsApp1/.vs/TokoEmasAppSolution/v16/Server/sqlite3/storage.ide
 sources/WindowsFormsApp1/.vs/TokoEmasAppSolution/v16/Server/sqlite3/storage.ide-shm
 
 sources/WindowsFormsApp1/.vs/TokoEmasAppSolution/v16/Server/sqlite3/storage.ide-wal
+
+sources/WindowsFormsApp1/WindowsFormsApp1/bin/Release/
+
+sources/WindowsFormsApp1/WindowsFormsApp1/obj/Release/
