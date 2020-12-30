@@ -68,6 +68,7 @@ namespace TokoEmasAppNET
         {
             MainForm parent = (MainForm)this.MdiParent;
             manager = parent.manDB;
+            activeUser = parent.activeUser;
 
             comboDictionaryCat = new Dictionary<int, Category>();
             comboDictionarySub = new Dictionary<int, Subcategory>();
