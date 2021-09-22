@@ -134,6 +134,12 @@ namespace TokoEmasAppNET
                     txbInvName.ReadOnly = true;
                     txbInvWeight.ReadOnly = true;
                     cbInvCarat.Enabled = false;
+
+                    if(itemInv.inventory_status < 4)
+                    {
+                        LoadComboStatusEmployee();
+                        cbStatus.SelectedIndex = itemInv.inventory_status - 1;
+                    }
                 }
                 else
                 {
@@ -252,6 +258,20 @@ namespace TokoEmasAppNET
                 cbStatus.Items.Add("SOLD");
                 cbStatus.Items.Add("UNKNOWN");
             }
+
+            if (cbStatus.SelectedIndex < 0)
+                cbStatus.SelectedIndex = 0;
+        }
+
+        private void LoadComboStatusEmployee()
+        {
+            if (cbStatus.Items.Count > 0)
+                cbStatus.Items.Clear();
+
+            cbStatus.Items.Add("INSIDE");
+            cbStatus.Items.Add("OUTSIDE");
+            cbStatus.Items.Add("SOLD");
+            
 
             if (cbStatus.SelectedIndex < 0)
                 cbStatus.SelectedIndex = 0;
